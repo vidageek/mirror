@@ -63,7 +63,7 @@ If you use maven to build your project, you can just add the following lines to 
 
 [/xml]
 
-Or even browse and checkout our sources at http://svn.vidageek.net/mirror .
+Or even browse and checkout our sources at http://github.com/vidageek/mirror/ .
 
 [section BugTracker And Email lists]
 
