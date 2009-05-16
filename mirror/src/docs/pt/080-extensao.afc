@@ -1,0 +1,50 @@
+[chapter Extensão]
+
+Agora que você conhece o Mirror, talvez você queira um pouco mais.
+
+[section Reflection Providers]
+
+Basicamente todo o trabalho sujo é feito por uma coleção de interfaces que chamamos de Reflection
+Providers.
+
+Esse é o núcleo real do Mirror.
+
+Atualmente temos apenas ::net.vidageek.mirror.provider.java.PureJavaReflectionProvider::, que usa 
+apenas a **Java Reflection API**. 
+
+Mas você pode simplesmente implementar ::net.vidageek.mirror.provider.ReflectionProvider:: para ter mais
+controle sobre o que está acontecendo.
+
+Na verdade, ::net.vidageek.mirror.provider.ReflectionProvider:: é apenas um grande wrapper para interfaces
+mais específicas:
+
+[list]
+* ::net.vidageek.mirror.provider.AnnotatedElementReflectionProvider.java::
+* ::net.vidageek.mirror.provider.ClassReflectionProvider.java::
+* ::net.vidageek.mirror.provider.ConstructorReflectionProvider.java::
+* ::net.vidageek.mirror.provider.FieldReflectionProvider.java::
+* ::net.vidageek.mirror.provider.MethodReflectionProvider.java::
+[/list]
+
+Mas como você faz para que o Mirror use seu Reflection Provider? De uma olhada em Extensão -> Configuração.
+
+[section Configuração]
+
+O Mirror tentará ler um arquivo de configuração (mirror.properties) que deve ficar na pasta raiz do 
+seu projeto.
+
+Por enquanto, a única chave aceita neste arquivo de configuração é a seguinte:
+
+[list]
+* provider.class : Este é o nome completo da classe implementando ::net.vidageek.mirror.provider.ReflectionProvider::
+que você quer que o Mirror use.
+[/list]
+
+Um exemplo:
+
+[code]
+provider.class = net.vidageek.mirror.fake.FakeProvider
+[/code]
+
+Apenas para lembrar, nenhuma configuração é necessária para usar o Mirror. Ele vai funcionar bem sem ela.
+Apenas use-a quando "bem" não for suficiente para suas necessidades.

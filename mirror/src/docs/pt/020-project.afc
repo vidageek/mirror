@@ -1,0 +1,122 @@
+[chapter Projeto]
+
+O Mirror é uma simples camada de DSL sobre a API de Reflection do Java, feita
+para tornar o uso dessa poderosa ferramenta mais fácil. Sem as três mil exceções
+lançadas na sua cara. Nem aquelas linhas de código completamente ilegíveis.
+
+Simplicidade também é muito poderosa.
+
+O projeto do Mirror começou por volta de Junho de 2008, implementando algo próximo
+da idéia dada por um grande programador, Nico Steppat (http://www.caelum.com.br),
+quando perguntado sobre como remover uma ReflectionUtil bem feia e cheia de métodos
+estáticos do código de um projeto em que estávamos trabalhando.
+
+[section Versionamento]
+
+O Mirror usa um sistema bem simples de versionamento:
+
+mirror-A.B.C.jar
+
+[list]
+* C - Correcões criticas de bugs.
+* B - Adicão de funcionalidades e correcões de bugs.
+* A - Muitas funcionalidades novas ou alteracão na API.
+[/list]
+
+Sendo o Mirror uma DSL, nós consideramos alteração na API como sendo qualquer
+alteração na DSL. Nenhuma classe que é utilizada internamente pelo Mirror será
+levada em consideração.
+
+[section Release Notes]
+
+[list]
+* **Mirror 1.4**
+Mudança de Mirror.on(AccessibleObject) para Mirror.on(AnnotatedElement)
+ 
+* **Mirror 1.3**
+
+- Adicionado Reflection Providers
+
+- Documentação em pt-BR
+
+- Javadocs na maioria dos métodos e classes públicas
+
+- Bugfixes 
+
+* **Mirror 1.2**
+
+- Primeiro release público
+[/list]
+
+[section Download]
+
+Você pode acessar todos os lançamentos e códigos fonte disponíveis em 
+http://maven.vidageek.net/net/vidageek/mirror .
+
+Se você utiliza Maven, basta apenas adicionar as seguintes linhas
+em seu pom.xml:
+
+[xml]
+<dependencies>
+...
+	<dependency>
+	    <groupId>net.vidageek</groupId>
+	    <artifactId>mirror</artifactId>
+	    <version>1.4</version>
+	</dependency>
+...
+</dependencies>
+[/xml]
+
+Ou até mesmo navegar e baixar os fontes no nosso repositório
+localizado em http://svn.vidageek.net/mirror .
+
+[section BugTracker E Listas de E-mail]
+
+[title Listas de E-mail]
+
+[list]
+* Users Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-users-vidageek.net
+** Dúvidas sobre o uso do mirror devem ser enviadas aqui.
+* Development Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-dev-vidageek.net
+** Discussões sobre novas funcionalidades e bugs.
+* Commit Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-commit-vidageek.net
+** Avisos de commits para os desenvolvedores (e qualquer pessoa que quer saber como o código
+do mirror está mudando).
+[/list]
+
+[title Bugtracker]
+
+Apenas acesse http://bugs.vidageek.net e não se sinta envergonhado de criar um novo item!
+
+[section Membros]
+
+Atualmente os membros ativos no projeto são:
+
+[list]
+* Jonas Abreu (jonas [at] vidageek [dot] net)
+* Adriano Almeida (adrianoalmeida7 [at] gmail [dot] com)
+* Diego Feitosa (diego [at] dnfeitosa [dot] com)
+* José Donizetti (jose.donizetti [at] caelum [dot] com [dot] br)
+[/list]
+
+[section Relatórios do Maven]
+
+Você pode ver os relatórios do maven aqui (em inglês):
+
+http://projetos.vidageek.net/mirror/maven
+
+[section Javadoc]
+
+Você pode ver o javadoc para este projeto aqui (em inglês):
+
+http://projetos.vidageek.net/mirror/javadoc
+
+[section Participe]
+
+Você pode participar de várias maneiras. Simplesmente por usar o Mirror você já está nos ajudando.
+Mas você sempre pode nos enviar patches (código-fonte, documentacão, etc) através do nosso bugtracker,
+também respondendo a dúvidas de novos usuários através da nossa mailing list e também nos informando
+sobre o seu uso.
+
+Você também pode traduzir a documentacão do Mirror para sua língua. Será de enorme ajuda.

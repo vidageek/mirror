@@ -1,0 +1,34 @@
+Deploy process for Mirror
+
+add the following lines to your settings.xml:
+
+<settings>
+  ...
+  <servers>
+    ...
+    <server>
+      <id>vidageek.net</id>
+      <username>your username</username>
+      <password>your password</password>
+    </server>
+    ...
+  </servers>
+  ...
+</settings>
+
+On pom.xml, find <distributionManagement> section and change <url> to your own repository.
+
+You need Tubaina in order to build the documentation:
+
+svn co https://tubaina.svn.sourceforge.net/svnroot/tubaina/trunk tubaina
+cd tubaina and follow notes.txt before running mvn install
+
+Also, tubaina maven plugin is needed:
+
+svn co https://tubaina.svn.sourceforge.net/svnroot/tubaina/tubaina-maven-plugin tubaina-maven-plugin
+cd tubaina-maven-plugin && mvn install 
+
+run mvn clean deploy
+
+For only generating the site, do:
+mvn tubaina:build

@@ -1,0 +1,56 @@
+[chapter Method]
+
+Manipulacão de Métodos no Mirror. No Mirror a pesquisa dos métodos também é feita
+nas superclasses.
+
+[section Refletindo]
+
+Refletindo um método pelo nome (retornará null se não for encontrado):
+
+[java]
+Class clazz;
+Method m = new Mirror().on(clazz).reflect().method("nomeMetodo").withoutArgs();
+[/java]
+
+Refletindo um método pelos seus argumentos (retornará null se não for encontrado):
+
+[java]
+Class clazz;
+Method m = new Mirror().on(clazz).reflect().method("nomeMetodo")
+           .withArgs(String.class, Object.class);
+[/java]
+
+Refletindo todos os métodos de uma classe (retornará uma lista vazia caso nada seja encontrado):
+
+[java]
+Class clazz;
+List<Method> l = new Mirror().on(clazz).reflectAll().methods();
+[/java]
+
+[section Invocando Métodos]
+
+Invocando um método estático:
+
+[java]
+Class clazz;
+Object retorno = new Mirror().on(clazz).invoke().method("nomeMetodo")
+				 .withArgs(valor1, valor2);
+[/java]
+
+Invocando um método de instância:
+
+[java]
+Object target;
+Object returnValue = new Mirror().on(target).invoke().method("nomeMetodo")
+					 .withoutArgs();
+[/java]
+
+Você também pode passar um java.lang.reflect.Method ao invés de uma String com o nome do método:
+
+Invocando um método de instância:
+
+[java]
+Method umMetodo;
+Object obj;
+Object retorno = new Mirror().on(obj).invoke().method(umMetodo).withArgs(valor1, valor2);
+[/java]

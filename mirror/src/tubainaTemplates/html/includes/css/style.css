@@ -1,0 +1,67 @@
+body {
+	background-color: #FFF;
+	font-family:"Trebuchet MS",Tahoma,Arial,Serif;
+	margin:0px;
+    padding:0px;
+}
+
+a {
+	color: #666;
+	text-decoration: none;
+}
+a:link {
+	color: #666;
+}     /* unvisited link */
+
+a:visited {
+	color: #666;
+}  /* visited link */
+a:hover {
+	color: #000;
+}   /* mouse over link */
+a:active {
+	color: #666;
+}   /* selected link */
+li {
+	list-style: none;
+	background-color: #BBB;	
+}
+li:hover {
+	background-color: #A9A;	
+}
+img {
+	border: 0px;	
+}
+.header {
+	width: 100%;
+	clear: both;
+}
+.logo {
+	width:20%;
+	float: left;
+}
+.slogan {
+	font-style:italic;
+	width:100%;
+	text-align: center;
+	vertical-align: middle;
+	padding-top: 10px;
+}
+.menu {
+	width: 20%;
+	float:left;
+	background-color: #B3C7FF;
+	margin:0px;
+}
+.subItem {
+	padding-left: 30px;	
+}
+.pageContent {
+	float:right;
+	width:79%;
+}
+
+/*PayPal*/
+div.donation {
+	margin-left: 20px;
+}

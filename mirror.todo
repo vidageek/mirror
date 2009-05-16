@@ -1,0 +1,4 @@
+document usage of method invocation and field getting (avoiding cast)
+document Mirror(ReflectionProvider)
+better site
+Support java 1.4

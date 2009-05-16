@@ -1,0 +1,38 @@
+[chapter Constructor]
+
+Manipulacão de Construtor usando o Mirror.
+
+[section Refletindo]
+
+Refletindo um construtor pelos argumentos (retornará null se não for encontrado):
+
+[java]
+Class<T> clazz;
+Constructor<T> c = new Mirror().on(clazz).reflect().constructor()
+						.withArgs(String.class, Object.class);
+[/java]
+
+
+Refletindo todos os construtores de uma classe (retornará uma lista vazia caso nada seja encontrado):
+
+[java]
+Class<T> clazz;
+List<Constructor<T>> l = new Mirror().on(clazz).reflectAll().constructors();
+[/java]
+
+[section Invocando Construtores]
+
+Invocando um construtor:
+
+[java]
+Class<T> clazz;
+T t = new Mirror().on(clazz).invoke().constructor().withoutArgs();
+[/java]
+
+Você também pode passar um java.lang.reflect.Constructor:
+
+[java]
+Constructor<T> umConstrutor;
+Class<T> clazz;
+T t = new Mirror().on(clazz).invoke().constructor(umConstrutor).withArgs(valor1, valor2);
+[/java]
