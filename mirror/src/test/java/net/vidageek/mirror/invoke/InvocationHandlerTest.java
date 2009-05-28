@@ -2,6 +2,9 @@ package net.vidageek.mirror.invoke;
 
 import java.lang.reflect.Method;
 
+import junit.framework.Assert;
+import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
 
@@ -55,4 +58,25 @@ public class InvocationHandlerTest {
         new DefaultInvocationHandler(provider, new Object()).constructor();
     }
 
+    @Test
+    public void testThatInvokesGetter() {
+        BeanFixture target = new BeanFixture();
+        target.setField("foo");
+        String string = (String) new DefaultInvocationHandler<Object>(provider, target).getterFor("field");
+        Assert.assertEquals("foo", string);
+    }
+
+    @Test
+    public void testThatInvokesGetterUsingField() {
+        BeanFixture target = new BeanFixture();
+        target.setField("foo");
+        String string = (String) new DefaultInvocationHandler<Object>(provider, target)
+                                                                                       .getterFor(new Mirror(provider)
+                                                                                                                      .on(
+                                                                                                                              BeanFixture.class)
+                                                                                                                      .reflect()
+                                                                                                                      .field(
+                                                                                                                              "field"));
+        Assert.assertEquals("foo", string);
+    }
 }

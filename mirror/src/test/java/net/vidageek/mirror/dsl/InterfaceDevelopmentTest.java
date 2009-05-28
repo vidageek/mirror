@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import net.vidageek.mirror.fixtures.AnnotationFixture;
+import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ClassFixture;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
@@ -36,6 +37,8 @@ public class InterfaceDevelopmentTest {
 
     private Field typedField;
 
+    private Field beanField;
+
     @Before
     public void setup() {
         methodFixture = new MethodFixture();
@@ -48,6 +51,8 @@ public class InterfaceDevelopmentTest {
         constructor = new Mirror().on(ConstructorFixture.class).reflect().constructor().withArgs(String.class);
         field = new Mirror().on(FieldFixture.class).reflect().field("field");
         typedField = new Mirror().on(FieldFixture.class).reflect().field("typedField");
+
+        beanField = new Mirror().on(BeanFixture.class).reflect().field("field");
     }
 
     @Test
@@ -175,8 +180,15 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(SubClassOfTypedClassFixture.class).reflect().parentGenericType().atPosition(0);
     }
 
-    public void name() {
-
+    @Test
+    public void testGetterInvocationInterface() {
+        new Mirror().on(new BeanFixture()).invoke().getterFor("field");
+        new Mirror().on(new BeanFixture()).invoke().getterFor(beanField);
     }
 
+    @Test
+    public void testSetterInvocationInterface() {
+        new Mirror().on(new BeanFixture()).invoke().setterFor("field").withValue("12345");
+        new Mirror().on(new BeanFixture()).invoke().setterFor(beanField).withValue("12345");
+    }
 }
