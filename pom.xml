@@ -12,9 +12,7 @@
 	
 	<modules>
 		<module>mirror</module>
-		<module>mirror14</module>
 		<module>scan</module>
-		<module>scan14</module>
 	</modules>
 	
 	<organization>
@@ -65,6 +63,14 @@
 
 	<build>
 		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<source>1.5</source>
+					<target>1.5</target>
+				</configuration>
+			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
