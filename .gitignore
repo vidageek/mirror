@@ -1,13 +1,10 @@
 mirror/.classpath
 mirror/.project
 mirror/.settings/
-mirror14/.classpath
-mirror14/.project
-mirror14/.settings/
 scan/.classpath
 scan/.project
 scan/.settings/
-scan14/.classpath
-scan14/.project
-scan14/.settings/
 mirror/target
+.classpath
+.project
+.settings/
