@@ -35,14 +35,14 @@ public class GetterHandlerTest {
     @Test
     public void testThatCanGetField() {
         FieldFixture fixture = new FieldFixture(10);
-        Integer result = new Mirror().on(fixture).get().field("field");
+        Integer result = (Integer) new Mirror().on(fixture).get().field("field");
         assertEquals(result, new Integer(fixture.getField()));
     }
 
     @Test
     public void testThatCanGetStaticField() {
         FieldFixture fixture = new FieldFixture(10);
-        Integer result = new Mirror().on(FieldFixture.class).get().field("staticField");
+        Integer result = (Integer) new Mirror().on(FieldFixture.class).get().field("staticField");
         assertEquals(result, new Integer(fixture.getStaticField()));
     }
 

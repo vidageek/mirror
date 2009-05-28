@@ -52,11 +52,9 @@ public class InterfaceDevelopmentTest {
 
     @Test
     public void testMethodInvocationInterface() {
-        @SuppressWarnings("unused")
-        String string = new Mirror().on(methodFixture).invoke().method("methodWithNoArgs").withoutArgs();
+        new Mirror().on(methodFixture).invoke().method("methodWithNoArgs").withoutArgs();
 
-        @SuppressWarnings("unused")
-        int i = new Mirror().on(methodFixture).invoke().method("methodWithOneArg").withArgs("arg");
+        new Mirror().on(methodFixture).invoke().method("methodWithOneArg").withArgs("arg");
 
         new Mirror().on(MethodFixture.class).invoke().method("staticMethod").withoutArgs();
         new Mirror().on(MethodFixture.class).invoke().method("staticMethodWithOneArg").withArgs("arg");

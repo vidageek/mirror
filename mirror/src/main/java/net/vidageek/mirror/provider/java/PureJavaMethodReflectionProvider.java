@@ -32,11 +32,10 @@ public final class PureJavaMethodReflectionProvider implements MethodReflectionP
 
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T invoke(final Object[] args) {
+    public Object invoke(final Object[] args) {
         try {
             setAccessible();
-            return (T) method.invoke(target, args);
+            return method.invoke(target, args);
 
         } catch (IllegalArgumentException e) {
             throw new ReflectionProviderException("Could not invoke method " + method.getName(), e);

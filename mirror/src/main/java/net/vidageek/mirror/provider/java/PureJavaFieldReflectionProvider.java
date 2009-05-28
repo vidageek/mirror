@@ -35,11 +35,10 @@ public final class PureJavaFieldReflectionProvider implements FieldReflectionPro
         }
     }
 
-    @SuppressWarnings("unchecked")
-    public <T> T getValue() {
+    public Object getValue() {
         try {
             setAccessible();
-            return (T) field.get(target);
+            return field.get(target);
         } catch (final IllegalAccessException e) {
             throw new ReflectionProviderException("could not get value for field " + field.getName() + " of class "
                     + clazz.getName());

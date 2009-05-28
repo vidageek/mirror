@@ -52,7 +52,7 @@ public final class DefaultGetterHandler implements GetterHandler {
      * @throws IllegalArgumentException
      *             if fieldName is null or empty
      */
-    public <T> T field(final String fieldName) {
+    public Object field(final String fieldName) {
         if ((fieldName == null) || (fieldName.trim().length() == 0)) {
             throw new IllegalArgumentException("fieldName cannot be null or empty.");
         }
@@ -77,7 +77,7 @@ public final class DefaultGetterHandler implements GetterHandler {
      * @see FieldReflectionProvider#setAccessible()
      * @see FieldReflectionProvider#getValue()
      */
-    public <T> T field(final Field field) {
+    public Object field(final Field field) {
         if (field == null) {
             throw new IllegalArgumentException("field cannot be null");
         }

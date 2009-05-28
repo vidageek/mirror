@@ -29,5 +29,5 @@ public interface MethodReflectionProvider extends ReflectionElementReflectionPro
      * @return The value returned by the method or null if the method was void.
      * @throws ReflectionProviderException
      */
-    <T> T invoke(Object[] args);
+    Object invoke(Object[] args);
 }

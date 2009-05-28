@@ -12,7 +12,7 @@ public interface MethodHandler {
      * 
      * @return The value returned by the method or null if the method was void.
      */
-    public <T> T withoutArgs();
+    public Object withoutArgs();
 
     /**
      * Invoke a method using arguments args.
@@ -21,6 +21,6 @@ public interface MethodHandler {
      *            arguments to be used to invoke method.
      * @return The value returned by the method or null if the method was void.
      */
-    public <T> T withArgs(final Object... args);
+    public Object withArgs(final Object... args);
 
 }

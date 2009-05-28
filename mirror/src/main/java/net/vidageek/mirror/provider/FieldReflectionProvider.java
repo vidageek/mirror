@@ -24,5 +24,5 @@ public interface FieldReflectionProvider extends ReflectionElementReflectionProv
      * @return the value of the field represented by wrapped field.
      * @throws ReflectionProviderException
      */
-    <T> T getValue();
+    Object getValue();
 }

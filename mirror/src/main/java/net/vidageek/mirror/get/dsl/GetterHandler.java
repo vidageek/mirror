@@ -15,7 +15,7 @@ public interface GetterHandler {
      * @throws IllegalArgumentException
      *             if fieldName is null or empty
      */
-    public <T> T field(final String fieldName);
+    public Object field(final String fieldName);
 
     /**
      * This part of the DSL controls which field is going to have it's value
@@ -34,6 +34,6 @@ public interface GetterHandler {
      * @see FieldReflectionProvider#setAccessible()
      * @see FieldReflectionProvider#getValue()
      */
-    public <T> T field(final Field field);
+    public Object field(final Field field);
 
 }

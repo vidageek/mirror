@@ -46,7 +46,7 @@ public final class MethodHandlerByName implements MethodHandler {
      * 
      * @see MethodHandlerByName#withArgs(Object...)
      */
-    public <T> T withoutArgs() {
+    public Object withoutArgs() {
         return withArgs(new Object[0]);
     }
 
@@ -61,7 +61,7 @@ public final class MethodHandlerByName implements MethodHandler {
      * @throws MirrorException
      *             if method is not found on class
      */
-    public <T> T withArgs(final Object... args) {
+    public Object withArgs(final Object... args) {
         return new MethodHandlerByMethod(provider, target, clazz, getMethod(args)).withArgs(args);
     }
 

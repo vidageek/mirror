@@ -52,7 +52,7 @@ public final class MethodHandlerByMethod implements MethodHandler {
      * @see MethodReflectionProvider#setAccessible()
      * @see MethodReflectionProvider#invoke(Object[])
      */
-    public <T> T withArgs(final Object... args) {
+    public Object withArgs(final Object... args) {
         if ((target == null) && !Modifier.isStatic(method.getModifiers())) {
             throw new IllegalStateException("attempt to call instance method " + method.getName() + " on class "
                     + clazz.getName());
@@ -69,7 +69,7 @@ public final class MethodHandlerByMethod implements MethodHandler {
      * This is a convenience method for
      * {@link MethodHandlerByMethod#withArgs(Object...)}
      */
-    public <T> T withoutArgs() {
+    public Object withoutArgs() {
         return withArgs(new Object[0]);
     }
 
