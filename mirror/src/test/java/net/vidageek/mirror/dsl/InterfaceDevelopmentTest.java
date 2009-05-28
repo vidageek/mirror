@@ -109,10 +109,10 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
         new Mirror().on(MethodFixture.class).reflect().method("methodWithOneArg").withArgs(String.class);
         new Mirror()
-            .on("net.vidageek.mirror.fixtures.MethodFixture")
-            .reflect()
-            .method("methodWithNoArgs")
-            .withoutArgs();
+                    .on("net.vidageek.mirror.fixtures.MethodFixture")
+                    .reflect()
+                    .method("methodWithNoArgs")
+                    .withoutArgs();
         new Mirror().on("net.vidageek.mirror.fixtures.MethodFixture").reflect().method("methodWithOneArg").withArgs(
                 String.class);
         new Mirror().on(MethodFixture.class).reflectAll().methods();
@@ -141,17 +141,17 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(FieldFixture.class).reflect().annotation(AnnotationFixture.class).atField("field");
         new Mirror().on(FieldFixture.class).reflect().annotation(AnnotationFixture.class).atField("staticField");
         new Mirror()
-            .on(MethodFixture.class)
-            .reflect()
-            .annotation(AnnotationFixture.class)
-            .atMethod("methodWithNoArgs")
-            .withoutArgs();
+                    .on(MethodFixture.class)
+                    .reflect()
+                    .annotation(AnnotationFixture.class)
+                    .atMethod("methodWithNoArgs")
+                    .withoutArgs();
         new Mirror()
-            .on(MethodFixture.class)
-            .reflect()
-            .annotation(AnnotationFixture.class)
-            .atMethod("methodWithOneArg")
-            .withArgs(String.class);
+                    .on(MethodFixture.class)
+                    .reflect()
+                    .annotation(AnnotationFixture.class)
+                    .atMethod("methodWithOneArg")
+                    .withArgs(String.class);
 
         new Mirror().on(ClassFixture.class).reflectAll().annotations().atClass();
         new Mirror().on(FieldFixture.class).reflectAll().annotations().atField("field");
@@ -175,6 +175,10 @@ public class InterfaceDevelopmentTest {
     public void testGenericTypeReflection() {
         new Mirror().on(typedField).reflect().genericType().atPosition(0);
         new Mirror().on(SubClassOfTypedClassFixture.class).reflect().parentGenericType().atPosition(0);
+    }
+
+    public void name() {
+
     }
 
 }
