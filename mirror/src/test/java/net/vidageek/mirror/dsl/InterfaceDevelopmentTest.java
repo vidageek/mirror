@@ -191,4 +191,9 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(new BeanFixture()).invoke().setterFor("field").withValue("12345");
         new Mirror().on(new BeanFixture()).invoke().setterFor(beanField).withValue("12345");
     }
+    
+    @Test
+    public void testSetterReflectionInterface() {
+    	new Mirror().on(BeanFixture.class).reflectAll().setters();
+    }
 }

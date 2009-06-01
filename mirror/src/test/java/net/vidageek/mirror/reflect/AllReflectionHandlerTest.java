@@ -10,6 +10,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.ChildHidingFixture;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
@@ -83,10 +84,18 @@ public class AllReflectionHandlerTest {
     }
 
     @Test
-    public void testThatReflectAllConstructors() {
+    public void testThatReflectsAllConstructors() {
         List<Constructor<ConstructorFixture>> constructors = new DefaultAllReflectionHandler<ConstructorFixture>(provider,
                 ConstructorFixture.class).constructors();
 
         assertEquals(6, constructors.size());
+    }
+    
+    @Test
+    public void testThatReflectsAllGetters() {
+    	List<Method> setters = new DefaultAllReflectionHandler<BeanFixture>(provider,
+                BeanFixture.class).setters();
+    	assertEquals(1, setters.size());
+    	assertEquals("setField", setters.get(0).getName());
     }
 }

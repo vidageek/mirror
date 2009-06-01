@@ -39,4 +39,13 @@ public interface AllReflectionHandler<T> {
 	 */
 	public AllAnnotationsHandler annotations() ;
 
+	
+	/**
+	 * 
+	 * Use this method to reflect all getters that follow JavaBean convention
+	 * 
+	 * @return A list of getter methods
+	 */
+	public List<Method> setters();
+
 }

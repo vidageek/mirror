@@ -17,7 +17,7 @@ final public class DefaultSetterMethodHandler implements SetterMethodHandler {
         this.fieldName = fieldName;
     }
 
-    public void withValue(final String value) {
+    public void withValue(final Object value) {
         new Mirror(provider).on(target).invoke().method(new Bean().setter(fieldName)).withArgs(value);
     }
 

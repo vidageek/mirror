@@ -6,8 +6,10 @@ package net.vidageek.mirror.reflect;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 
+import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllAnnotationsHandler;
@@ -69,6 +71,16 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
 	 */
 	public AllAnnotationsHandler annotations() {
 		return new DefaultAllAnnotationsHandler(provider, clazz);
+	}
+
+	public List<Method> setters() {
+		List<Method> list = new ArrayList<Method>();
+		for (Method method : new Mirror(provider).on(clazz).reflectAll().methods()) {
+			if (method.getName().startsWith("set")) {
+				list.add(method);
+			}
+		}
+		return list;
 	}
 
 }
