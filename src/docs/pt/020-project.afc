@@ -31,7 +31,19 @@ levada em consideração.
 
 [list]
 * **Mirror 1.4**
-Mudança de Mirror.on(AccessibleObject) para Mirror.on(AnnotatedElement)
+- Adicionado suporte para invocação de setter/getter (FEATURE)
+
+- Adicionado suporte para reflexão de setter/getter (FEATURE)
+
+- Mirror é completamente baseado em interfaces. (FEATURE)
+
+- net.vidageek.mirror.Mirror foi depreciado.. Use net.vidageek.mirror.dsl.Mirror no lugar. (DEPRECATION)
+
+- Mudança de Mirror.on(AccessibleObject) para Mirror.on(AnnotatedElement) (BUGFIX)
+
+- Busca por fields é feita em interfaces (BUGFIX)
+
+- Lança IllegalArgumentException no lugar de NUllPointerException (BUGFIX)
  
 * **Mirror 1.3**
 

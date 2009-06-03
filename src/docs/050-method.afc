@@ -27,6 +27,20 @@ Class clazz;
 List<Method> l = new Mirror().on(clazz).reflectAll().methods();
 [/java]
 
+Reflecting all getters of a class (will return an empty list if none found):
+
+[java]
+Class clazz;
+List<Method> l = new Mirror().on(clazz).reflectAll().getters();
+[/java]
+
+Reflecting all setters of a class (will return an empty list if none found):
+
+[java]
+Class clazz;
+List<Method> l = new Mirror().on(clazz).reflectAll().setters();
+[/java]
+
 [section Invoking Methods]
 
 Invoking a static method:
@@ -53,4 +67,20 @@ Method aMethod;
 Object target;
 Object returnValue = new Mirror().on(target).invoke().method(aMethod)
 						.withArgs(value1, value2);
+[/java]
+
+Invoking a setter method:
+
+[java]
+Field field;
+Object target;
+new Mirror().on(target).invoke().setterFor(field).withValue(value1);
+[/java]
+
+Invoking a getter method:
+
+[java]
+String fieldName;
+Object target;
+Object returnValue = new Mirror().on(target).invoke().getterFor(fieldName);
 [/java]

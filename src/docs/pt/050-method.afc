@@ -27,6 +27,21 @@ Class clazz;
 List<Method> l = new Mirror().on(clazz).reflectAll().methods();
 [/java]
 
+Refletindo todos os getters de uma classe (retornará uma lista vazia caso nada seja encontrado):
+
+[java]
+Class clazz;
+List<Method> l = new Mirror().on(clazz).reflectAll().getters();
+[/java]
+
+Refletindo todos os setters de uma classe (retornará uma lista vazia caso nada seja encontrado):
+
+[java]
+Class clazz;
+List<Method> l = new Mirror().on(clazz).reflectAll().setters();
+[/java]
+
+
 [section Invocando Métodos]
 
 Invocando um método estático:
@@ -53,4 +68,20 @@ Invocando um método de instância:
 Method umMetodo;
 Object obj;
 Object retorno = new Mirror().on(obj).invoke().method(umMetodo).withArgs(valor1, valor2);
+[/java]
+
+Invocando um setter:
+
+[java]
+Field field;
+Object target;
+new Mirror().on(target).invoke().setterFor(field).withValue(value1);
+[/java]
+
+Invocando um getter:
+
+[java]
+String fieldName;
+Object target;
+Object returnValue = new Mirror().on(target).invoke().getterFor(fieldName);
 [/java]

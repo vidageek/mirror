@@ -2,7 +2,6 @@ Issue 64
 Issue 92
 Issue 79
 static Mirror deprecated. Use dsl.Mirror instead.
-changing invocation and field getting to avoid cast
 Mirror is completely interface based.
 invoke setter/getter
 reflect setter/getter
