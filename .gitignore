@@ -1,11 +1,4 @@
-mirror/.classpath
-mirror/.project
-mirror/.settings/
-scan/.classpath
-scan/.project
-scan/.settings/
-scan/target/
-mirror/target
 .classpath
 .project
 .settings/
+target/
