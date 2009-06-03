@@ -29,7 +29,13 @@ Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API cha
 
 [list]
 * **Mirror 1.4**
-Changed Mirror.on(AccessibleObject) to Mirror.on(AnnotatedElement)
+- support for setter/getter invocation (FEATURE)
+- support for setter/getter reflection (FEATURE)
+- Mirror is completely interface based. (FEATURE)
+- net.vidageek.mirror.Mirror was deprecated. Use net.vidageek.mirror.dsl.Mirror instead. (DEPRECATION)
+- Changed Mirror.on(AccessibleObject) to Mirror.on(AnnotatedElement) (BUGFIX)
+- Field lookup is done on interfaces (BUGFIX)
+- Throws IllegalArgumentException instead of NUllPointerException (BUGFIX)
 
 * **Mirror 1.3**
 
