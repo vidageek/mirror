@@ -20,67 +20,79 @@ import net.vidageek.mirror.reflect.dsl.AllReflectionHandler;
  * 
  * @author jonasabreu
  */
-public final class DefaultAllReflectionHandler<T> implements AllReflectionHandler<T>{
+public final class DefaultAllReflectionHandler<T> implements AllReflectionHandler<T> {
 
-	private final Class<T> clazz;
+    private final Class<T> clazz;
 
-	private final ReflectionProvider provider;
+    private final ReflectionProvider provider;
 
-	public DefaultAllReflectionHandler(final ReflectionProvider provider, final Class<T> clazz) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
-		this.provider = provider;
-		this.clazz = clazz;
-	}
+    public DefaultAllReflectionHandler(final ReflectionProvider provider, final Class<T> clazz) {
+        if (clazz == null) {
+            throw new IllegalArgumentException("clazz cannot be null");
+        }
+        this.provider = provider;
+        this.clazz = clazz;
+    }
 
-	/**
-	 * Use this method to reflect all fields on the wrapped class
-	 * 
-	 * @return The list of fields or an empty list if none was found.
-	 * @see ClassReflectionProvider#reflectAllFields()
-	 */
-	public List<Field> fields() {
-		return provider.getClassReflectionProvider(clazz).reflectAllFields();
-	}
+    /**
+     * Use this method to reflect all fields on the wrapped class
+     * 
+     * @return The list of fields or an empty list if none was found.
+     * @see ClassReflectionProvider#reflectAllFields()
+     */
+    public List<Field> fields() {
+        return provider.getClassReflectionProvider(clazz).reflectAllFields();
+    }
 
-	/**
-	 * Use this method to reflect all methods on the wrapped class
-	 * 
-	 * @return The list of methods or an empty list if none was found.
-	 * @see ClassReflectionProvider#reflectAllMethods()
-	 */
-	public List<Method> methods() {
-		return provider.getClassReflectionProvider(clazz).reflectAllMethods();
-	}
+    /**
+     * Use this method to reflect all methods on the wrapped class
+     * 
+     * @return The list of methods or an empty list if none was found.
+     * @see ClassReflectionProvider#reflectAllMethods()
+     */
+    public List<Method> methods() {
+        return provider.getClassReflectionProvider(clazz).reflectAllMethods();
+    }
 
-	/**
-	 * Use this method to reflect all constructors on the wrapped class
-	 * 
-	 * @return The list of constructors or an empty list if none was found.
-	 * @see ClassReflectionProvider#reflectAllConstructors()
-	 */
-	public List<Constructor<T>> constructors() {
-		return provider.getClassReflectionProvider(clazz).reflectAllConstructors();
-	}
+    /**
+     * Use this method to reflect all constructors on the wrapped class
+     * 
+     * @return The list of constructors or an empty list if none was found.
+     * @see ClassReflectionProvider#reflectAllConstructors()
+     */
+    public List<Constructor<T>> constructors() {
+        return provider.getClassReflectionProvider(clazz).reflectAllConstructors();
+    }
 
-	/**
-	 * Use this method to reflect all annotations on a AccessibleObject
-	 * 
-	 * @return An object responsible for reflecting annotations.
-	 */
-	public AllAnnotationsHandler annotations() {
-		return new DefaultAllAnnotationsHandler(provider, clazz);
-	}
+    /**
+     * Use this method to reflect all annotations on a AccessibleObject
+     * 
+     * @return An object responsible for reflecting annotations.
+     */
+    public AllAnnotationsHandler annotations() {
+        return new DefaultAllAnnotationsHandler(provider, clazz);
+    }
 
-	public List<Method> setters() {
-		List<Method> list = new ArrayList<Method>();
-		for (Method method : new Mirror(provider).on(clazz).reflectAll().methods()) {
-			if (method.getName().startsWith("set")) {
-				list.add(method);
-			}
-		}
-		return list;
-	}
+    public List<Method> setters() {
+        List<Method> list = new ArrayList<Method>();
+        for (Method method : new Mirror(provider).on(clazz).reflectAll().methods()) {
+            if (method.getName().startsWith("set") && (method.getParameterTypes().length == 1)
+                    && (method.getReturnType().equals(void.class))) {
+                list.add(method);
+            }
+        }
+        return list;
+    }
+
+    public List<Method> getters() {
+        List<Method> list = new ArrayList<Method>();
+        for (Method method : new Mirror(provider).on(clazz).reflectAll().methods()) {
+            if (method.getName().startsWith("get") && (method.getParameterTypes().length == 0)
+                    && (!method.getReturnType().equals(void.class))) {
+                list.add(method);
+            }
+        }
+        return list;
+    }
 
 }
