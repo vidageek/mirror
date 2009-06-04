@@ -10,15 +10,15 @@
 	</head>
 
 	<body>
-
-		<div class="header">
-			<div class="logo">
-				<img src="${relative}/includes/images/mirror_2.png" />
-			</div>
-			<div class="slogan">
-				<h2>Because Meta Programming must be easy.</h2>				
-			</div>
-		</div>			
-			<#include "menu.ftl">
-			
-			<div class="pageContent">
+		<div id="page">
+			<div class="header">
+				<div class="logo">
+					<img src="${relative}/includes/images/mirror_2.png" />
+				</div>
+				<div class="slogan">
+					<h2>Because Meta Programming must be easy.</h2>				
+				</div>
+			</div>			
+				<#include "menu.ftl">
+				
+				<div class="pageContent">

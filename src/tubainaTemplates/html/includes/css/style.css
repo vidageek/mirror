@@ -5,6 +5,12 @@ body {
     padding:0px;
 }
 
+#page {
+	border: 1px solid;
+	max-width: 980px;
+	min-width: 980px;	
+}
+
 a {
 	color: #666;
 	text-decoration: none;

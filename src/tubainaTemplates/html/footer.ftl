@@ -8,6 +8,7 @@
 			</div> <!-- footer -->	
 											
 		</div> <!-- content -->
+	</div>
 		
 		<!--Google Tracking Script -->
 		<script type="text/javascript">
