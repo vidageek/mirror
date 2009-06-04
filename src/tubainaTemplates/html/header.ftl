@@ -16,7 +16,7 @@
 					<img src="${relative}/includes/images/mirror_2.png" />
 				</div>
 				<div class="slogan">
-					<h2>Because Meta Programming must be easy.</h2>				
+					Because Meta Programming must be easy.				
 				</div>
 			</div>			
 				<#include "menu.ftl">
