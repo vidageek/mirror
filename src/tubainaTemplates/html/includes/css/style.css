@@ -54,10 +54,14 @@ img {
 	padding-top: 10px;
 }
 .menu {
-	width: 20%;
+	width: 180px;
 	float:left;
-	background-color: #B3C7FF;
+	margin:10px;
+}
+
+.menu ul {
 	margin:0px;
+	padding: 0px;
 }
 .subItem {
 	padding-left: 30px;	
