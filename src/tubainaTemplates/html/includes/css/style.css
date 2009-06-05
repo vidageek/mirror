@@ -12,6 +12,9 @@ body {
 
 a {
 	color: #666;
+}
+
+div.menu a {
 	text-decoration: none;
 }
 a:link {
@@ -27,6 +30,7 @@ a:hover {
 a:active {
 	color: #666;
 }   /* selected link */
+
 ul.chapter li {
 	list-style: none;
 }
@@ -87,7 +91,11 @@ span.paragraph {
 	margin-left:40px;
 }
 
-div.java {
+li span.paragraph {
+	margin-left:10px;
+}
+
+div.java, div.xml {
 	margin-left:40px;
 	margin-bottom:10px;
 }
