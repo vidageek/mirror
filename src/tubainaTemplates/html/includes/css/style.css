@@ -27,15 +27,15 @@ a:hover {
 a:active {
 	color: #666;
 }   /* selected link */
-li {
+ul.chapter li {
 	list-style: none;
-	background-color: #BBB;	
 }
-li:hover {
+ul.chapter li:hover {
 	background-color: #A9A;	
 }
 img {
-	border: 0px;	
+	border: 0px;
+	width: 250px;
 }
 .header {
 	width: 100%;
@@ -44,26 +44,52 @@ img {
 	width:100%;
 }
 .slogan {
+	color:#666;
+	font-size:19px;
 	font-style:italic;
+	margin-bottom:0;
+	margin-left:68px;
+	margin-top:-17px;
 	width:100%;
-	margin-left:60px;
 }
 .menu {
 	width: 180px;
 	float:left;
 	margin:10px;
+	background:#FFFFFF url(../images/menu.png) no-repeat scroll 0 0;
 }
 
 .menu ul {
 	margin:0px;
-	padding: 0px;
+	padding: 10px;
 }
 .subItem {
 	padding-left: 30px;	
 }
 .pageContent {
 	float:right;
-	width:79%;
+	margin:10px;
+	width:760px;
+	background:#FFFFFF url(../images/body.png) no-repeat scroll 0 0;
+	color: #666;
+	min-height: 600px;
+}
+
+h1.chapter, h2.section {
+	margin-left:40px;
+	margin-top:40px;
+	color: #000;
+}
+
+span.paragraph {
+	display:block;
+	margin-bottom:10px;
+	margin-left:40px;
+}
+
+div.java {
+	margin-left:40px;
+	margin-bottom:10px;
 }
 
 /*PayPal*/
