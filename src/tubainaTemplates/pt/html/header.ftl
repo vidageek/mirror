@@ -5,18 +5,20 @@
 		<meta http-equiv="Content-Language" content="Portuguese" />
 		<link rel="stylesheet" type="text/css" href="${relative}/../mirror/includes/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="${relative}/../mirror/includes/css/java.css" />
-		<title> Mirror - Porque meta-programação deve ser fácil. </title>
+		<title> Mirror - Porque meta-programa&ccedil;&atilde;o deve ser f&aacute;cil. </title>
 		
 	</head>
 
 	<body>
-
-		<div class="content">
+		<div id="page">
 			<div class="header">
-				<h1>Mirror</h1>
-				<h2>Porque meta-programação deve ser fácil.</h2>				
+				<div class="logo">
+					<img src="${relative}/../mirror/includes/images/mirror_2.png" />
+				</div>
+				<div class="slogan">
+					Porque meta-programa&ccedil;&atilde;o deve ser f&aacute;cil.
+				</div>
 			</div>
-			
-			<#include "menu.ftl">
+				<#include "menu.ftl">
 			
 			<div class="pageContent">

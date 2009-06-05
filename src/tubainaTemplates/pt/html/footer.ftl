@@ -8,7 +8,8 @@
 			</div> <!-- footer -->	
 											
 		</div> <!-- content -->
-		
+	</div>
+	
 		<!--Google Tracking Script -->
 		<script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
