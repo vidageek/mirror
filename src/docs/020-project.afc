@@ -59,7 +59,8 @@ Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API cha
 [/list]
 [section Download]
 
-You can browse all Mirror releases and sources at http://maven.vidageek.net/net/vidageek/mirror .
+You can browse all Mirror releases and sources at http://maven.vidageek.net/net/vidageek/mirror 
+or http://github.com/vidageek/mirror/downloads .
 
 If you use maven to build your project, you can just add the following lines to your pom.xml:
 [xml]

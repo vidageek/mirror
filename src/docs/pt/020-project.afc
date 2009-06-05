@@ -63,7 +63,7 @@ levada em consideração.
 [section Download]
 
 Você pode acessar todos os lançamentos e códigos fonte disponíveis em 
-http://maven.vidageek.net/net/vidageek/mirror .
+http://maven.vidageek.net/net/vidageek/mirror ou http://github.com/vidageek/mirror/downloads .
 
 Se você utiliza Maven, basta apenas adicionar as seguintes linhas
 em seu pom.xml:
