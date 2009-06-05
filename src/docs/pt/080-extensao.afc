@@ -30,8 +30,15 @@ Mas como você faz para que o Mirror use seu Reflection Provider? De uma olhada 
 
 [section Configuração]
 
-O Mirror tentará ler um arquivo de configuração (mirror.properties) que deve ficar na pasta raiz do 
-seu projeto.
+Existem duas formas de configurar o Mirror. Você pode instanciar Mirror passando um 
+::net.vidageek.mirror.provider.ReflectionProvider:: :
+
+[java]
+new Mirror(new FakeReflectionProvider());
+[/java]
+
+Ou você pode deixar que o mirror leia um arquivo de configuração (mirror.properties) que deve ficar na 
+pasta raiz do seu projeto.
 
 Por enquanto, a única chave aceita neste arquivo de configuração é a seguinte:
 

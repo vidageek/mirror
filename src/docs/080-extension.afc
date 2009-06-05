@@ -29,7 +29,13 @@ But how do you make Mirror use your Reflection Provider? Take a look at Extensio
 
 [section Configuration]
 
-Mirror will try to read a configuration file (mirror.properties) located at your project root folder.
+There are two ways to configure Mirror. You can instantiate Mirror passing a ::net.vidageek.mirror.provider.ReflectionProvider:: :
+
+[java]
+new Mirror(new FakeReflectionProvider());
+[/java]
+
+Or you can let Mirror read a property file (mirror.properties) located at your project root folder.
 
 For now, this configuration file will use only the following key:
 
