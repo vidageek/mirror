@@ -6,8 +6,8 @@ body {
 }
 
 #page {
-	max-width: 980px;
-	min-width: 980px;	
+	width:980px;
+	margin-left:20px;
 }
 
 a {
