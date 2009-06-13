@@ -5,7 +5,13 @@
 		<meta http-equiv="Content-Language" content="English" />
 		<link rel="stylesheet" type="text/css" href="${relative}/includes/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="${relative}/includes/css/java.css" />
-		<title> Mirror - Because Meta Programming must be easy. </title>
+		<title> Mirror - Because Meta Programming must be easy. | ${chapter_name} 
+			
+			<#if section_name != "none">
+				-> ${section_name}
+			</#if>
+			
+			</title>
 		
 	</head>
 

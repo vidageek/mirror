@@ -1,5 +1,8 @@
 <#assign relative = "..">
 
+<#assign chapter_name = chapter.title >
+<#assign section_name = "none" >
+
 <#include "header.ftl">
 
 		<h1 class="chapter">${chapter.title}</h1>
