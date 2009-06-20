@@ -30,7 +30,7 @@ levada em consideração.
 [section Release Notes]
 
 [list]
-* **Mirror 1.4**
+* **Mirror 1.4 - 5 de Junho de 2009**
 - Adicionado suporte para invocação de setter/getter (FEATURE)
 
 - Adicionado suporte para reflexão de setter/getter (FEATURE)
@@ -45,7 +45,7 @@ levada em consideração.
 
 - Lança IllegalArgumentException no lugar de NUllPointerException (BUGFIX)
  
-* **Mirror 1.3**
+* **Mirror 1.3 - 5 de Janeiro de 2009**
 
 - Adicionado Reflection Providers
 
@@ -55,7 +55,7 @@ levada em consideração.
 
 - Bugfixes 
 
-* **Mirror 1.2**
+* **Mirror 1.2 - 16 de Novembro de 2008**
 
 - Primeiro release público
 [/list]
