@@ -1,0 +1,57 @@
+[chapter Mirror]
+
+Mirror a été créé pour trouver une solution à un simple problème, que s'appele ReflectionUtil,
+qui est présent en presque tout les projet que implique en un usage avancée du Reflection. 
+
+Travailler avec Java Reflection API est trés difficilé. Questionne quelqu'un que tu connais que
+travail avec Reflection et il va dire-à-toi que c'est un travail trés désagréable.
+
+Jetez un coup d'oeil au le code suivante:
+
+[java]
+//Let's just set a field value. Should be a simple task, right?
+
+//"target" is the object containing the field whose value you want to set. 
+Field toSet = null;
+for (Field f : target.getClass().getDeclaredFields()) { 
+	//Get all fields DECLARED inside the target object class 
+	if (f.getName().equals("field")) {
+		toSet = f;
+	}
+}
+if (toSet != null && ((toSet.getModifiers() & Modifier.STATIC) == 0) 
+		&& ((toSet.getModifiers() & Modifier.FINAL) == 0)) {
+	toSet.setAccessible(true);
+	toSet.set(target, value);
+}
+[/java]
+
+Ah! Code moche! Totalement illisible. Que ces Modifier.FINAL et 
+Modifier.STATIC font au code moi?
+
+So, what a good programmer would do? Hide it inside some *Util class, so he would be able to
+use it like this:
+
+[java]
+ReflectionUtil.setField(target, fielName, value);
+[/java]
+
+Better, but completely procedural. Not good.
+
+Wouldn't be much better if you could just do something like this:
+
+[code]
+Dear program,
+
+On a target object, set fieldName with value.
+[/code]
+
+Beautiful, isn't?
+
+Taking away all those sugar-full words, we get:
+
+[java]
+new Mirror().on(target).set().field(fieldName).withValue(value);
+[/java]
+
+And this was our "You don't even know it's a tutorial" Tutorial. Mirror is that simple.
