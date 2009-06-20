@@ -29,6 +29,8 @@ if (toSet != null && ((toSet.getModifiers() & Modifier.STATIC) == 0)
 Ah! Code moche! Totalement illisible. Que ces Modifier.FINAL et 
 Modifier.STATIC font au code moi?
 
+Alors, qu'est-ce qu'un bon programmeur devrait faire?
+
 So, what a good programmer would do? Hide it inside some *Util class, so he would be able to
 use it like this:
 
