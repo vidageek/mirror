@@ -165,6 +165,9 @@
 				</plugins>
 			</build>
 		</profile>
+		<profile>
+			<id>tests</id>
+		</profile>
 	</profiles>
 
 	<developers>
