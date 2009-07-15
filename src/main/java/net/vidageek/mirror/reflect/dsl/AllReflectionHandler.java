@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import net.vidageek.mirror.dsl.Matcher;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
 
 public interface AllReflectionHandler<T> {
@@ -54,5 +55,15 @@ public interface AllReflectionHandler<T> {
      * @return A list of getter methods
      */
     public List<Method> getters();
+
+    /**
+     * Use this method to reflect all fields on the wrapped class that matches
+     * matcher.
+     * 
+     * @return The list of fields or an empty list if none was accepted by the
+     *         matcher.
+     * @see AllReflectionHandler#fields()
+     */
+    public List<Field> fieldsMatching(Matcher<Field> matcher);
 
 }
