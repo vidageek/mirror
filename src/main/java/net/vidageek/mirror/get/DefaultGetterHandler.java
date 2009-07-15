@@ -43,15 +43,6 @@ public final class DefaultGetterHandler implements GetterHandler {
         target = null;
     }
 
-    /**
-     * Convenience method for {@link DefaultGetterHandler#field(Field)}
-     * 
-     * @param fieldName
-     *            Name of the field that is going to be reflected.
-     * @see DefaultGetterHandler#field(Field)
-     * @throws IllegalArgumentException
-     *             if fieldName is null or empty
-     */
     public Object field(final String fieldName) {
         if ((fieldName == null) || (fieldName.trim().length() == 0)) {
             throw new IllegalArgumentException("fieldName cannot be null or empty.");
@@ -60,23 +51,6 @@ public final class DefaultGetterHandler implements GetterHandler {
         return field(getField(fieldName));
     }
 
-    /**
-     * This part of the DSL controls which field is going to have it's value
-     * read.
-     * 
-     * @param field
-     *            Field object representing the field from which the value is
-     *            going to be read.
-     * @return The value of the field represented by this field.
-     * @throws IllegalArgumentException
-     *             if field is null or if field does not exists in this
-     *             class/object
-     * @throws IllegalStateException
-     *             if you are trying to access an instance field without
-     *             providing an object.
-     * @see FieldReflectionProvider#setAccessible()
-     * @see FieldReflectionProvider#getValue()
-     */
     public Object field(final Field field) {
         if (field == null) {
             throw new IllegalArgumentException("field cannot be null");

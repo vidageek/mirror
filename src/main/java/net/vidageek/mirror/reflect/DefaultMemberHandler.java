@@ -3,7 +3,6 @@ package net.vidageek.mirror.reflect;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 
-import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.MemberHandler;
 
@@ -27,14 +26,6 @@ public final class DefaultMemberHandler implements MemberHandler {
         this.member = member;
     }
 
-    /**
-     * Use this method to reflect a single annotation from the AccessibleObject
-     * 
-     * @param annotation
-     *            Annotation type to be reflected.
-     * @return The annotation or null if it was not found.
-     * @see AnnotatedElementReflectionProvider#getAnnotation(Class)
-     */
     public <T extends Annotation> T annotation(final Class<T> annotation) {
         return provider.getAnnotatedElementReflectionProvider(member).getAnnotation(annotation);
     }

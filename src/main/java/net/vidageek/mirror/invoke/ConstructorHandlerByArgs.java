@@ -28,28 +28,10 @@ public final class ConstructorHandlerByArgs<T> implements ConstructorHandler<T> 
         this.clazz = clazz;
     }
 
-    /**
-     * {@inheritDoc ConstructorHandler#withoutArgs()}
-     * 
-     * This is a convenience method for
-     * {@link ConstructorHandlerByArgs#withArgs(Object...)}
-     * 
-     * @see ConstructorHandlerByArgs#withArgs(Object...)
-     */
     public T withoutArgs() {
         return this.withArgs(new Object[0]);
     }
 
-    /**
-     * {@inheritDoc ConstructorHandler#withArgs(Object...)}
-     * 
-     * This is a convenience method for
-     * {@link ConstructorHandlerByConstructor#withArgs(Object...)}
-     * 
-     * @throws MirrorException
-     *             if no constructor matching args is found.
-     * @see ConstructorHandlerByConstructor#withArgs(Object...)
-     */
     public T withArgs(final Object... args) {
         return new ConstructorHandlerByConstructor<T>(provider, clazz, getConstructor(args)).withArgs(args);
     }

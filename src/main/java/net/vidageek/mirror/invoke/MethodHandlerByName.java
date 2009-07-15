@@ -38,29 +38,10 @@ public final class MethodHandlerByName implements MethodHandler {
         this.methodName = methodName;
     }
 
-    /**
-     * {@inheritDoc MethodHandler#withoutArgs()}
-     * 
-     * This is a convenience method for
-     * {@link MethodHandlerByName#withArgs(Object...)}
-     * 
-     * @see MethodHandlerByName#withArgs(Object...)
-     */
     public Object withoutArgs() {
         return withArgs(new Object[0]);
     }
 
-    /**
-     * {@inheritDoc MethodHandler#withArgs(Object...)}
-     * 
-     * This is a convenience method for
-     * {@link MethodHandlerByMethod#withArgs(Object...)}
-     * 
-     * @see MethodHandlerByMethod#withArgs(Object...)
-     * 
-     * @throws MirrorException
-     *             if method is not found on class
-     */
     public Object withArgs(final Object... args) {
         return new MethodHandlerByMethod(provider, target, clazz, getMethod(args)).withArgs(args);
     }

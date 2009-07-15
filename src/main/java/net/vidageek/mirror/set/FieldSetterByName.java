@@ -18,47 +18,37 @@ import net.vidageek.mirror.set.dsl.FieldSetter;
  */
 public final class FieldSetterByName implements FieldSetter {
 
-	private final String fieldName;
+    private final String fieldName;
 
-	private final Object target;
+    private final Object target;
 
-	private final Class<?> clazz;
+    private final Class<?> clazz;
 
-	private final ReflectionProvider provider;
+    private final ReflectionProvider provider;
 
-	public FieldSetterByName(final ReflectionProvider provider, final String fieldName, final Object target,
-			final Class<?> clazz) {
-		if (fieldName == null || fieldName.trim().length() == 0) {
-			throw new IllegalArgumentException("fieldName cannot be null or blank");
-		}
+    public FieldSetterByName(final ReflectionProvider provider, final String fieldName, final Object target,
+            final Class<?> clazz) {
+        if ((fieldName == null) || (fieldName.trim().length() == 0)) {
+            throw new IllegalArgumentException("fieldName cannot be null or blank");
+        }
 
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
+        if (clazz == null) {
+            throw new IllegalArgumentException("clazz cannot be null");
+        }
 
-		this.provider = provider;
-		this.fieldName = fieldName;
-		this.target = target;
-		this.clazz = clazz;
-	}
+        this.provider = provider;
+        this.fieldName = fieldName;
+        this.target = target;
+        this.clazz = clazz;
+    }
 
-	/**
-	 * {@inheritDoc FieldSetter#withValue(Object)}
-	 * 
-	 * This is a convenience method for
-	 * {@link FieldSetterByField#withValue(Object)}
-	 * 
-	 * @see FieldSetterByField#withValue(Object)
-	 * @throws MirrorException
-	 *             if field is not found.
-	 */
-	public void withValue(final Object value) {
-		Field field = new Mirror(provider).on(clazz).reflect().field(fieldName);
-		if (field == null) {
-			throw new MirrorException("could not find field " + fieldName + " on class " + clazz.getName());
-		}
-		new FieldSetterByField(provider, target, clazz, field).withValue(value);
+    public void withValue(final Object value) {
+        Field field = new Mirror(provider).on(clazz).reflect().field(fieldName);
+        if (field == null) {
+            throw new MirrorException("could not find field " + fieldName + " on class " + clazz.getName());
+        }
+        new FieldSetterByField(provider, target, clazz, field).withValue(value);
 
-	}
+    }
 
 }

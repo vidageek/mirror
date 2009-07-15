@@ -28,21 +28,10 @@ public final class DefaultMemberController implements MemberController {
         this.member = member;
     }
 
-    /**
-     * This part of the DSL controls reflection of a list of reflection
-     * elements.
-     * 
-     * @return An object to control reflection of lists of elements.
-     */
     public AllMemberHandler reflectAll() {
         return new DefaultAllMemberHandler(provider, member);
     }
 
-    /**
-     * This part of the DSL controls reflection of single reflection elements.
-     * 
-     * @return An object to control reflection of single elements.
-     */
     public MemberHandler reflect() {
         return new DefaultMemberHandler(provider, member);
     }

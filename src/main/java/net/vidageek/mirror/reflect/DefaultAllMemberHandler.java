@@ -4,7 +4,6 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.util.List;
 
-import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllMemberHandler;
 
@@ -28,12 +27,6 @@ public final class DefaultAllMemberHandler implements AllMemberHandler {
         this.member = member;
     }
 
-    /**
-     * Use this method to reflect a list of annotations on the AccessibleObject
-     * 
-     * @return The list of annotation or a empty list if none was found.
-     * @see AnnotatedElementReflectionProvider#getAnnotations()
-     */
     public List<Annotation> annotations() {
         return provider.getAnnotatedElementReflectionProvider(member).getAnnotations();
     }

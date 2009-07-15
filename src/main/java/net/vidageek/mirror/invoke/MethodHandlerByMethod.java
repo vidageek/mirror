@@ -43,15 +43,6 @@ public final class MethodHandlerByMethod implements MethodHandler {
         this.method = method;
     }
 
-    /**
-     * {@inheritDoc MethodHandler#withArgs(Object...)}
-     * 
-     * @throws IllegalStateException
-     *             if attempting to invoke an instance method without providing
-     *             an object.
-     * @see MethodReflectionProvider#setAccessible()
-     * @see MethodReflectionProvider#invoke(Object[])
-     */
     public Object withArgs(final Object... args) {
         if ((target == null) && !Modifier.isStatic(method.getModifiers())) {
             throw new IllegalStateException("attempt to call instance method " + method.getName() + " on class "
@@ -63,12 +54,6 @@ public final class MethodHandlerByMethod implements MethodHandler {
         return methodReflectionProvider.invoke(args);
     }
 
-    /**
-     * {@inheritDoc MethodHandler#withoutArgs()}
-     * 
-     * This is a convenience method for
-     * {@link MethodHandlerByMethod#withArgs(Object...)}
-     */
     public Object withoutArgs() {
         return withArgs(new Object[0]);
     }

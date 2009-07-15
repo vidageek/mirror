@@ -1,5 +1,11 @@
 package net.vidageek.mirror.bean;
 
+/**
+ * Class to make it a little more pleasant to concatenate strings.
+ * 
+ * @author jonasabreu
+ * 
+ */
 final public class Bean {
 
     private String capitalize(final String fieldName) {
