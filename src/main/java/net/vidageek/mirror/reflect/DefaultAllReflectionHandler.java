@@ -7,12 +7,12 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.List;
 
 import net.vidageek.mirror.dsl.Matcher;
-import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.matcher.GetterMatcher;
 import net.vidageek.mirror.matcher.ListFilter;
+import net.vidageek.mirror.matcher.SetterMatcher;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllAnnotationsHandler;
 import net.vidageek.mirror.reflect.dsl.AllReflectionHandler;
@@ -53,25 +53,13 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
     }
 
     public List<Method> setters() {
-        List<Method> list = new ArrayList<Method>();
-        for (Method method : new Mirror(provider).on(clazz).reflectAll().methods()) {
-            if (method.getName().startsWith("set") && (method.getParameterTypes().length == 1)
-                    && (method.getReturnType().equals(void.class))) {
-                list.add(method);
-            }
-        }
-        return list;
+        return new ListFilter().filter(new SetterMatcher(), methods());
+
     }
 
     public List<Method> getters() {
-        List<Method> list = new ArrayList<Method>();
-        for (Method method : new Mirror(provider).on(clazz).reflectAll().methods()) {
-            if (method.getName().startsWith("get") && (method.getParameterTypes().length == 0)
-                    && (!method.getReturnType().equals(void.class))) {
-                list.add(method);
-            }
-        }
-        return list;
+        return new ListFilter().filter(new GetterMatcher(), methods());
+
     }
 
     public List<Field> fieldsMatching(final Matcher<Field> matcher) {
