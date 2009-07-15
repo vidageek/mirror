@@ -104,7 +104,6 @@ public class MethodInvocationTest {
                 new Class<?>[] { InterfaceFixture.class }, new InvocationHandler() {
 
                     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
-                        // TODO Auto-generated method stub
                         return null;
                     }
                 });
@@ -115,10 +114,10 @@ public class MethodInvocationTest {
     @Test
     public void testThatCanInvokeAnnotationMethods() {
         AnnotationFixture annotation = new Mirror()
-            .on(ClassFixture.class)
-            .reflect()
-            .annotation(AnnotationFixture.class)
-            .atClass();
+                                                   .on(ClassFixture.class)
+                                                   .reflect()
+                                                   .annotation(AnnotationFixture.class)
+                                                   .atClass();
 
         Assert.assertEquals("foo", new Mirror().on(annotation).invoke().method("value").withoutArgs());
     }
