@@ -19,7 +19,8 @@ public final class PureJavaClassReflectionProvider<T> implements ClassReflection
     @SuppressWarnings("unchecked")
     public PureJavaClassReflectionProvider(final String className) {
         try {
-            this.clazz = (Class<T>) Class.forName(className);
+            this.clazz = (Class<T>) Class.forName(className, false,
+                    PureJavaClassReflectionProvider.class.getClassLoader());
         } catch (final ClassNotFoundException e) {
             this.clazz = (Class<T>) FixedType.fromValue(className);
 
