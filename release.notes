@@ -1,0 +1,2 @@
+issue 19 - should not run static initializer on reflected class
+
