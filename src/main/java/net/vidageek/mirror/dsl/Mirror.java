@@ -26,14 +26,20 @@ public final class Mirror {
 
     private static final String MIRROR_CFG = "/mirror.properties";
 
+    private static final ReflectionProvider cachedProvider;
+
     private final ReflectionProvider provider;
+
+    static {
+        cachedProvider = new MirrorProviderBuilder(Mirror.class.getResource(MIRROR_CFG)).createProvider();
+    }
 
     public Mirror(final ReflectionProvider provider) {
         this.provider = provider;
     }
 
     public Mirror() {
-        provider = new MirrorProviderBuilder(Mirror.class.getResource(MIRROR_CFG)).createProvider();
+        provider = Mirror.cachedProvider;
     }
 
     /**
