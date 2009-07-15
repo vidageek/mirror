@@ -172,4 +172,32 @@ public class AllReflectionHandlerTest {
                 });
         assertEquals(1, list.size());
     }
+
+    @Test
+    public void testThatPresentsAllMethodsToConstructor() {
+        List<Constructor<ConstructorFixture>> list = new Mirror(provider)
+                                                                         .on(ConstructorFixture.class)
+                                                                         .reflectAll()
+                                                                         .constructorsMatching(
+                                                                                 new Matcher<Constructor<ConstructorFixture>>() {
+
+                                                                                     public boolean accepts(
+                                                                                             final Constructor<ConstructorFixture> element) {
+                                                                                         return true;
+                                                                                     }
+                                                                                 });
+        assertEquals(6, list.size());
+    }
+
+    @Test
+    public void testThatMatcherIsRespectedForConstructors() {
+        List<Constructor<ConstructorFixture>> list = new Mirror(provider).on(ConstructorFixture.class).reflectAll().constructorsMatching(
+                new Matcher<Constructor<ConstructorFixture>>() {
+
+                    public boolean accepts(final Constructor<ConstructorFixture> element) {
+                        return element.getParameterTypes().length == 0;
+                    }
+                });
+        assertEquals(1, list.size());
+    }
 }

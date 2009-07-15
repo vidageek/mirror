@@ -80,6 +80,10 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
         return filter(matcher, methods());
     }
 
+    public List<Constructor<T>> constructorsMatching(final Matcher<Constructor<T>> matcher) {
+        return filter(matcher, constructors());
+    }
+
     private <A> List<A> filter(final Matcher<A> matcher, final List<A> list) {
         List<A> filteredList = new ArrayList<A>();
         for (A element : list) {

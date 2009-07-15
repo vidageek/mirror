@@ -76,4 +76,14 @@ public interface AllReflectionHandler<T> {
      */
     public List<Method> methodsMatching(Matcher<Method> matcher);
 
+    /**
+     * Use this method to reflect all constructors on the wrapped class that
+     * matches matcher.
+     * 
+     * @return The list of constructors or an empty list if none was accepted by
+     *         the matcher.
+     * @see AllReflectionHandler#constructors()
+     */
+    public List<Constructor<T>> constructorsMatching(Matcher<Constructor<T>> matcher);
+
 }
