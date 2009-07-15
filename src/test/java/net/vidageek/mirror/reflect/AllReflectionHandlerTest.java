@@ -148,4 +148,28 @@ public class AllReflectionHandlerTest {
                 });
         assertEquals(1, list.size());
     }
+
+    @Test
+    public void testThatPresentsAllMethodsToMatcher() {
+        List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll().methodsMatching(
+                new Matcher<Method>() {
+
+                    public boolean accepts(final Method element) {
+                        return true;
+                    }
+                });
+        assertEquals(22, list.size());
+    }
+
+    @Test
+    public void testThatMatcherIsRespectedForMethods() {
+        List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll().methodsMatching(
+                new Matcher<Method>() {
+
+                    public boolean accepts(final Method element) {
+                        return "methodWithNoArgs".equals(element.getName());
+                    }
+                });
+        assertEquals(1, list.size());
+    }
 }

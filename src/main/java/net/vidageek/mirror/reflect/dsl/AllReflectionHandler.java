@@ -66,4 +66,14 @@ public interface AllReflectionHandler<T> {
      */
     public List<Field> fieldsMatching(Matcher<Field> matcher);
 
+    /**
+     * Use this method to reflect all methods on the wrapped class that matches
+     * matcher.
+     * 
+     * @return The list of methods or an empty list if none was accepted by the
+     *         matcher.
+     * @see AllReflectionHandler#methods()
+     */
+    public List<Method> methodsMatching(Matcher<Method> matcher);
+
 }

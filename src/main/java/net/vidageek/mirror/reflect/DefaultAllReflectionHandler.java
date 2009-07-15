@@ -73,13 +73,21 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
     }
 
     public List<Field> fieldsMatching(final Matcher<Field> matcher) {
-        List<Field> list = new ArrayList<Field>();
-        for (Field field : fields()) {
-            if (matcher.accepts(field)) {
-                list.add(field);
+        return filter(matcher, fields());
+    }
+
+    public List<Method> methodsMatching(final Matcher<Method> matcher) {
+        return filter(matcher, methods());
+    }
+
+    private <A> List<A> filter(final Matcher<A> matcher, final List<A> list) {
+        List<A> filteredList = new ArrayList<A>();
+        for (A element : list) {
+            if (matcher.accepts(element)) {
+                filteredList.add(element);
             }
         }
-        return list;
+        return filteredList;
     }
 
 }
