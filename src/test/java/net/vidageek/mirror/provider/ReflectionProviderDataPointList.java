@@ -2,6 +2,8 @@ package net.vidageek.mirror.provider;
 
 import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
 
+import org.junit.experimental.theories.DataPoint;
+
 /**
  * Interface to provide datapoints to JUnit's Theory.
  * 
@@ -9,6 +11,7 @@ import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
  */
 public interface ReflectionProviderDataPointList {
 
-	public ReflectionProvider pureJava = new PureJavaReflectionProvider();
+    @DataPoint
+    public ReflectionProvider pureJava = new PureJavaReflectionProvider();
 
 }
