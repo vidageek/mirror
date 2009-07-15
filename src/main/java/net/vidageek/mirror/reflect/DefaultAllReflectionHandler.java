@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.vidageek.mirror.dsl.Matcher;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllAnnotationsHandler;
@@ -66,6 +67,16 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
             if (method.getName().startsWith("get") && (method.getParameterTypes().length == 0)
                     && (!method.getReturnType().equals(void.class))) {
                 list.add(method);
+            }
+        }
+        return list;
+    }
+
+    public List<Field> fieldsMatching(final Matcher<Field> matcher) {
+        List<Field> list = new ArrayList<Field>();
+        for (Field field : fields()) {
+            if (matcher.accepts(field)) {
+                list.add(field);
             }
         }
         return list;

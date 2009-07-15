@@ -10,6 +10,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import net.vidageek.mirror.dsl.Matcher;
+import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.ChildHidingFixture;
@@ -121,5 +123,29 @@ public class AllReflectionHandlerTest {
                                                                                                                 .getters();
         assertEquals(1, getters.size());
         assertEquals("getClass", getters.get(0).getName());
+    }
+
+    @Test
+    public void testThatPresentsAllFieldsToMatcher() {
+        List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll().fieldsMatching(
+                new Matcher<Field>() {
+
+                    public boolean accepts(final Field element) {
+                        return true;
+                    }
+                });
+        assertEquals(8, list.size());
+    }
+
+    @Test
+    public void testThatMatcherIsRespectedForFields() {
+        List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll().fieldsMatching(
+                new Matcher<Field>() {
+
+                    public boolean accepts(final Field element) {
+                        return "finalField".equals(element.getName());
+                    }
+                });
+        assertEquals(1, list.size());
     }
 }
