@@ -5,18 +5,25 @@ superclasses and interfaces.
 
 [section Reflecting]
 
-Reflect a field by name:
+Reflect a field by name (will return null if not found):
 
 [java]
 Class clazz;
 Field f = new Mirror().on(clazz).reflect().field("fieldName");
 [/java]
 
-Reflecting all fields of a class:
+Reflecting all fields of a class (will return an empty list if none found):
 
 [java]
 Class clazz;
 List<Field> l = new Mirror().on(clazz).reflectAll().fields();
+[/java]
+
+Reflecting all fields of a class that matches a Matcher<Field> (will return an empty list if none found):
+
+[java]
+Class clazz;
+List<Field> l = new Mirror().on(clazz).reflectAll().fieldsMatching(new YourCustomMatcher());
 [/java]
 
 [section Setting Values]

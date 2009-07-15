@@ -41,6 +41,12 @@ Class clazz;
 List<Method> l = new Mirror().on(clazz).reflectAll().setters();
 [/java]
 
+Refletindo todos os métodos de uma classe que sejam aceitos por um Matcher<Method> (retornará uma lista vazia caso nada seja encontrado):
+
+[java]
+Class clazz;
+List<Method> l = new Mirror().on(clazz).reflectAll().methodsMatching(new SeuProprioMatcher());
+[/java]
 
 [section Invocando Métodos]
 

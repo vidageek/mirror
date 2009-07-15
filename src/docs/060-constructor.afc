@@ -20,6 +20,13 @@ Class<T> clazz;
 List<Constructor<T>> l = new Mirror().on(clazz).reflectAll().constructors();
 [/java]
 
+Reflecting all constructors of a class that matches a Matcher<Constructor> (will return an empty list if none found):
+
+[java]
+Class<T> clazz;
+List<Constructor<T>> l = new Mirror().on(clazz).reflectAll().constructorsMatching(new YourCustomMatcher());
+[/java]
+
 [section Invoking Constructors]
 
 Invoking a constructor:

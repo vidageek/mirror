@@ -5,18 +5,25 @@ nas superclasses e nas interfaces.
 
 [section Refletindo]
 
-Refletir um atributo através do nome:
+Refletir um atributo através do nome (devolverá null se não encontrar):
 
 [java]
 Class clazz;
 Field f = new Mirror().on(clazz).reflect().field("nomeAtributo");
 [/java]
 
-Reflecting all fields of a class:
+Refletir todos os campos de uma classe (devolverá uma lista vazia se não encontrar fields):
 
 [java]
 Class clazz;
 List<Field> l = new Mirror().on(clazz).reflectAll().fields();
+[/java]
+
+Refletir todos os campos de uma classe que sejam aceitos por um Matcher<Field>(devolverá uma lista vazia se não encontrar fields):
+
+[java]
+Class clazz;
+List<Field> l = new Mirror().on(clazz).reflectAll().fieldsMatching(new SeuProprioMatcher());
 [/java]
 
 [section Atribuindo Valores]

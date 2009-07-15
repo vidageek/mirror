@@ -12,12 +12,18 @@ Constructor<T> c = new Mirror().on(clazz).reflect().constructor()
 						.withArgs(String.class, Object.class);
 [/java]
 
-
 Refletindo todos os construtores de uma classe (retornará uma lista vazia caso nada seja encontrado):
 
 [java]
 Class<T> clazz;
 List<Constructor<T>> l = new Mirror().on(clazz).reflectAll().constructors();
+[/java]
+
+Refletindo todos os construtores de uma classe que sejam aceitos por um Matcher<Constructor> (retornará uma lista vazia caso nada seja encontrado):
+
+[java]
+Class<T> clazz;
+List<Constructor<T>> l = new Mirror().on(clazz).reflectAll().constructorsMatching(new SeuProprioMatcher());
 [/java]
 
 [section Invocando Construtores]

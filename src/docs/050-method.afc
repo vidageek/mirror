@@ -41,6 +41,13 @@ Class clazz;
 List<Method> l = new Mirror().on(clazz).reflectAll().setters();
 [/java]
 
+Reflecting all methods of class that matches a Matcher<Method> (will return an empty list if none found):
+
+[java]
+Class clazz;
+List<Method> l = new Mirror().on(clazz).reflectAll().methodsMatching(new YourCustomMatcher());
+[/java]
+
 [section Invoking Methods]
 
 Invoking a static method:
@@ -75,12 +82,14 @@ Invoking a setter method:
 Field field;
 Object target;
 new Mirror().on(target).invoke().setterFor(field).withValue(value1);
+new Mirror().on(target).invoke().setterFor("fieldName").withValue(value1);
 [/java]
 
 Invoking a getter method:
 
 [java]
-String fieldName;
+Field field
 Object target;
-Object returnValue = new Mirror().on(target).invoke().getterFor(fieldName);
+Object returnValue = new Mirror().on(target).invoke().getterFor(field);
+Object returnValue = new Mirror().on(target).invoke().getterFor("fieldName");
 [/java]
