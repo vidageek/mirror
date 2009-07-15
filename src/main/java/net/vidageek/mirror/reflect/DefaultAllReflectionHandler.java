@@ -54,12 +54,10 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
 
     public List<Method> setters() {
         return new ListFilter().filter(new SetterMatcher(), methods());
-
     }
 
     public List<Method> getters() {
         return new ListFilter().filter(new GetterMatcher(), methods());
-
     }
 
     public List<Field> fieldsMatching(final Matcher<Field> matcher) {
