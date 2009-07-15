@@ -5,6 +5,7 @@ package net.vidageek.mirror.reflect;
 
 import static org.junit.Assert.assertEquals;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -15,6 +16,7 @@ import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.ChildHidingFixture;
+import net.vidageek.mirror.fixtures.ClassFixture;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
@@ -191,13 +193,43 @@ public class AllReflectionHandlerTest {
 
     @Test
     public void testThatMatcherIsRespectedForConstructors() {
-        List<Constructor<ConstructorFixture>> list = new Mirror(provider).on(ConstructorFixture.class).reflectAll().constructorsMatching(
-                new Matcher<Constructor<ConstructorFixture>>() {
+        List<Constructor<ConstructorFixture>> list = new Mirror(provider)
+                                                                         .on(ConstructorFixture.class)
+                                                                         .reflectAll()
+                                                                         .constructorsMatching(
+                                                                                 new Matcher<Constructor<ConstructorFixture>>() {
 
-                    public boolean accepts(final Constructor<ConstructorFixture> element) {
-                        return element.getParameterTypes().length == 0;
+                                                                                     public boolean accepts(
+                                                                                             final Constructor<ConstructorFixture> element) {
+                                                                                         return element
+                                                                                                       .getParameterTypes().length == 0;
+                                                                                     }
+                                                                                 });
+        assertEquals(1, list.size());
+    }
+
+    @Test
+    public void testThatPresentsAllAnnotationsToMatcher() {
+        List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll().annotationsMatching(
+                new Matcher<Annotation>() {
+
+                    public boolean accepts(final Annotation element) {
+                        return true;
+                    }
+                });
+        assertEquals(2, list.size());
+    }
+
+    @Test
+    public void testThatMatcherIsRespectedForAnnotations() {
+        List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll().annotationsMatching(
+                new Matcher<Annotation>() {
+
+                    public boolean accepts(final Annotation element) {
+                        return "AnnotationFixture".equals(element.annotationType().getSimpleName());
                     }
                 });
         assertEquals(1, list.size());
     }
+
 }

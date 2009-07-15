@@ -1,5 +1,6 @@
 package net.vidageek.mirror.reflect.dsl;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -85,5 +86,15 @@ public interface AllReflectionHandler<T> {
      * @see AllReflectionHandler#constructors()
      */
     public List<Constructor<T>> constructorsMatching(Matcher<Constructor<T>> matcher);
+
+    /**
+     * Use this method to reflect all annotations on the wrapped
+     * AnnotatedElement that matches matcher.
+     * 
+     * @return The list of annotations or an empty list if none was accepted by
+     *         the matcher.
+     * @see AllReflectionHandler#annotations()
+     */
+    public List<Annotation> annotationsMatching(Matcher<Annotation> matcher);
 
 }

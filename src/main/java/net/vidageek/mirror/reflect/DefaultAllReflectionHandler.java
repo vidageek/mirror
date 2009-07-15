@@ -3,6 +3,7 @@
  */
 package net.vidageek.mirror.reflect;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -11,6 +12,7 @@ import java.util.List;
 
 import net.vidageek.mirror.dsl.Matcher;
 import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.matcher.ListFilter;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllAnnotationsHandler;
 import net.vidageek.mirror.reflect.dsl.AllReflectionHandler;
@@ -73,25 +75,19 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
     }
 
     public List<Field> fieldsMatching(final Matcher<Field> matcher) {
-        return filter(matcher, fields());
+        return new ListFilter().filter(matcher, fields());
     }
 
     public List<Method> methodsMatching(final Matcher<Method> matcher) {
-        return filter(matcher, methods());
+        return new ListFilter().filter(matcher, methods());
     }
 
     public List<Constructor<T>> constructorsMatching(final Matcher<Constructor<T>> matcher) {
-        return filter(matcher, constructors());
+        return new ListFilter().filter(matcher, constructors());
     }
 
-    private <A> List<A> filter(final Matcher<A> matcher, final List<A> list) {
-        List<A> filteredList = new ArrayList<A>();
-        for (A element : list) {
-            if (matcher.accepts(element)) {
-                filteredList.add(element);
-            }
-        }
-        return filteredList;
+    public List<Annotation> annotationsMatching(final Matcher<Annotation> matcher) {
+        return new ListFilter().filter(matcher, annotations().atClass());
     }
 
 }

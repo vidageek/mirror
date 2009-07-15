@@ -226,12 +226,13 @@ public class InterfaceDevelopmentTest {
 
     @Test
     public void testConstructorReflectAllWithMatcherInterface() {
-        new Mirror().on(ConstructorFixture.class).reflectAll().constructorsMatching(new Matcher<Constructor<?>>() {
+        new Mirror().on(ConstructorFixture.class).reflectAll().constructorsMatching(
+                new Matcher<Constructor<ConstructorFixture>>() {
 
-            public boolean accepts(final Constructor<?> element) {
-                return true;
-            }
-        });
+                    public boolean accepts(final Constructor<ConstructorFixture> element) {
+                        return true;
+                    }
+                });
     }
 
     @Test
@@ -243,6 +244,13 @@ public class InterfaceDevelopmentTest {
                         return true;
                     }
                 });
+
+        new Mirror().on(FieldFixture.class).reflectAll().annotationsMatching(new Matcher<Annotation>() {
+
+            public boolean accepts(final Annotation element) {
+                return true;
+            }
+        });
 
     }
 }
