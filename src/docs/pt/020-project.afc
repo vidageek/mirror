@@ -30,6 +30,15 @@ levada em consideração.
 [section Release Notes]
 
 [list]
+* **Mirror 1.5 - 24 de Julho de 2009**
+- Não rodar static initializer (BUGFIX #19)
+
+- Ler arquivo de configuração apenas uma vez (BUGFIX #32)
+
+- Criar lista de discussão em português (FEATURE #29)
+
+- Matchers para reflectAll() (FEATURE #30)
+
 * **Mirror 1.4 - 5 de Junho de 2009**
 - Adicionado suporte para invocação de setter/getter (FEATURE)
 
@@ -74,7 +83,7 @@ em seu pom.xml:
 	<dependency>
 	    <groupId>net.vidageek</groupId>
 	    <artifactId>mirror</artifactId>
-	    <version>1.4</version>
+	    <version>1.5</version>
 	</dependency>
 ...
 </dependencies>

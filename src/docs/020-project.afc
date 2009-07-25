@@ -28,6 +28,15 @@ Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API cha
 [section Release Notes]
 
 [list]
+* **Mirror 1.5 - 2009 July 24**
+- Does not run static initializer (BUGFIX #19)
+
+- Reads configuration file just once (BUGFIX #32)
+
+- Created portuguese users list (FEATURE #29)
+
+- Matchers for reflectAll() (FEATURE #30)
+  
 * **Mirror 1.4 - 2009 June 5**
 - support for setter/getter invocation (FEATURE)
 
@@ -69,7 +78,7 @@ If you use maven to build your project, you can just add the following lines to 
 	<dependency>
 	    <groupId>net.vidageek</groupId>
 	    <artifactId>mirror</artifactId>
-	    <version>1.4</version>
+	    <version>1.5</version>
 	</dependency>
 ...
 </dependencies>

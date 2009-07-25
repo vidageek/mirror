@@ -1,4 +1,0 @@
-issue 19 - should not run static initializer on reflected class.
-issue 32 - should read config file only once.
-issue 29 - add portuguese users list.
-issue 30 - matchers for reflectAll.
