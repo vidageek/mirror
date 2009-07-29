@@ -4,6 +4,7 @@
 package net.vidageek.mirror.reflect;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
@@ -62,7 +63,7 @@ public class AllReflectionHandlerTest {
     @Test
     public void testThatFindsHidingFields() {
         List<Field> fields = new DefaultAllReflectionHandler<ChildHidingFixture>(provider, ChildHidingFixture.class)
-                                                                                                                    .fields();
+            .fields();
 
         assertEquals(2, fields.size());
     }
@@ -84,7 +85,7 @@ public class AllReflectionHandlerTest {
     @Test
     public void testThatFindsOverridingMethods() {
         List<Method> methods = new DefaultAllReflectionHandler<ChildHidingFixture>(provider, ChildHidingFixture.class)
-                                                                                                                      .methods();
+            .methods();
 
         assertEquals(14, methods.size());
     }
@@ -100,14 +101,15 @@ public class AllReflectionHandlerTest {
     @Test
     public void testThatReflectsAllSetters() {
         List<Method> setters = new DefaultAllReflectionHandler<BeanFixture>(provider, BeanFixture.class).setters();
-        assertEquals(1, setters.size());
-        assertEquals("setField", setters.get(0).getName());
+        assertEquals(2, setters.size());
+        assertTrue("should contain setField", setters.get(0).getName().equals("setField"));
+        assertTrue("should contain setBooleanField", setters.get(1).getName().equals("setBooleanField"));
     }
 
     @Test
     public void testThatDoesntReflectMethodAsSetterIfArgumentNumberIsNotOneOrReturnTypeIsNotVoid() {
         List<Method> setters = new DefaultAllReflectionHandler<NotABeanFixture>(provider, NotABeanFixture.class)
-                                                                                                                .setters();
+            .setters();
         assertEquals(0, setters.size());
     }
 
@@ -122,7 +124,7 @@ public class AllReflectionHandlerTest {
     @Test
     public void testThatDoesntReflectMethodAsGetterIfArgumentNumberIsNotZeroOrReturnTypeIsVoid() {
         List<Method> getters = new DefaultAllReflectionHandler<NotABeanFixture>(provider, NotABeanFixture.class)
-                                                                                                                .getters();
+            .getters();
         assertEquals(1, getters.size());
         assertEquals("getClass", getters.get(0).getName());
     }
@@ -178,33 +180,28 @@ public class AllReflectionHandlerTest {
     @Test
     public void testThatPresentsAllMethodsToConstructor() {
         List<Constructor<ConstructorFixture>> list = new Mirror(provider)
-                                                                         .on(ConstructorFixture.class)
-                                                                         .reflectAll()
-                                                                         .constructorsMatching(
-                                                                                 new Matcher<Constructor<ConstructorFixture>>() {
+            .on(ConstructorFixture.class)
+            .reflectAll()
+            .constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
 
-                                                                                     public boolean accepts(
-                                                                                             final Constructor<ConstructorFixture> element) {
-                                                                                         return true;
-                                                                                     }
-                                                                                 });
+                public boolean accepts(final Constructor<ConstructorFixture> element) {
+                    return true;
+                }
+            });
         assertEquals(6, list.size());
     }
 
     @Test
     public void testThatMatcherIsRespectedForConstructors() {
         List<Constructor<ConstructorFixture>> list = new Mirror(provider)
-                                                                         .on(ConstructorFixture.class)
-                                                                         .reflectAll()
-                                                                         .constructorsMatching(
-                                                                                 new Matcher<Constructor<ConstructorFixture>>() {
+            .on(ConstructorFixture.class)
+            .reflectAll()
+            .constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
 
-                                                                                     public boolean accepts(
-                                                                                             final Constructor<ConstructorFixture> element) {
-                                                                                         return element
-                                                                                                       .getParameterTypes().length == 0;
-                                                                                     }
-                                                                                 });
+                public boolean accepts(final Constructor<ConstructorFixture> element) {
+                    return element.getParameterTypes().length == 0;
+                }
+            });
         assertEquals(1, list.size());
     }
 
