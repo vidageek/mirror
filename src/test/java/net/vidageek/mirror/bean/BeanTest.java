@@ -8,8 +8,11 @@ final public class BeanTest {
 
     @Test
     public void testThatGeneratesGetter() {
-        Assert.assertEquals("getField", new Bean().getter("field"));
-        Assert.assertEquals("getField", new Bean().getter("Field"));
+        Assert.assertEquals(2, new Bean().getter("field").size());
+        Assert.assertTrue(new Bean().getter("field").contains("getField"));
+        Assert.assertTrue(new Bean().getter("field").contains("isField"));
+        Assert.assertTrue(new Bean().getter("Field").contains("isField"));
+        Assert.assertTrue(new Bean().getter("Field").contains("getField"));
     }
 
     @Test

@@ -65,6 +65,14 @@ public class InvocationHandlerTest {
         String string = (String) new DefaultInvocationHandler<Object>(provider, target).getterFor("field");
         Assert.assertEquals("foo", string);
     }
+    
+    @Test
+    public void testThatInvokesGetterStartingWithIs() {
+    	BeanFixture target = new BeanFixture();
+    	target.setBooleanField(true);
+    	Boolean b = (Boolean) new DefaultInvocationHandler<Object>(provider, target).getterFor("booleanField");
+    	Assert.assertTrue(b);
+    }
 
     @Test
     public void testThatInvokesGetterUsingField() {

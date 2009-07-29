@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 
 import net.vidageek.mirror.bean.Bean;
 import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.invoke.dsl.ConstructorHandler;
 import net.vidageek.mirror.invoke.dsl.InvocationHandler;
 import net.vidageek.mirror.invoke.dsl.MethodHandler;
@@ -70,7 +71,15 @@ public final class DefaultInvocationHandler<T> implements InvocationHandler<T> {
     }
 
     public Object getterFor(final String fieldName) {
-        return new Mirror(provider).on(target).invoke().method(new Bean().getter(fieldName)).withoutArgs();
+    	Method method = null;
+    	for (String string : new Bean().getter(fieldName)) {
+    		 method = new Mirror(provider).on(target.getClass()).reflect().method(string).withoutArgs();
+    		 if (method != null) break;
+		}
+    	if(method == null) {
+    		throw new MirrorException("Could not find getter for field " + fieldName);
+    	}
+        return new Mirror(provider).on(target).invoke().method(method).withoutArgs();
     }
 
     public Object getterFor(final Field field) {

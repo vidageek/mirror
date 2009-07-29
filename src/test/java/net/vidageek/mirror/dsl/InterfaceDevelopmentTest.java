@@ -40,6 +40,8 @@ public class InterfaceDevelopmentTest {
     private Field typedField;
 
     private Field beanField;
+    
+    private Field beanBooleanField;
 
     @Before
     public void setup() {
@@ -55,6 +57,7 @@ public class InterfaceDevelopmentTest {
         typedField = new Mirror().on(FieldFixture.class).reflect().field("typedField");
 
         beanField = new Mirror().on(BeanFixture.class).reflect().field("field");
+        beanBooleanField = new Mirror().on(BeanFixture.class).reflect().field("booleanField");
     }
 
     @Test
@@ -187,11 +190,18 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(new BeanFixture()).invoke().getterFor("field");
         new Mirror().on(new BeanFixture()).invoke().getterFor(beanField);
     }
+    
+    @Test
+    public void testGetterStartingWithIsInvocationInterface() {
+    	new Mirror().on(new BeanFixture()).invoke().getterFor("booleanField");
+    	new Mirror().on(new BeanFixture()).invoke().getterFor(beanBooleanField);
+    }
 
     @Test
     public void testSetterInvocationInterface() {
         new Mirror().on(new BeanFixture()).invoke().setterFor("field").withValue("12345");
         new Mirror().on(new BeanFixture()).invoke().setterFor(beanField).withValue("12345");
+        new Mirror().on(new BeanFixture()).invoke().setterFor("field").withValue("12345");
     }
 
     @Test
