@@ -30,7 +30,12 @@ levada em consideração.
 [section Release Notes]
 
 [list]
+* **Mirror 1.5.1 - 04 de Agosto de 2009**
+
+- Não encontra getter de field do tipo boolean (BUGFIX #40)
+
 * **Mirror 1.5 - 24 de Julho de 2009**
+
 - Não rodar static initializer (BUGFIX #19)
 
 - Ler arquivo de configuração apenas uma vez (BUGFIX #32)
@@ -40,6 +45,7 @@ levada em consideração.
 - Matchers para reflectAll() (FEATURE #30)
 
 * **Mirror 1.4 - 5 de Junho de 2009**
+
 - Adicionado suporte para invocação de setter/getter (FEATURE)
 
 - Adicionado suporte para reflexão de setter/getter (FEATURE)

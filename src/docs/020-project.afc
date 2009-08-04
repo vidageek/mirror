@@ -28,7 +28,12 @@ Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API cha
 [section Release Notes]
 
 [list]
+* **Mirror 1.5.1 - 2009 August 04**
+
+- Cannot find getter for boolean field. (BUGFIX #40)
+
 * **Mirror 1.5 - 2009 July 24**
+
 - Does not run static initializer (BUGFIX #19)
 
 - Reads configuration file just once (BUGFIX #32)
@@ -38,6 +43,7 @@ Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API cha
 - Matchers for reflectAll() (FEATURE #30)
   
 * **Mirror 1.4 - 2009 June 5**
+
 - support for setter/getter invocation (FEATURE)
 
 - support for setter/getter reflection (FEATURE)
