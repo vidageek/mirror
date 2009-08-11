@@ -3,7 +3,17 @@
 	<ul class="chapter">
 	<#assign i = 1>
 	<#list book.chapters as chap>
-		<li class="menuItem"><a href="../${relative}/${dirTree[i]}">${chap.title}</a></li>
+		<li class="menuItem">
+			<a href="../${relative}/${dirTree[i]}">${chap.title}</a>
+			<#if i == 1> 
+				<a href="http://projetos.vidageek.net/mirror">
+					<img class="lang" src="${relative}/../mirror/includes/images/en.gif" alt="Mirror (English)"/>
+				</a>
+				<a href="http://projetos.vidageek.net/mirror-pt">
+					<img class="lang" src="${relative}/../mirror/includes/images/pt_br.gif" alt="Mirror (Portugu&ecirc;s)"/>
+				</a>
+			</#if>
+		</li>
 		<#assign i = i + 1>
 		<#list chap.sections as sec>
 			<li class="subItem"><a href="../${relative}/${dirTree[i]}">${sec.title}</a></li>
