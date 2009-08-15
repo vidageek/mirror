@@ -10,6 +10,8 @@ import net.vidageek.mirror.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
 
 /**
+ * This is list implementation that delegates to a received list.
+ * 
  * @author jonasabreu
  * 
  */
