@@ -28,6 +28,14 @@ List<Constructor<T>> l = new Mirror().on(clazz).reflectAll()
                                   .constructors().matching(new YourCustomMatcher());
 [/java]
 
+You can also map your constructors to other types:
+[java]
+Class clazz;
+List<String> l = new Mirror().on(clazz).reflectAll()
+                      .constructors().mappingTo(new YourConstructorToStringMapper());
+[/java]
+
+
 [section Invoking Constructors]
 
 Invoking a constructor:

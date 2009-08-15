@@ -26,6 +26,14 @@ Class clazz;
 List<Field> l = new Mirror().on(clazz).reflectAll().fields().matching(new SeuProprioMatcher());
 [/java]
 
+Você também pode mapear seus campos para outros tipos:
+
+[java]
+Class<T> clazz;
+List<String> l = new Mirror().on(clazz).reflectAll()
+                      .fields().mappingTo(new SeuProprioMapperDeFieldParaString());
+[/java]
+
 [section Atribuindo Valores]
 
 Atribuindo valores em um atributo estático:

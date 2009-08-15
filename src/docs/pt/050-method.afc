@@ -49,6 +49,14 @@ List<Method> l = new Mirror().on(clazz).reflectAll()
                                .methods().matching(new SeuProprioMatcher());
 [/java]
 
+Você também pode mapear seus métodos para outros tipos:
+
+[java]
+Class<T> clazz;
+List<String> l = new Mirror().on(clazz).reflectAll()
+                      .methods().mappingTo(new SeuProprioMapperDeMethodParaString());
+[/java]
+
 [section Invocando Métodos]
 
 Invocando um método estático:

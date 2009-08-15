@@ -26,6 +26,12 @@ Class clazz;
 List<Field> l = new Mirror().on(clazz).reflectAll().fields().matching(new YourCustomMatcher());
 [/java]
 
+You can also map your fields to other types:
+[java]
+Class clazz;
+List<String> l = new Mirror().on(clazz).reflectAll().fields().mappingTo(new YourFieldToStringMapper());
+[/java]
+
 [section Setting Values]
 
 Setting value of a static field:

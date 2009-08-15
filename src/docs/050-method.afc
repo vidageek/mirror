@@ -49,6 +49,13 @@ List<Method> l = new Mirror().on(clazz).reflectAll()
                                .methods().matching(new YourCustomMatcher());
 [/java]
 
+You can also map your methods to other types:
+[java]
+Class clazz;
+List<String> l = new Mirror().on(clazz).reflectAll()
+                           .methods().mappingTo(new YourMethodToStringMapper());
+[/java]
+
 [section Invoking Methods]
 
 Invoking a static method:
