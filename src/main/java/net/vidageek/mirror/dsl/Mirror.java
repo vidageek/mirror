@@ -39,7 +39,7 @@ public final class Mirror {
     }
 
     public Mirror() {
-        provider = Mirror.cachedProvider;
+        this(Mirror.cachedProvider);
     }
 
     /**
