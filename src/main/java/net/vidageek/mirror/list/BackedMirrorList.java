@@ -35,7 +35,7 @@ final public class BackedMirrorList<T> implements MirrorList<T> {
         return new BackedMirrorList<T>(filteredList);
     }
 
-    public <E> MirrorList<E> mapping(final Mapper<T, E> mapper) {
+    public <E> MirrorList<E> mappingTo(final Mapper<T, E> mapper) {
         List<E> mappedList = new ArrayList<E>();
         for (T element : list) {
             mappedList.add(mapper.map(element));

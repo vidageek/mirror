@@ -33,7 +33,7 @@ final public class BackedMirrorListTest {
     @Test
     public void testMap() {
         MirrorList<Integer> list = new BackedMirrorList<Integer>(Arrays.asList(1, 2, 3, 4));
-        MirrorList<String> result = list.mapping(new Mapper<Integer, String>() {
+        MirrorList<String> result = list.mappingTo(new Mapper<Integer, String>() {
 
             public String map(final Integer element) {
                 return "" + element;
