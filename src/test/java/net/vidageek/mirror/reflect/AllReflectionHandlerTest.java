@@ -7,6 +7,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -14,6 +15,7 @@ import java.util.List;
 
 import net.vidageek.mirror.dsl.Matcher;
 import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.dsl.MirrorList;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.ChildHidingFixture;
@@ -235,6 +237,21 @@ public class AllReflectionHandlerTest {
                     }
                 });
         assertEquals(1, list.size());
+    }
+
+    @SuppressWarnings("unused")
+    @Test
+    public void testThatAllReflectionHandlersReturnMirrorList() {
+        MirrorList<Constructor<ClassFixture>> constructors = new Mirror(provider)
+            .on(ClassFixture.class)
+            .reflectAll()
+            .constructors();
+        MirrorList<Field> fields = new Mirror(provider).on(FieldFixture.class).reflectAll().fields();
+        MirrorList<Method> methods = new Mirror(provider).on(MethodFixture.class).reflectAll().methods();
+        MirrorList<Annotation> annotations = new Mirror(provider)
+            .on((AnnotatedElement) ClassFixture.class)
+            .reflectAll()
+            .annotations();
     }
 
 }

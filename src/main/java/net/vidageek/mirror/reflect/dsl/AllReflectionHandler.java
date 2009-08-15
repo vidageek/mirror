@@ -7,6 +7,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import net.vidageek.mirror.list.dsl.Matcher;
+import net.vidageek.mirror.dsl.MirrorList;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
 
 public interface AllReflectionHandler<T> {
@@ -16,7 +17,7 @@ public interface AllReflectionHandler<T> {
      * @return The list of fields or an empty list if none was found.
      * @see ClassReflectionProvider#reflectAllFields()
      */
-    public List<Field> fields();
+    public MirrorList<Field> fields();
 
     /**
      * Use this method to reflect all methods on the wrapped class
@@ -24,7 +25,7 @@ public interface AllReflectionHandler<T> {
      * @return The list of methods or an empty list if none was found.
      * @see ClassReflectionProvider#reflectAllMethods()
      */
-    public List<Method> methods();
+    public MirrorList<Method> methods();
 
     /**
      * Use this method to reflect all constructors on the wrapped class
@@ -32,7 +33,7 @@ public interface AllReflectionHandler<T> {
      * @return The list of constructors or an empty list if none was found.
      * @see ClassReflectionProvider#reflectAllConstructors()
      */
-    public List<Constructor<T>> constructors();
+    public MirrorList<Constructor<T>> constructors();
 
     /**
      * Use this method to reflect all annotations on a AccessibleObject
