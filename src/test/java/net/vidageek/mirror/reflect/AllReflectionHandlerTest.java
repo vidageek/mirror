@@ -129,6 +129,7 @@ public class AllReflectionHandlerTest {
         assertEquals("getClass", getters.get(0).getName());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatPresentsAllFieldsToMatcher() {
         List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll().fieldsMatching(
@@ -141,6 +142,7 @@ public class AllReflectionHandlerTest {
         assertEquals(8, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatMatcherIsRespectedForFields() {
         List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll().fieldsMatching(
@@ -153,6 +155,7 @@ public class AllReflectionHandlerTest {
         assertEquals(1, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatPresentsAllMethodsToMatcher() {
         List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll().methodsMatching(
@@ -165,6 +168,7 @@ public class AllReflectionHandlerTest {
         assertEquals(22, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatMatcherIsRespectedForMethods() {
         List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll().methodsMatching(
@@ -177,6 +181,7 @@ public class AllReflectionHandlerTest {
         assertEquals(1, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatPresentsAllMethodsToConstructor() {
         List<Constructor<ConstructorFixture>> list = new Mirror(provider)
@@ -191,6 +196,7 @@ public class AllReflectionHandlerTest {
         assertEquals(6, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatMatcherIsRespectedForConstructors() {
         List<Constructor<ConstructorFixture>> list = new Mirror(provider)
@@ -205,6 +211,7 @@ public class AllReflectionHandlerTest {
         assertEquals(1, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatPresentsAllAnnotationsToMatcher() {
         List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll().annotationsMatching(
@@ -217,6 +224,7 @@ public class AllReflectionHandlerTest {
         assertEquals(2, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatMatcherIsRespectedForAnnotations() {
         List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll().annotationsMatching(
