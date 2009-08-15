@@ -25,7 +25,7 @@ Reflecting all constructors of a class that matches a Matcher<Constructor> (will
 [java]
 Class<T> clazz;
 List<Constructor<T>> l = new Mirror().on(clazz).reflectAll()
-                                  .constructorsMatching(new YourCustomMatcher());
+                                  .constructors().matching(new YourCustomMatcher());
 [/java]
 
 [section Invoking Constructors]

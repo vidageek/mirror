@@ -24,7 +24,7 @@ Refletindo todos os construtores de uma classe que sejam aceitos por um Matcher<
 [java]
 Class<T> clazz;
 List<Constructor<T>> l = new Mirror().on(clazz).reflectAll()
-                                       .constructorsMatching(new SeuProprioMatcher());
+                                       .constructors().matching(new SeuProprioMatcher());
 [/java]
 
 [section Invocando Construtores]

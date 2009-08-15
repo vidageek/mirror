@@ -46,7 +46,7 @@ Refletindo todos os métodos de uma classe que sejam aceitos por um Matcher<Meth
 [java]
 Class clazz;
 List<Method> l = new Mirror().on(clazz).reflectAll()
-                               .methodsMatching(new SeuProprioMatcher());
+                               .methods().matching(new SeuProprioMatcher());
 [/java]
 
 [section Invocando Métodos]

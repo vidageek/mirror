@@ -46,7 +46,7 @@ Reflecting all methods of class that matches a Matcher<Method> (will return an e
 [java]
 Class clazz;
 List<Method> l = new Mirror().on(clazz).reflectAll()
-                               .methodsMatching(new YourCustomMatcher());
+                               .methods().matching(new YourCustomMatcher());
 [/java]
 
 [section Invoking Methods]
