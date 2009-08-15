@@ -217,6 +217,13 @@ public class InterfaceDevelopmentTest {
     @SuppressWarnings("deprecation")
     @Test
     public void testFieldReflectAllWithMatcherInterface() {
+        new Mirror().on(FieldFixture.class).reflectAll().fields().matching(new Matcher<Field>() {
+
+            public boolean accepts(final Field element) {
+                return true;
+            }
+        });
+
         new Mirror().on(FieldFixture.class).reflectAll().fieldsMatching(new Matcher<Field>() {
 
             public boolean accepts(final Field element) {
@@ -228,6 +235,13 @@ public class InterfaceDevelopmentTest {
     @SuppressWarnings("deprecation")
     @Test
     public void testMethodReflectAllWithMatcherInterface() {
+        new Mirror().on(MethodFixture.class).reflectAll().methods().matching(new Matcher<Method>() {
+
+            public boolean accepts(final Method element) {
+                return true;
+            }
+        });
+
         new Mirror().on(MethodFixture.class).reflectAll().methodsMatching(new Matcher<Method>() {
 
             public boolean accepts(final Method element) {
@@ -239,6 +253,14 @@ public class InterfaceDevelopmentTest {
     @SuppressWarnings("deprecation")
     @Test
     public void testConstructorReflectAllWithMatcherInterface() {
+        new Mirror().on(ConstructorFixture.class).reflectAll().constructors().matching(
+                new Matcher<Constructor<ConstructorFixture>>() {
+
+                    public boolean accepts(final Constructor<ConstructorFixture> element) {
+                        return true;
+                    }
+                });
+
         new Mirror().on(ConstructorFixture.class).reflectAll().constructorsMatching(
                 new Matcher<Constructor<ConstructorFixture>>() {
 
@@ -251,6 +273,14 @@ public class InterfaceDevelopmentTest {
     @SuppressWarnings("deprecation")
     @Test
     public void testAnnotationReflectAllWithMatcherInterface() {
+        new Mirror().on((AnnotatedElement) FieldFixture.class).reflectAll().annotations().matching(
+                new Matcher<Annotation>() {
+
+                    public boolean accepts(final Annotation element) {
+                        return true;
+                    }
+                });
+
         new Mirror().on((AnnotatedElement) FieldFixture.class).reflectAll().annotationsMatching(
                 new Matcher<Annotation>() {
 

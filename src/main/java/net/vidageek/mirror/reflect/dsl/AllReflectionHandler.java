@@ -101,7 +101,7 @@ public interface AllReflectionHandler<T> {
      * @return The list of annotations or an empty list if none was accepted by
      *         the matcher.
      * @see AllReflectionHandler#annotations()
-     * @deprecated Use annotations().matching(Matcher<Annotation>) instead.
+     * @deprecated This functionality is going to be dropped.
      */
     @Deprecated
     public List<Annotation> annotationsMatching(Matcher<Annotation> matcher);
