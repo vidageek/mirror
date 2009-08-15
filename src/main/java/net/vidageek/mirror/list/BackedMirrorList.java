@@ -2,6 +2,7 @@ package net.vidageek.mirror.list;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -21,7 +22,7 @@ final public class BackedMirrorList<T> implements MirrorList<T> {
     private final List<T> list;
 
     public BackedMirrorList(final List<T> list) {
-        this.list = list;
+        this.list = Collections.unmodifiableList(list);
     }
 
     public MirrorList<T> matching(final Matcher<T> matcher) {

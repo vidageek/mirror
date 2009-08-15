@@ -3,3 +3,4 @@ Issue 36 - Deprecate fields/constructors/methods/annotationsMatching
 Issue 35 - Must return MirrorList
 Issue 43 - Move Matcher to list.dsl
 Issue 38 - Implement mapping
+Issue 39 - MirrorList must be thread safe
