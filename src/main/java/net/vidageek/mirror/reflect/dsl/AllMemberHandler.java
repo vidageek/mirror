@@ -3,7 +3,7 @@ package net.vidageek.mirror.reflect.dsl;
 import java.lang.annotation.Annotation;
 import java.util.List;
 
-import net.vidageek.mirror.dsl.Matcher;
+import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 
 public interface AllMemberHandler {

@@ -6,7 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import net.vidageek.mirror.dsl.Matcher;
+import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
 
 public interface AllReflectionHandler<T> {

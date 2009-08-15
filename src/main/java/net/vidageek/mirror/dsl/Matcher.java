@@ -8,16 +8,9 @@ package net.vidageek.mirror.dsl;
  * 
  * @param <T>
  *            Type of the matcher.
+ * @deprecated use net.vidageek.mirror.list.dsl.Matcher instead.
  */
-public interface Matcher<T> {
-
-    /**
-     * This method determines if the element must be allowed to be on the list.
-     * 
-     * @param element
-     * 
-     * @return true if the element is allowed. false otherwise.
-     */
-    boolean accepts(T element);
+@Deprecated
+public interface Matcher<T> extends net.vidageek.mirror.list.dsl.Matcher<T> {
 
 }
