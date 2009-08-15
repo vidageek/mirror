@@ -40,7 +40,7 @@ public class InterfaceDevelopmentTest {
     private Field typedField;
 
     private Field beanField;
-    
+
     private Field beanBooleanField;
 
     @Before
@@ -117,10 +117,10 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
         new Mirror().on(MethodFixture.class).reflect().method("methodWithOneArg").withArgs(String.class);
         new Mirror()
-                    .on("net.vidageek.mirror.fixtures.MethodFixture")
-                    .reflect()
-                    .method("methodWithNoArgs")
-                    .withoutArgs();
+            .on("net.vidageek.mirror.fixtures.MethodFixture")
+            .reflect()
+            .method("methodWithNoArgs")
+            .withoutArgs();
         new Mirror().on("net.vidageek.mirror.fixtures.MethodFixture").reflect().method("methodWithOneArg").withArgs(
                 String.class);
         new Mirror().on(MethodFixture.class).reflectAll().methods();
@@ -149,17 +149,17 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(FieldFixture.class).reflect().annotation(AnnotationFixture.class).atField("field");
         new Mirror().on(FieldFixture.class).reflect().annotation(AnnotationFixture.class).atField("staticField");
         new Mirror()
-                    .on(MethodFixture.class)
-                    .reflect()
-                    .annotation(AnnotationFixture.class)
-                    .atMethod("methodWithNoArgs")
-                    .withoutArgs();
+            .on(MethodFixture.class)
+            .reflect()
+            .annotation(AnnotationFixture.class)
+            .atMethod("methodWithNoArgs")
+            .withoutArgs();
         new Mirror()
-                    .on(MethodFixture.class)
-                    .reflect()
-                    .annotation(AnnotationFixture.class)
-                    .atMethod("methodWithOneArg")
-                    .withArgs(String.class);
+            .on(MethodFixture.class)
+            .reflect()
+            .annotation(AnnotationFixture.class)
+            .atMethod("methodWithOneArg")
+            .withArgs(String.class);
 
         new Mirror().on(ClassFixture.class).reflectAll().annotations().atClass();
         new Mirror().on(FieldFixture.class).reflectAll().annotations().atField("field");
@@ -190,11 +190,11 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(new BeanFixture()).invoke().getterFor("field");
         new Mirror().on(new BeanFixture()).invoke().getterFor(beanField);
     }
-    
+
     @Test
     public void testGetterStartingWithIsInvocationInterface() {
-    	new Mirror().on(new BeanFixture()).invoke().getterFor("booleanField");
-    	new Mirror().on(new BeanFixture()).invoke().getterFor(beanBooleanField);
+        new Mirror().on(new BeanFixture()).invoke().getterFor("booleanField");
+        new Mirror().on(new BeanFixture()).invoke().getterFor(beanBooleanField);
     }
 
     @Test
@@ -214,6 +214,7 @@ public class InterfaceDevelopmentTest {
         new Mirror().on(BeanFixture.class).reflectAll().getters();
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testFieldReflectAllWithMatcherInterface() {
         new Mirror().on(FieldFixture.class).reflectAll().fieldsMatching(new Matcher<Field>() {
@@ -224,6 +225,7 @@ public class InterfaceDevelopmentTest {
         });
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testMethodReflectAllWithMatcherInterface() {
         new Mirror().on(MethodFixture.class).reflectAll().methodsMatching(new Matcher<Method>() {
@@ -234,6 +236,7 @@ public class InterfaceDevelopmentTest {
         });
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testConstructorReflectAllWithMatcherInterface() {
         new Mirror().on(ConstructorFixture.class).reflectAll().constructorsMatching(
@@ -245,6 +248,7 @@ public class InterfaceDevelopmentTest {
                 });
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testAnnotationReflectAllWithMatcherInterface() {
         new Mirror().on((AnnotatedElement) FieldFixture.class).reflectAll().annotationsMatching(

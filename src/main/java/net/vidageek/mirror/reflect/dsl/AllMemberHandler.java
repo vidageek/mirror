@@ -23,7 +23,9 @@ public interface AllMemberHandler {
      * @return The list of annotations or an empty list if none was accepted by
      *         the matcher.
      * @see AllMemberHandler#annotations()
+     * @deprecated Use annotations().matching(Matcher<Annotation>) instead.
      */
+    @Deprecated
     public List<Annotation> annotationsMatching(Matcher<Annotation> matcher);
 
 }

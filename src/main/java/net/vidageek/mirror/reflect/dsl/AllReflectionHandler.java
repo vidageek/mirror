@@ -64,7 +64,9 @@ public interface AllReflectionHandler<T> {
      * @return The list of fields or an empty list if none was accepted by the
      *         matcher.
      * @see AllReflectionHandler#fields()
+     * @deprecated Use fields().matching(Matcher<Field>) instead.
      */
+    @Deprecated
     public List<Field> fieldsMatching(Matcher<Field> matcher);
 
     /**
@@ -74,7 +76,9 @@ public interface AllReflectionHandler<T> {
      * @return The list of methods or an empty list if none was accepted by the
      *         matcher.
      * @see AllReflectionHandler#methods()
+     * @deprecated Use methods().matching(Matcher<Method>) instead.
      */
+    @Deprecated
     public List<Method> methodsMatching(Matcher<Method> matcher);
 
     /**
@@ -84,7 +88,9 @@ public interface AllReflectionHandler<T> {
      * @return The list of constructors or an empty list if none was accepted by
      *         the matcher.
      * @see AllReflectionHandler#constructors()
+     * @deprecated Use constructors().matching(Matcher<Constructor<T>>) instead.
      */
+    @Deprecated
     public List<Constructor<T>> constructorsMatching(Matcher<Constructor<T>> matcher);
 
     /**
@@ -94,7 +100,9 @@ public interface AllReflectionHandler<T> {
      * @return The list of annotations or an empty list if none was accepted by
      *         the matcher.
      * @see AllReflectionHandler#annotations()
+     * @deprecated Use annotations().matching(Matcher<Annotation>) instead.
      */
+    @Deprecated
     public List<Annotation> annotationsMatching(Matcher<Annotation> matcher);
 
 }
