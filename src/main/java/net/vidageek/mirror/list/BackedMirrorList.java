@@ -6,6 +6,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+import net.vidageek.mirror.list.dsl.Mapper;
 import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
 
@@ -31,6 +32,14 @@ final public class BackedMirrorList<T> implements MirrorList<T> {
             }
         }
         return new BackedMirrorList<T>(filteredList);
+    }
+
+    public <E> MirrorList<E> mapping(final Mapper<T, E> mapper) {
+        List<E> mappedList = new ArrayList<E>();
+        for (T element : list) {
+            mappedList.add(mapper.map(element));
+        }
+        return new BackedMirrorList<E>(mappedList);
     }
 
     /*
