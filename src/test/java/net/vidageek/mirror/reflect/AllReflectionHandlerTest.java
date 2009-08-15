@@ -15,7 +15,6 @@ import java.util.List;
 
 import net.vidageek.mirror.dsl.Matcher;
 import net.vidageek.mirror.dsl.Mirror;
-import net.vidageek.mirror.dsl.MirrorList;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.ChildHidingFixture;
@@ -24,6 +23,7 @@ import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.fixtures.NotABeanFixture;
+import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
 

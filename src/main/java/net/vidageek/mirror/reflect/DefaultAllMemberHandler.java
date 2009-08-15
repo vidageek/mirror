@@ -5,7 +5,8 @@ import java.lang.reflect.AnnotatedElement;
 import java.util.List;
 
 import net.vidageek.mirror.list.dsl.Matcher;
-import net.vidageek.mirror.matcher.ListFilter;
+import net.vidageek.mirror.list.BackedMirrorList;
+import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllMemberHandler;
 
@@ -29,12 +30,12 @@ public final class DefaultAllMemberHandler implements AllMemberHandler {
         this.member = member;
     }
 
-    public List<Annotation> annotations() {
-        return provider.getAnnotatedElementReflectionProvider(member).getAnnotations();
+    public MirrorList<Annotation> annotations() {
+        return new BackedMirrorList<Annotation>(provider.getAnnotatedElementReflectionProvider(member).getAnnotations());
     }
 
     public List<Annotation> annotationsMatching(final Matcher<Annotation> matcher) {
-        return new ListFilter().filter(matcher, annotations());
+        return annotations().matching(matcher);
     }
 
 }

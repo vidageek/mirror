@@ -1,4 +1,4 @@
-package net.vidageek.mirror.dsl;
+package net.vidageek.mirror.list.dsl;
 
 import java.util.List;
 

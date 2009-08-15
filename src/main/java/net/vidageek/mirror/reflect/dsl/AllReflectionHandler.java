@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import net.vidageek.mirror.list.dsl.Matcher;
-import net.vidageek.mirror.dsl.MirrorList;
+import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
 
 public interface AllReflectionHandler<T> {
@@ -48,7 +48,7 @@ public interface AllReflectionHandler<T> {
      * 
      * @return A list of setter methods
      */
-    public List<Method> setters();
+    public MirrorList<Method> setters();
 
     /**
      * 
@@ -56,7 +56,7 @@ public interface AllReflectionHandler<T> {
      * 
      * @return A list of getter methods
      */
-    public List<Method> getters();
+    public MirrorList<Method> getters();
 
     /**
      * Use this method to reflect all fields on the wrapped class that matches

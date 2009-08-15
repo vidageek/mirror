@@ -39,10 +39,10 @@ public class AllMemberHandlerTest {
     @Test
     public void testThatReturnAllAnnotationsFromConstructor() {
         final Constructor<ConstructorFixture> constructor = new Mirror()
-                                                                        .on(ConstructorFixture.class)
-                                                                        .reflect()
-                                                                        .constructor()
-                                                                        .withoutArgs();
+            .on(ConstructorFixture.class)
+            .reflect()
+            .constructor()
+            .withoutArgs();
         assertNotNull(constructor);
 
         final List<Annotation> annontations = new DefaultAllMemberHandler(provider, constructor).annotations();
@@ -67,33 +67,33 @@ public class AllMemberHandlerTest {
         assertEquals(2, annontations.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatPresentsAllAnnotationsToMatcher() {
         List<Annotation> list = new Mirror(provider)
-                                                    .on((AnnotatedElement) ClassFixture.class)
-                                                    .reflectAll()
-                                                    .annotationsMatching(new Matcher<Annotation>() {
+            .on((AnnotatedElement) ClassFixture.class)
+            .reflectAll()
+            .annotationsMatching(new Matcher<Annotation>() {
 
-                                                        public boolean accepts(final Annotation element) {
-                                                            return true;
-                                                        }
-                                                    });
+                public boolean accepts(final Annotation element) {
+                    return true;
+                }
+            });
         assertEquals(2, list.size());
     }
 
+    @SuppressWarnings("deprecation")
     @Test
     public void testThatMatcherIsRespectedForAnnotations() {
         List<Annotation> list = new Mirror(provider)
-                                                    .on((AnnotatedElement) ClassFixture.class)
-                                                    .reflectAll()
-                                                    .annotationsMatching(new Matcher<Annotation>() {
+            .on((AnnotatedElement) ClassFixture.class)
+            .reflectAll()
+            .annotationsMatching(new Matcher<Annotation>() {
 
-                                                        public boolean accepts(final Annotation element) {
-                                                            return "AnnotationFixture".equals(element
-                                                                                                     .annotationType()
-                                                                                                     .getSimpleName());
-                                                        }
-                                                    });
+                public boolean accepts(final Annotation element) {
+                    return "AnnotationFixture".equals(element.annotationType().getSimpleName());
+                }
+            });
         assertEquals(1, list.size());
     }
 
