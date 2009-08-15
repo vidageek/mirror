@@ -23,7 +23,8 @@ Refletir todos os campos de uma classe que sejam aceitos por um Matcher<Field>(d
 
 [java]
 Class clazz;
-List<Field> l = new Mirror().on(clazz).reflectAll().fields().matching(new SeuProprioMatcher());
+List<Field> l = new Mirror().on(clazz).reflectAll().fields()
+                                 .matching(new SeuProprioMatcher());
 [/java]
 
 Você também pode mapear seus campos para outros tipos:

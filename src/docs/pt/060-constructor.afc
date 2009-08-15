@@ -32,7 +32,7 @@ Você também pode mapear seus construtores para outros tipos:
 [java]
 Class<T> clazz;
 List<String> l = new Mirror().on(clazz).reflectAll()
-                      .constructors().mappingTo(new SeuProprioMapperDeConstrutorParaString());
+                    .constructors().mappingTo(new SeuProprioMapperDeConstrutorParaString());
 [/java]
 
 [section Invocando Construtores]
