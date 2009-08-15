@@ -13,7 +13,6 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import net.vidageek.mirror.dsl.Matcher;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ChildFixture;
@@ -23,6 +22,7 @@ import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.fixtures.NotABeanFixture;
+import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
@@ -252,6 +252,18 @@ public class AllReflectionHandlerTest {
             .on((AnnotatedElement) ClassFixture.class)
             .reflectAll()
             .annotations();
+    }
+
+    @SuppressWarnings("deprecation")
+    @Test
+    public void testThatOldMatcherIsStillAccepted() {
+        new Mirror(provider).on(MethodFixture.class).reflectAll().methods().matching(
+                new net.vidageek.mirror.dsl.Matcher<Method>() {
+
+                    public boolean accepts(final Method element) {
+                        return true;
+                    }
+                });
     }
 
 }
