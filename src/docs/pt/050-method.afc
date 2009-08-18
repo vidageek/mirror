@@ -20,6 +20,13 @@ Method m = new Mirror().on(clazz).reflect().method("nomeMetodo")
            .withArgs(String.class, Object.class);
 [/java]
 
+Refletindo um método com nome único (retornará null se não for encontrado ou lançará 
+uma MirrorException se encotrar mais de uma método com o mesmo nome):
+[java]
+Class clazz;
+Method m = new Mirror().on(clazz).reflect().method("nomeMetodo").withAnyArgs();
+[/java]
+
 Refletindo todos os métodos de uma classe (retornará uma lista vazia caso nada seja encontrado):
 
 [java]
