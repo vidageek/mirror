@@ -6,7 +6,7 @@ package net.vidageek.mirror.config;
 import junit.framework.Assert;
 import net.vidageek.mirror.fake.FakeProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Test;
 
@@ -20,7 +20,7 @@ public class MirrorProviderBuilderTest {
     public void testThatInstantiatesPureJavaReflectionProviderIfPropertiesNotFound() {
         ReflectionProvider provider = new MirrorProviderBuilder(null).createProvider();
 
-        Assert.assertEquals(PureJavaReflectionProvider.class, provider.getClass());
+        Assert.assertEquals(DefaultMirrorReflectionProvider.class, provider.getClass());
     }
 
     @Test

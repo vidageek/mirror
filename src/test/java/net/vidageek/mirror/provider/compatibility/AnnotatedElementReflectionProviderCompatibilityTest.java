@@ -17,7 +17,7 @@ import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
@@ -73,7 +73,7 @@ public class AnnotatedElementReflectionProviderCompatibilityTest implements Refl
 
     @BeforeClass
     public static void init() {
-        Mirror mirror = new Mirror(new PureJavaReflectionProvider());
+        Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
         clazz = ClassFixture.class;
         field = mirror.on(FieldFixture.class).reflect().field("field");
         method = mirror.on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();

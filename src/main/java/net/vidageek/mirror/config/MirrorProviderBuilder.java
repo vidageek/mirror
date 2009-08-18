@@ -15,7 +15,7 @@ import java.util.Properties;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 /**
  * Class that provides all logic to read configuration file and instantiate the
@@ -34,12 +34,12 @@ public final class MirrorProviderBuilder {
 
 	public ReflectionProvider createProvider() {
 		if (configurationFile == null) {
-			return new PureJavaReflectionProvider();
+			return new DefaultMirrorReflectionProvider();
 		}
 
 		Map<Item, String> cfg = processProperties(configurationFile);
 
-		Mirror mirror = new Mirror(new PureJavaReflectionProvider());
+		Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
 
 		return (ReflectionProvider) mirror.on(cfg.get(Item.REFLECTION_PROVIDER)).invoke().constructor().withoutArgs();
 	}
@@ -47,7 +47,7 @@ public final class MirrorProviderBuilder {
 	private Map<Item, String> processProperties(final URL file) {
 		Map<Item, String> map = new HashMap<Item, String>();
 
-		map.put(Item.REFLECTION_PROVIDER, PureJavaReflectionProvider.class.getName());
+		map.put(Item.REFLECTION_PROVIDER, DefaultMirrorReflectionProvider.class.getName());
 
 		try {
 			Properties properties = new Properties();

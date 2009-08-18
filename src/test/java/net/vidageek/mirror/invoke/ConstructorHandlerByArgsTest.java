@@ -5,8 +5,9 @@ import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.ConstructorExceptionFixture;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
+import net.vidageek.mirror.fixtures.ConstructorThatThrowsException;
 import net.vidageek.mirror.fixtures.MethodFixture;
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -18,11 +19,11 @@ import org.junit.Test;
  */
 public class ConstructorHandlerByArgsTest {
 
-    private PureJavaReflectionProvider provider;
+    private DefaultMirrorReflectionProvider provider;
 
     @Before
     public void setup() {
-        provider = new PureJavaReflectionProvider();
+        provider = new DefaultMirrorReflectionProvider();
     }
 
     @Test(expected = IllegalArgumentException.class)
@@ -48,5 +49,15 @@ public class ConstructorHandlerByArgsTest {
     @Test(expected = IllegalArgumentException.class)
     public void testThatThrowsIEAWhenValueIsNullOnConstructorInvocation() {
         new Mirror().on(MethodFixture.class).invoke().constructor().withArgs((String) null);
+    }
+
+    @Test
+    public void testThatInstantiatesWithoutUsingConstructor() {
+        ConstructorThatThrowsException instance = new Mirror()
+            .on(ConstructorThatThrowsException.class)
+            .invoke()
+            .constructor()
+            .bypasser();
+        Assert.assertNotNull(instance);
     }
 }

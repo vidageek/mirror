@@ -1,6 +1,6 @@
 package net.vidageek.mirror.provider;
 
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.experimental.theories.DataPoint;
 
@@ -12,6 +12,6 @@ import org.junit.experimental.theories.DataPoint;
 public interface ReflectionProviderDataPointList {
 
     @DataPoint
-    public ReflectionProvider pureJava = new PureJavaReflectionProvider();
+    public ReflectionProvider defaultProvider = new DefaultMirrorReflectionProvider();
 
 }

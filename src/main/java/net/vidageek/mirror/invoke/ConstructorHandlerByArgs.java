@@ -6,6 +6,7 @@ import java.util.Arrays;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.invoke.dsl.ConstructorHandler;
+import net.vidageek.mirror.provider.ConstructorBypassingReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 
 /**
@@ -34,6 +35,12 @@ public final class ConstructorHandlerByArgs<T> implements ConstructorHandler<T> 
 
     public T withArgs(final Object... args) {
         return new ConstructorHandlerByConstructor<T>(provider, clazz, getConstructor(args)).withArgs(args);
+    }
+
+    public T bypasser() {
+        ConstructorBypassingReflectionProvider<T> bypassingProvider = provider
+            .getConstructorBypassingReflectionProvider(clazz);
+        return bypassingProvider.bypassConstructor();
     }
 
     private Constructor<T> getConstructor(final Object... args) {

@@ -17,7 +17,7 @@ import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -28,7 +28,7 @@ public class AllMemberHandlerTest {
 
     @Before
     public void setup() {
-        provider = new PureJavaReflectionProvider();
+        provider = new DefaultMirrorReflectionProvider();
     }
 
     @Test(expected = IllegalArgumentException.class)

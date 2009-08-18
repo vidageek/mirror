@@ -5,7 +5,7 @@ package net.vidageek.mirror;
 
 
 
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Test;
 
@@ -17,7 +17,7 @@ public class AccessorsControllerTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testThatThrowsExceptionIfTargetIsNull() {
-        new DefaultAccessorsController(new PureJavaReflectionProvider(), null);
+        new DefaultAccessorsController(new DefaultMirrorReflectionProvider(), null);
     }
 
 }

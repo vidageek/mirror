@@ -1,6 +1,6 @@
 package net.vidageek.mirror.reflect;
 
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class ParameterizedElementHandlerTest {
 
 	@Test(expected = IllegalArgumentException.class)
 	public void testThatThrowExceptionIfAccessorIsNull() {
-		new DefaultParameterizedElementHandler(new PureJavaReflectionProvider(), null);
+		new DefaultParameterizedElementHandler(new DefaultMirrorReflectionProvider(), null);
 	}
 
 }

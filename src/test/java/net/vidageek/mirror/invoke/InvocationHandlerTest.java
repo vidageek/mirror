@@ -6,7 +6,7 @@ import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +23,7 @@ public class InvocationHandlerTest {
 
     @Before
     public void setup() {
-        provider = new PureJavaReflectionProvider();
+        provider = new DefaultMirrorReflectionProvider();
     }
 
     @Test(expected = IllegalArgumentException.class)

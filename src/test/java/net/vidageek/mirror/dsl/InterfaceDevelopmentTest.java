@@ -10,6 +10,7 @@ import net.vidageek.mirror.fixtures.AnnotationFixture;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ClassFixture;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
+import net.vidageek.mirror.fixtures.ConstructorThatThrowsException;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.fixtures.SubClassOfTypedClassFixture;
@@ -296,6 +297,10 @@ public class InterfaceDevelopmentTest {
                 return true;
             }
         });
+    }
 
+    @Test
+    public void testConstructorBypasserInterface() {
+        new Mirror().on(ConstructorThatThrowsException.class).invoke().constructor().bypasser();
     }
 }

@@ -7,7 +7,7 @@ import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.AnnotationFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
-import net.vidageek.mirror.provider.java.PureJavaReflectionProvider;
+import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -19,12 +19,12 @@ import org.junit.Test;
  */
 public class FieldHandlerTest {
 
-    private PureJavaReflectionProvider provider;
+    private DefaultMirrorReflectionProvider provider;
     private Field annotatedField;
 
     @Before
     public void setup() {
-        provider = new PureJavaReflectionProvider();
+        provider = new DefaultMirrorReflectionProvider();
         annotatedField = new Mirror().on(FieldFixture.class).reflect().field("field");
     }
 

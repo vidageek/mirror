@@ -6,6 +6,7 @@ package net.vidageek.mirror.invoke;
 import java.lang.reflect.Constructor;
 
 import net.vidageek.mirror.invoke.dsl.ConstructorHandler;
+import net.vidageek.mirror.provider.ConstructorBypassingReflectionProvider;
 import net.vidageek.mirror.provider.ConstructorReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 
@@ -48,6 +49,12 @@ public final class ConstructorHandlerByConstructor<T> implements ConstructorHand
 
     public T withoutArgs() {
         return withArgs(new Object[0]);
+    }
+
+    public T bypasser() {
+        ConstructorBypassingReflectionProvider<T> bypassingProvider = provider
+            .getConstructorBypassingReflectionProvider(clazz);
+        return bypassingProvider.bypassConstructor();
     }
 
 }

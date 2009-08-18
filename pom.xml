@@ -7,7 +7,7 @@
 	<name>Mirror</name>
 	<packaging>jar</packaging>
 	<description>Mirror is a simple DSL to make Java reflection easier.</description>
-	
+
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
@@ -21,7 +21,7 @@
 		<name>VidaGeek.net</name>
 		<url>http://vidageek.net</url>
 	</organization>
-	
+
 	<licenses>
 		<license>
 			<distribution>repo</distribution>
@@ -29,17 +29,17 @@
 			<url>http://apache.org/licenses/LICENSE-2.0.txt</url>
 		</license>
 	</licenses>
-	
+
 	<scm>
 		<connection>scm:git:git://github.com:vidageek/mirror.git</connection>
 		<url>git://github.com:vidageek/mirror.git</url>
 	</scm>
-	
-	
+
+
 	<issueManagement>
 		<url>http://github.com/vidageek/mirror/issues</url>
 	</issueManagement>
-	
+
 	<distributionManagement>
 		<repository>
 			<id>vidageek.net</id>
@@ -98,7 +98,7 @@
 				</executions>
 			</plugin>
 		</plugins>
- 		<extensions>
+		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh-external</artifactId>
@@ -131,7 +131,7 @@
 								<phase>install</phase>
 								<goals>
 									<goal>build</goal>
-								</goals>	
+								</goals>
 							</execution>
 						</executions>
 					</plugin>
@@ -158,7 +158,7 @@
 								<phase>install</phase>
 								<goals>
 									<goal>build</goal>
-								</goals>	
+								</goals>
 							</execution>
 						</executions>
 					</plugin>
@@ -204,19 +204,19 @@
 			</roles>
 		</developer>
 	</developers>
-	
+
 	<contributors>
 		<contributor>
 			<name>Caio Filipini</name>
 		</contributor>
 		<contributor>
 			<name>David Paniz</name>
-		</contributor>	
+		</contributor>
 		<contributor>
 			<name>Ricardo Nakamura</name>
-		</contributor>	
+		</contributor>
 	</contributors>
-	
+
 	<mailingLists>
 		<mailingList>
 			<name>Users Mailing list</name>
@@ -232,5 +232,5 @@
 		</mailingList>
 	</mailingLists>
 
-	
+
 </project>
