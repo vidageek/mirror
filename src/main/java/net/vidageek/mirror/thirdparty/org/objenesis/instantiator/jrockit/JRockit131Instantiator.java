@@ -18,67 +18,63 @@ import java.lang.reflect.Method;
 import net.vidageek.mirror.thirdparty.org.objenesis.ObjenesisException;
 import net.vidageek.mirror.thirdparty.org.objenesis.instantiator.ObjectInstantiator;
 
-
 /**
- * Instantiates a class by making a call to internal JRockit private methods. It is only supposed to
- * work on JRockit 7.0 JVMs, which are compatible with Java API 1.3.1. This instantiator will not
- * call any constructors.
+ * Instantiates a class by making a call to internal JRockit private methods. It
+ * is only supposed to work on JRockit 7.0 JVMs, which are compatible with Java
+ * API 1.3.1. This instantiator will not call any constructors.
  * 
  * @author Leonardo Mesquita
  * @see net.vidageek.mirror.thirdparty.org.objenesis.instantiator.ObjectInstantiator
  */
+@SuppressWarnings("all")
 public class JRockit131Instantiator implements ObjectInstantiator {
 
-   private Constructor mungedConstructor;
+    private Constructor mungedConstructor;
 
-   private static Method newConstructorForSerializationMethod;
+    private static Method newConstructorForSerializationMethod;
 
-   private static void initialize() {
-      if(newConstructorForSerializationMethod == null) {
-         Class cl;
-         try {
-            cl = Class.forName("COM.jrockit.reflect.MemberAccess");
-            newConstructorForSerializationMethod = cl.getDeclaredMethod(
-               "newConstructorForSerialization", new Class[] {Constructor.class, Class.class});
-            newConstructorForSerializationMethod.setAccessible(true);
-         }
-         catch(Exception e) {
+    private static void initialize() {
+        if (newConstructorForSerializationMethod == null) {
+            Class cl;
+            try {
+                cl = Class.forName("COM.jrockit.reflect.MemberAccess");
+                newConstructorForSerializationMethod = cl.getDeclaredMethod("newConstructorForSerialization",
+                        new Class[] { Constructor.class, Class.class });
+                newConstructorForSerializationMethod.setAccessible(true);
+            } catch (Exception e) {
+                throw new ObjenesisException(e);
+            }
+        }
+    }
+
+    public JRockit131Instantiator(final Class type) {
+        initialize();
+
+        if (newConstructorForSerializationMethod != null) {
+
+            Constructor javaLangObjectConstructor;
+
+            try {
+                javaLangObjectConstructor = Object.class.getConstructor((Class[]) null);
+            } catch (NoSuchMethodException e) {
+                throw new Error("Cannot find constructor for java.lang.Object!");
+            }
+
+            try {
+                mungedConstructor = (Constructor) newConstructorForSerializationMethod.invoke(null, new Object[] {
+                        javaLangObjectConstructor, type });
+            } catch (Exception e) {
+                throw new ObjenesisException(e);
+            }
+        }
+
+    }
+
+    public Object newInstance() {
+        try {
+            return mungedConstructor.newInstance((Object[]) null);
+        } catch (Exception e) {
             throw new ObjenesisException(e);
-         }
-      }
-   }
-
-   public JRockit131Instantiator(Class type) {
-      initialize();
-
-      if(newConstructorForSerializationMethod != null) {
-
-         Constructor javaLangObjectConstructor;
-
-         try {
-            javaLangObjectConstructor = Object.class.getConstructor((Class[]) null);
-         }
-         catch(NoSuchMethodException e) {
-            throw new Error("Cannot find constructor for java.lang.Object!");
-         }
-
-         try {
-            mungedConstructor = (Constructor) newConstructorForSerializationMethod.invoke(null,
-               new Object[] {javaLangObjectConstructor, type});
-         }
-         catch(Exception e) {
-        	 throw new ObjenesisException(e);
-         }
-      }
-
-   }
-
-   public Object newInstance() {
-      try {
-         return mungedConstructor.newInstance((Object[]) null);
-      }
-      catch(Exception e) {
-         throw new ObjenesisException(e);
-      }
-   }
+        }
+    }
 }

@@ -63,8 +63,7 @@ public class FakeProvider implements ReflectionProvider {
         return null;
     }
 
-    public <T> ConstructorBypassingReflectionProvider getConstructorBypassingReflectionProvider(final Class<T> clazz) {
-        // TODO Auto-generated method stub
+    public <T> ConstructorBypassingReflectionProvider<T> getConstructorBypassingReflectionProvider(final Class<T> clazz) {
         return null;
     }
 
