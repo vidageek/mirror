@@ -51,3 +51,14 @@ Constructor<T> umConstrutor;
 Class<T> clazz;
 T t = new Mirror().on(clazz).invoke().constructor(umConstrutor).withArgs(valor1, valor2);
 [/java]
+
+[section Ignorando Construtores]
+Com o Mirror, você pode ignorar completamente construtores para criar instancias:
+
+[java]
+Class<T> clazz;
+T t = new Mirror().on(clazz).invoke().constructor().bypasser();
+[/java]
+
+Note que esse comportamento só é suportado pelas VMs suportadas pelo projeto Objenesis. 
+Dê uma olhada em http://code.google.com/p/objenesis/wiki/ListOfCurrentlySupportedVMs .

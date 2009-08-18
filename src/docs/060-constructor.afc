@@ -52,3 +52,13 @@ Constructor<T> aConstructor;
 Class<T> clazz;
 T t = new Mirror().on(clazz).invoke().constructor(aConstructor).withArgs(value1, value2);
 [/java]
+
+[section Bypassing Constructors]
+With Mirror, you can completely bypass constructors to create instances.
+
+[java]
+Class<T> clazz;
+T t = new Mirror().on(clazz).invoke().constructor().bypasser();
+[/java]
+
+Please note that this is only supported on Objenesis supported VMs. Take a look at http://code.google.com/p/objenesis/wiki/ListOfCurrentlySupportedVMs .
