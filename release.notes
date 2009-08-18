@@ -4,3 +4,4 @@ Issue 35 - Must return MirrorList
 Issue 43 - Move Matcher to list.dsl
 Issue 38 - Implement mapping
 Issue 39 - MirrorList must be thread safe
+Issue 44 - add method to reflect uniquely named methods
