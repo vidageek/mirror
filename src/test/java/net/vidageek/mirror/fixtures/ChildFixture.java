@@ -23,4 +23,20 @@ public class ChildFixture extends SuperClassFixture implements InterfaceFixture 
 
     }
 
+    @SuppressWarnings("unused")
+    private void overridenMethod() {
+
+    }
+
+    @SuppressWarnings("unused")
+    private void overridenMethodWithTwoArgs(final int i, final String string) {
+
+    }
+
+    @Override
+    public boolean equals(final Object obj) {
+        // TODO Auto-generated method stub
+        return super.equals(obj);
+    }
+
 }

@@ -125,6 +125,7 @@ public class InterfaceDevelopmentTest {
                 String.class);
         new Mirror().on(MethodFixture.class).reflectAll().methods();
         new Mirror().on("net.vidageek.mirror.fixtures.MethodFixture").reflectAll().methods();
+        new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withAnyArgs();
     }
 
     @Test

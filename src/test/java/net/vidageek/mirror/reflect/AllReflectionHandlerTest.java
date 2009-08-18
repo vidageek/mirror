@@ -74,14 +74,14 @@ public class AllReflectionHandlerTest {
     public void testThatReflectAllMethods() {
         List<Method> methods = new DefaultAllReflectionHandler<MethodFixture>(provider, MethodFixture.class).methods();
 
-        assertEquals(22, methods.size());
+        assertEquals(24, methods.size());
     }
 
     @Test
     public void testThatReflectHierarchyMethods() {
         List<Method> methods = new DefaultAllReflectionHandler<ChildFixture>(provider, ChildFixture.class).methods();
 
-        assertEquals(16, methods.size());
+        assertEquals(21, methods.size());
     }
 
     @Test
@@ -167,7 +167,7 @@ public class AllReflectionHandlerTest {
                         return true;
                     }
                 });
-        assertEquals(22, list.size());
+        assertEquals(24, list.size());
     }
 
     @SuppressWarnings("deprecation")

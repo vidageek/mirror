@@ -56,6 +56,14 @@ public class MethodFixture {
         argNum = 500;
     }
 
+    public void overloadedMethod() {
+
+    }
+
+    public void overloadedMethod(final int i) {
+
+    }
+
     public static Integer getArgNum() {
         return argNum;
     }

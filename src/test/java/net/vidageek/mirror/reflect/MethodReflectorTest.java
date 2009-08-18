@@ -4,10 +4,12 @@
 package net.vidageek.mirror.reflect;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
+import junit.framework.Assert;
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.InterfaceFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
@@ -59,8 +61,8 @@ public class MethodReflectorTest {
 
     @Test
     public void testThatCanReflectMethodWithPrimitiveType() throws Exception {
-        Method m = new DefaultMethodReflector(provider, "methodWithTwoPrimitives", MethodFixture.class).withArgs(int.class,
-                boolean.class);
+        Method m = new DefaultMethodReflector(provider, "methodWithTwoPrimitives", MethodFixture.class).withArgs(
+                int.class, boolean.class);
         assertNotNull(m);
         m.invoke(new MethodFixture(), 1, true);
     }
@@ -82,20 +84,57 @@ public class MethodReflectorTest {
 
     @Test
     public void testThatCanReflectInterfaceMethods() throws Exception {
-        Method method = new DefaultMethodReflector(provider, "interfaceMethod", ChildFixture.class).withArgs(String.class);
+        Method method = new DefaultMethodReflector(provider, "interfaceMethod", ChildFixture.class)
+            .withArgs(String.class);
         assertNotNull(method);
         method.invoke(new ChildFixture(), "");
     }
 
     @Test
     public void testThatCanReflectInterfaceMethodsOnInterfaces() {
-        Method method = new DefaultMethodReflector(provider, "interfaceMethod", InterfaceFixture.class).withArgs(String.class);
+        Method method = new DefaultMethodReflector(provider, "interfaceMethod", InterfaceFixture.class)
+            .withArgs(String.class);
 
         assertNotNull(method);
     }
 
-    public static void main(final String[] args) {
-        System.out.println(Arrays.asList(InterfaceFixture.class.getDeclaredMethods()));
+    @Test
+    public void testThatFindsUniquelyNamedMethod() {
+        Method method = new DefaultMethodReflector(provider, "methodWithOneArg", MethodFixture.class).withAnyArgs();
+        assertNotNull(method);
+        Method method2 = new DefaultMethodReflector(provider, "methodWithOneArg", MethodFixture.class)
+            .withArgs(String.class);
+        Assert.assertEquals(method2, method);
     }
 
+    @Test
+    public void testThatReturnsNullIfNoUniquelyNamedMethodIsFound() {
+        Method method = new DefaultMethodReflector(provider, "someMethodThatDoesNotExists", MethodFixture.class)
+            .withAnyArgs();
+        assertNull(method);
+    }
+
+    @Test(expected = MirrorException.class)
+    public void testThatThrowsMirrorExceptionIfMoreThanOneMethodIsFound() {
+        new DefaultMethodReflector(provider, "overloadedMethod", MethodFixture.class).withAnyArgs();
+    }
+
+    @Test
+    public void testThatWorksForOverridenMethods() {
+        Method method = new DefaultMethodReflector(provider, "overridenMethod", ChildFixture.class).withAnyArgs();
+        assertNotNull(method);
+    }
+
+    @Test
+    public void testThatWorksForOverridenMethodsWithMoreThanOneArgument() {
+        Method method = new DefaultMethodReflector(provider, "overridenMethodWithTwoArgs", ChildFixture.class)
+            .withAnyArgs();
+        assertNotNull(method);
+    }
+
+    @Test
+    public void testThatWorksForOverridenMethodsOnMoreThanOneLevel() {
+        Method method = new DefaultMethodReflector(provider, "equals", ChildFixture.class).withAnyArgs();
+        assertNotNull(method);
+    }
 }
