@@ -12,6 +12,13 @@ Constructor<T> c = new Mirror().on(clazz).reflect().constructor()
 						.withArgs(String.class, Object.class);
 [/java]
 
+Reflectindo o único construtor de uma classe (lançará uma exceção se encontrar mais de um contrutor)
+
+[java]
+Class<T> clazz;
+Constructor<T> m = new Mirror().on(clazz).reflect().constructor().withAnyArgs();
+[/java]
+
 Refletindo todos os construtores de uma classe (retornará uma lista vazia caso nada seja encontrado):
 
 [java]
