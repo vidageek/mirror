@@ -14,6 +14,7 @@ import net.vidageek.mirror.fixtures.ConstructorThatThrowsException;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.fixtures.SubClassOfTypedClassFixture;
+import net.vidageek.mirror.fixtures.UniqueConstructorFixture;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -137,6 +138,7 @@ public class InterfaceDevelopmentTest {
         new Mirror().on("net.vidageek.mirror.fixtures.ConstructorFixture").reflect().constructor().withArgs(int.class);
         new Mirror().on(FieldFixture.class).reflectAll().constructors();
         new Mirror().on("net.vidageek.mirror.fixtures.ConstructorFixture").reflectAll().constructors();
+        new Mirror().on(UniqueConstructorFixture.class).reflect().constructor().withAnyArgs();
 
     }
 

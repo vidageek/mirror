@@ -8,7 +8,10 @@ import static org.junit.Assert.assertNotNull;
 
 import java.lang.reflect.Constructor;
 
+import junit.framework.Assert;
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
+import net.vidageek.mirror.fixtures.UniqueConstructorFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
@@ -35,7 +38,8 @@ public class ConstructorReflectorTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void testThrowsExceptionIfClassesIsNull() {
-        new DefaultConstructorReflector<ConstructorFixture>(provider, ConstructorFixture.class).withArgs((Class<?>[]) null);
+        new DefaultConstructorReflector<ConstructorFixture>(provider, ConstructorFixture.class)
+            .withArgs((Class<?>[]) null);
     }
 
     @Test
@@ -62,6 +66,21 @@ public class ConstructorReflectorTest {
         c.setAccessible(true);
         assertNotNull(c);
         assertEquals(c.newInstance(new Long(1)).getClass(), ConstructorFixture.class);
+    }
+
+    @Test
+    public void testThatFindsUniqueConstructor() {
+        Constructor<UniqueConstructorFixture> constructor = new DefaultConstructorReflector<UniqueConstructorFixture>(
+                provider, UniqueConstructorFixture.class).withAnyArgs();
+        assertNotNull(constructor);
+        Constructor<UniqueConstructorFixture> constructor2 = new DefaultConstructorReflector<UniqueConstructorFixture>(
+                provider, UniqueConstructorFixture.class).withoutArgs();
+        Assert.assertEquals(constructor2, constructor);
+    }
+
+    @Test(expected = MirrorException.class)
+    public void testThatThrowsMirrorExceptionIfMoreThanOneMethodIsFound() {
+        new DefaultConstructorReflector<ConstructorFixture>(provider, ConstructorFixture.class).withAnyArgs();
     }
 
 }
