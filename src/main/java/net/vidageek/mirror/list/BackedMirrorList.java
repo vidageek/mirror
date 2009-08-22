@@ -148,4 +148,8 @@ final public class BackedMirrorList<T> implements MirrorList<T> {
         return list.toArray(a);
     }
 
+    @Override
+    public String toString() {
+        return list.toString();
+    }
 }
