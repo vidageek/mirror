@@ -14,10 +14,12 @@ import net.vidageek.mirror.fixtures.InterfaceFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
+import net.vidageek.mirror.provider.experimental.sun15.Sun15ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 import net.vidageek.mirror.reflect.MethodReflectorTest;
 
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -41,6 +43,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 
     @Theory
     public void testSetAccessible(final ReflectionProvider r) {
+        Assume.assumeTrue(!r.getClass().equals(Sun15ReflectionProvider.class));
         Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
                 new Class<?>[] {});
 
@@ -56,19 +59,21 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
         Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithNoArgs",
                 new Class<?>[] {});
 
-        Class<?>[] types = r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
-                .getParameters();
+        Class<?>[] types = r
+            .getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
+            .getParameters();
 
         Assert.assertEquals(0, types.length);
     }
 
     @Theory
-    public void testGetParametersForConstructorWithArgs(final ReflectionProvider r) {
+    public void testGetParametersForMethodWithArgs(final ReflectionProvider r) {
         Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithFourArgs",
                 new Class<?>[] { String.class, Boolean.class, Class.class, Long.class });
 
-        Class<?>[] types = r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
-                .getParameters();
+        Class<?>[] types = r
+            .getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
+            .getParameters();
 
         Assert.assertEquals(4, types.length);
         Assert.assertEquals(String.class, types[0]);
@@ -78,7 +83,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
     }
 
     @Theory
-    public void testInvokeInstanceMethodWithArgs(final ReflectionProvider r) {
+    public void testInvokeInstanceMethodWithOneArg(final ReflectionProvider r) {
         Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithOneArg",
                 new Class<?>[] { String.class });
 

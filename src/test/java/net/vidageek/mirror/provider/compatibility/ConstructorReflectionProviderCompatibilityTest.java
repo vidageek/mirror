@@ -8,9 +8,11 @@ import java.lang.reflect.Constructor;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
+import net.vidageek.mirror.provider.experimental.sun15.Sun15ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Assert;
+import org.junit.Assume;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -26,11 +28,13 @@ public class ConstructorReflectionProviderCompatibilityTest implements Reflectio
 
     @Theory
     public void testInstantiate(final ReflectionProvider r) {
-        Constructor<ConstructorFixture> constructor = provider.getClassReflectionProvider(ConstructorFixture.class)
-                .reflectConstructor(new Class<?>[] {});
+        Constructor<ConstructorFixture> constructor = provider
+            .getClassReflectionProvider(ConstructorFixture.class)
+            .reflectConstructor(new Class<?>[] {});
 
-        ConstructorFixture instance = r.getConstructorReflectionProvider(ConstructorFixture.class, constructor)
-                .instantiate(new Object[] {});
+        ConstructorFixture instance = r
+            .getConstructorReflectionProvider(ConstructorFixture.class, constructor)
+            .instantiate(new Object[] {});
 
         Assert.assertEquals(new Integer(0), instance.getConstructor());
 
@@ -38,11 +42,13 @@ public class ConstructorReflectionProviderCompatibilityTest implements Reflectio
 
     @Theory
     public void testInstantiateWithPrivateConstructor(final ReflectionProvider r) {
-        Constructor<ConstructorFixture> constructor = provider.getClassReflectionProvider(ConstructorFixture.class)
-                .reflectConstructor(new Class<?>[] { Long.class });
+        Constructor<ConstructorFixture> constructor = provider
+            .getClassReflectionProvider(ConstructorFixture.class)
+            .reflectConstructor(new Class<?>[] { Long.class });
 
-        ConstructorFixture instance = r.getConstructorReflectionProvider(ConstructorFixture.class, constructor)
-                .instantiate(2L);
+        ConstructorFixture instance = r
+            .getConstructorReflectionProvider(ConstructorFixture.class, constructor)
+            .instantiate(2L);
 
         Assert.assertEquals(new Integer(4), instance.getConstructor());
 
@@ -50,19 +56,22 @@ public class ConstructorReflectionProviderCompatibilityTest implements Reflectio
 
     @Theory
     public void testInstantiateWithPrimitiveArgs(final ReflectionProvider r) {
-        Constructor<ConstructorFixture> constructor = provider.getClassReflectionProvider(ConstructorFixture.class)
-                .reflectConstructor(new Class<?>[] { int.class, long.class, boolean.class });
+        Constructor<ConstructorFixture> constructor = provider
+            .getClassReflectionProvider(ConstructorFixture.class)
+            .reflectConstructor(new Class<?>[] { int.class, long.class, boolean.class });
 
-        ConstructorFixture instance = r.getConstructorReflectionProvider(ConstructorFixture.class, constructor)
-                .instantiate(2, 13L, false);
+        ConstructorFixture instance = r
+            .getConstructorReflectionProvider(ConstructorFixture.class, constructor)
+            .instantiate(2, 13L, false);
 
         Assert.assertEquals(new Integer(3), instance.getConstructor());
     }
 
     @Theory
     public void testGetParametersForConstructorWithoutArgs(final ReflectionProvider r) {
-        Constructor<ConstructorFixture> constructor = provider.getClassReflectionProvider(ConstructorFixture.class)
-                .reflectConstructor(new Class<?>[] {});
+        Constructor<ConstructorFixture> constructor = provider
+            .getClassReflectionProvider(ConstructorFixture.class)
+            .reflectConstructor(new Class<?>[] {});
 
         Class<?>[] types = r.getConstructorReflectionProvider(ConstructorFixture.class, constructor).getParameters();
 
@@ -71,8 +80,9 @@ public class ConstructorReflectionProviderCompatibilityTest implements Reflectio
 
     @Theory
     public void testGetParametersForConstructorWithArgs(final ReflectionProvider r) {
-        Constructor<ConstructorFixture> constructor = provider.getClassReflectionProvider(ConstructorFixture.class)
-                .reflectConstructor(new Class<?>[] { int.class, long.class, boolean.class });
+        Constructor<ConstructorFixture> constructor = provider
+            .getClassReflectionProvider(ConstructorFixture.class)
+            .reflectConstructor(new Class<?>[] { int.class, long.class, boolean.class });
 
         Class<?>[] types = r.getConstructorReflectionProvider(ConstructorFixture.class, constructor).getParameters();
 
@@ -84,8 +94,9 @@ public class ConstructorReflectionProviderCompatibilityTest implements Reflectio
 
     @Theory
     public void testThatProviderDoesntChangeAccessibilityWhenReflecting(final ReflectionProvider r) {
-        Constructor<ConstructorFixture> constructor = provider.getClassReflectionProvider(ConstructorFixture.class)
-                .reflectConstructor(new Class<?>[] { Long.class });
+        Constructor<ConstructorFixture> constructor = provider
+            .getClassReflectionProvider(ConstructorFixture.class)
+            .reflectConstructor(new Class<?>[] { Long.class });
 
         Assert.assertFalse(constructor.isAccessible());
 
@@ -93,8 +104,11 @@ public class ConstructorReflectionProviderCompatibilityTest implements Reflectio
 
     @Theory
     public void testSetAccessible(final ReflectionProvider r) {
-        Constructor<ConstructorFixture> constructor = provider.getClassReflectionProvider(ConstructorFixture.class)
-                .reflectConstructor(new Class<?>[] { Long.class });
+        Assume.assumeTrue(!r.getClass().equals(Sun15ReflectionProvider.class));
+
+        Constructor<ConstructorFixture> constructor = provider
+            .getClassReflectionProvider(ConstructorFixture.class)
+            .reflectConstructor(new Class<?>[] { Long.class });
 
         Assert.assertFalse(constructor.isAccessible());
 
