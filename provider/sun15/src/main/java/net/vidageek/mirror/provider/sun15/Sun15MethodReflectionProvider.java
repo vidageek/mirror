@@ -1,4 +1,4 @@
-package net.vidageek.mirror.provider.experimental.sun15;
+package net.vidageek.mirror.provider.sun15;
 
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.InvocationTargetException;
@@ -16,13 +16,13 @@ import sun.reflect.MethodAccessor;
 final public class Sun15MethodReflectionProvider implements MethodReflectionProvider {
 
     private final Object target;
-    private final net.vidageek.mirror.provider.experimental.sun15.Method method;
+    private final net.vidageek.mirror.provider.sun15.Method method;
     private final MethodReflectionProvider provider = null;
     private final MethodAccessor accessor;
 
     public Sun15MethodReflectionProvider(final Object target, final Class<?> clazz, final Method method) {
         this.target = target;
-        this.method = (net.vidageek.mirror.provider.experimental.sun15.Method) (AnnotatedElement) method;
+        this.method = (net.vidageek.mirror.provider.sun15.Method) (AnnotatedElement) method;
         {
             if (this.method.methodAccessor == null) {
                 this.method.acquireMethodAccessor();

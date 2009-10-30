@@ -1,4 +1,4 @@
-package net.vidageek.mirror.provider.experimental.sun15;
+package net.vidageek.mirror.provider.sun15;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;

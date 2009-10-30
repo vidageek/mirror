@@ -5,8 +5,8 @@ import java.lang.reflect.Method;
 import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.MethodFixture;
-import net.vidageek.mirror.provider.experimental.sun15.Sun15ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
+import net.vidageek.mirror.provider.sun15.Sun15ReflectionProvider;
 
 import org.junit.Before;
 import org.junit.Test;
