@@ -14,7 +14,6 @@ import net.vidageek.mirror.fixtures.InterfaceFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
-import net.vidageek.mirror.reflect.MethodReflectorTest;
 
 import org.junit.Assert;
 import org.junit.experimental.theories.DataPoint;
@@ -167,7 +166,7 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testThatCanInvokeInterfaceMethodsOnProxys(final ReflectionProvider r) {
-        Object proxy = Proxy.newProxyInstance(MethodReflectorTest.class.getClassLoader(),
+        Object proxy = Proxy.newProxyInstance(MethodReflectionProviderCompatibilityTest.class.getClassLoader(),
                 new Class<?>[] { InterfaceFixture.class }, new InvocationHandler() {
 
                     public Object invoke(final Object proxy, final Method method, final Object[] args) throws Throwable {
