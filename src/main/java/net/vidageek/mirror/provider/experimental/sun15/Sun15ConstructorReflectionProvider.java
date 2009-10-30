@@ -49,7 +49,6 @@ final public class Sun15ConstructorReflectionProvider<T> implements ConstructorR
     }
 
     public void setAccessible() {
-        // Constructor accessor just ignores accessibility issues.
     }
 
 }

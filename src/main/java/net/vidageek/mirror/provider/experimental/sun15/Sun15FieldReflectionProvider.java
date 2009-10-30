@@ -44,7 +44,6 @@ final public class Sun15FieldReflectionProvider implements FieldReflectionProvid
     }
 
     public void setAccessible() {
-        // FieldAccessor just ignores accessibility issues.
     }
 
 }

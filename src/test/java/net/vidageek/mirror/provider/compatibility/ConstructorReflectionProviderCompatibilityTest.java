@@ -8,11 +8,9 @@ import java.lang.reflect.Constructor;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
-import net.vidageek.mirror.provider.experimental.sun15.Sun15ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Assert;
-import org.junit.Assume;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -104,7 +102,6 @@ public class ConstructorReflectionProviderCompatibilityTest implements Reflectio
 
     @Theory
     public void testSetAccessible(final ReflectionProvider r) {
-        Assume.assumeTrue(!r.getClass().equals(Sun15ReflectionProvider.class));
 
         Constructor<ConstructorFixture> constructor = provider
             .getClassReflectionProvider(ConstructorFixture.class)
