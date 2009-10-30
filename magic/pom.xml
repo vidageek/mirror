@@ -41,7 +41,7 @@
 							<relocations>
 								<relocation>
 									<pattern>org.objenesis</pattern>
-									<shadedPattern>net.vidageek.thirdparty.org.objenesis</shadedPattern>
+									<shadedPattern>net.vidageek.mirror.thirdparty.org.objenesis</shadedPattern>
 								</relocation>
 							</relocations>
 						</configuration>
