@@ -17,6 +17,7 @@ import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 import net.vidageek.mirror.reflect.MethodReflectorTest;
 
 import org.junit.Assert;
+import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -28,11 +29,14 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 public class MethodReflectionProviderCompatibilityTest {
 
-    private final ReflectionProvider provider = new DefaultMirrorReflectionProvider();
+    @DataPoint
+    public static ReflectionProvider provider;
+
+    private final ReflectionProvider defaultProvider = new DefaultMirrorReflectionProvider();
 
     @Theory
     public void testThatProviderDoesntChangeAccessibilityWhenReflecting(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
                 new Class<?>[] {});
 
         Assert.assertFalse(method.isAccessible());
@@ -40,7 +44,7 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testSetAccessible(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
                 new Class<?>[] {});
 
         Assert.assertFalse(method.isAccessible());
@@ -52,8 +56,8 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testGetParametersForMethodWithoutArgs(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithNoArgs",
-                new Class<?>[] {});
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
+                "methodWithNoArgs", new Class<?>[] {});
 
         Class<?>[] types = r
             .getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
@@ -64,8 +68,8 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testGetParametersForMethodWithArgs(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithFourArgs",
-                new Class<?>[] { String.class, Boolean.class, Class.class, Long.class });
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
+                "methodWithFourArgs", new Class<?>[] { String.class, Boolean.class, Class.class, Long.class });
 
         Class<?>[] types = r
             .getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
@@ -80,8 +84,8 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokeInstanceMethodWithOneArg(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithOneArg",
-                new Class<?>[] { String.class });
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
+                "methodWithOneArg", new Class<?>[] { String.class });
 
         r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method).invoke(new Object[] { "" });
 
@@ -90,8 +94,8 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokeInstanceMethodWithoutArgs(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithNoArgs",
-                new Class<?>[] {});
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
+                "methodWithNoArgs", new Class<?>[] {});
 
         r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method).invoke(new Object[] {});
 
@@ -100,7 +104,7 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokeStaticMethodWithArgs(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
                 "staticMethodWithOneArg", new Class<?>[] { String.class });
 
         r.getMethodReflectionProvider(null, MethodFixture.class, method).invoke(new Object[] { "" });
@@ -110,7 +114,7 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokeStaticMethodWithoutArgs(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("staticMethod",
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod("staticMethod",
                 new Class<?>[] {});
 
         r.getMethodReflectionProvider(null, MethodFixture.class, method).invoke(new Object[] {});
@@ -120,8 +124,8 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokeSuperClassMethod(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(ChildFixture.class).reflectMethod("superClassMethod",
-                new Class<?>[] {});
+        Method method = defaultProvider.getClassReflectionProvider(ChildFixture.class).reflectMethod(
+                "superClassMethod", new Class<?>[] {});
 
         Object returnValue = r.getMethodReflectionProvider(new ChildFixture(), ChildFixture.class, method).invoke(
                 new Object[] {});
@@ -131,7 +135,7 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokeMethodWithPrimitivesArgs(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod(
                 "methodWithTwoPrimitives", new Class<?>[] { int.class, boolean.class });
 
         r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method).invoke(
@@ -142,7 +146,7 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokePrivateMethod(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
+        Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
                 new Class<?>[] {});
 
         r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method).invoke(new Object[] {});
@@ -152,7 +156,7 @@ public class MethodReflectionProviderCompatibilityTest {
 
     @Theory
     public void testInvokePrivateSuperClassMethod(final ReflectionProvider r) {
-        Method method = provider.getClassReflectionProvider(ChildFixture.class).reflectMethod(
+        Method method = defaultProvider.getClassReflectionProvider(ChildFixture.class).reflectMethod(
                 "superClassPrivateMethod", new Class<?>[] {});
 
         Object returnValue = r.getMethodReflectionProvider(new ChildFixture(), ChildFixture.class, method).invoke(
@@ -172,7 +176,7 @@ public class MethodReflectionProviderCompatibilityTest {
                     }
                 });
 
-        Method method = provider.getClassReflectionProvider(proxy.getClass()).reflectMethod("interfaceMethod",
+        Method method = defaultProvider.getClassReflectionProvider(proxy.getClass()).reflectMethod("interfaceMethod",
                 new Class<?>[] { String.class });
 
         r.getMethodReflectionProvider(proxy, proxy.getClass(), method).invoke(new Object[] { "" });
@@ -183,7 +187,7 @@ public class MethodReflectionProviderCompatibilityTest {
         AnnotationFixture annotation = r.getAnnotatedElementReflectionProvider(ClassFixture.class).getAnnotation(
                 AnnotationFixture.class);
 
-        Method method = provider.getClassReflectionProvider(AnnotationFixture.class).reflectMethod("value",
+        Method method = defaultProvider.getClassReflectionProvider(AnnotationFixture.class).reflectMethod("value",
                 new Class<?>[] {});
 
         Assert.assertNotNull(method);

@@ -15,6 +15,9 @@ import org.junit.runner.RunWith;
 public class PrimitiveClassReflectionProviderCompatibilityTest {
 
     @DataPoint
+    public static ReflectionProvider provider;
+
+    @DataPoint
     public static Class<?> booleanClass = boolean.class;
     @DataPoint
     public static Class<?> byteClass = byte.class;

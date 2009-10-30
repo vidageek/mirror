@@ -13,6 +13,7 @@ import net.vidageek.mirror.provider.GenericTypeAccessor;
 import net.vidageek.mirror.provider.ReflectionProvider;
 
 import org.junit.Before;
+import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -24,6 +25,9 @@ import org.junit.runner.RunWith;
  */
 @RunWith(Theories.class)
 public class ParameterizedTypeReflectionProviderCompatibilityTest {
+
+    @DataPoint
+    public static ReflectionProvider provider;
 
     private Field typedField;
     private Field notTypedField;

@@ -33,6 +33,9 @@ import org.junit.runner.RunWith;
 public class AnnotatedElementReflectionProviderCompatibilityTest {
 
     @DataPoint
+    public static ReflectionProvider provider;
+
+    @DataPoint
     public static AnnotatedElement clazz;
     @DataPoint
     public static AnnotatedElement field;
