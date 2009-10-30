@@ -5,7 +5,6 @@ package net.vidageek.mirror.provider.compatibility;
 
 import static org.junit.Assert.assertEquals;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
 
 import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theories;
@@ -13,7 +12,7 @@ import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
 
 @RunWith(Theories.class)
-public class PrimitiveClassReflectionProviderCompatibilityTest implements ReflectionProviderDataPointList {
+public class PrimitiveClassReflectionProviderCompatibilityTest {
 
     @DataPoint
     public static Class<?> booleanClass = boolean.class;

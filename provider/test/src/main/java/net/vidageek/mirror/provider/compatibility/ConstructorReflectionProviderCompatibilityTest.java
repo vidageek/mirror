@@ -7,7 +7,6 @@ import java.lang.reflect.Constructor;
 
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Assert;
@@ -20,7 +19,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-public class ConstructorReflectionProviderCompatibilityTest implements ReflectionProviderDataPointList {
+public class ConstructorReflectionProviderCompatibilityTest {
 
     private final ReflectionProvider provider = new DefaultMirrorReflectionProvider();
 

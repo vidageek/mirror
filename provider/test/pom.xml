@@ -2,31 +2,23 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.vidageek</groupId>
-	<artifactId>mirror-sun15-provider</artifactId>
+	<artifactId>mirror-provider-test</artifactId>
 	<version>1.6-SNAPSHOT</version>
-	<name>Mirror Sun JDK 1.5 Reflection Provider</name>
+	<name>Mirror Test Suite for Reflection Providers</name>
 	<packaging>jar</packaging>
-	<description>Reflection provider that relies on Sun internal classes to speedup reflection.</description>
+	<description>Test Suite to ensure Reflection Providers compatibility</description>
 
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>4.7</version>
-			<scope>test</scope>
 		</dependency>
 
 		<dependency>
 			<groupId>net.vidageek</groupId>
 			<artifactId>mirror</artifactId>
 			<version>${pom.version}</version>
-		</dependency>
-		
-		<dependency>
-			<groupId>net.vidageek</groupId>
-			<artifactId>mirror-provider-test</artifactId>
-			<version>${pom.version}</version>
-			<scope>test</scope>
 		</dependency>
 		
 	</dependencies>
@@ -52,20 +44,6 @@
 	<issueManagement>
 		<url>http://github.com/vidageek/mirror/issues</url>
 	</issueManagement>
-
-	<distributionManagement>
-		<repository>
-			<id>vidageek.net</id>
-			<name>VidaGeek.net Maven Repository</name>
-			<url>scp://maven_sync@vidageek.net/home/maven_sync/maven.vidageek.net/</url>
-		</repository>
-		<snapshotRepository>
-			<id>vidageek.net</id>
-			<name>VidaGeek.net Maven Snapshot Repository</name>
-			<url>scp://maven_sync@vidageek.net/home/maven_sync/snapshots.vidageek.net/</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
 
 	<reporting>
 		<plugins>
@@ -111,13 +89,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<extensions>
-			<extension>
-				<groupId>org.apache.maven.wagon</groupId>
-				<artifactId>wagon-ssh-external</artifactId>
-				<version>1.0-alpha-5</version>
-			</extension>
-		</extensions>
 	</build>
 
 	<developers>

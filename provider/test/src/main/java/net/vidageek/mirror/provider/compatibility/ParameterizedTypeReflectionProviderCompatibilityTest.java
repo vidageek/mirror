@@ -11,7 +11,6 @@ import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.SubClassOfTypedClassFixture;
 import net.vidageek.mirror.provider.GenericTypeAccessor;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
 
 import org.junit.Before;
 import org.junit.experimental.theories.Theories;
@@ -24,7 +23,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-public class ParameterizedTypeReflectionProviderCompatibilityTest implements ReflectionProviderDataPointList {
+public class ParameterizedTypeReflectionProviderCompatibilityTest {
 
     private Field typedField;
     private Field notTypedField;

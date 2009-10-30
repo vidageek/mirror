@@ -13,7 +13,6 @@ import net.vidageek.mirror.fixtures.ClassFixture;
 import net.vidageek.mirror.fixtures.InterfaceFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 import net.vidageek.mirror.reflect.MethodReflectorTest;
 
@@ -27,7 +26,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-public class MethodReflectionProviderCompatibilityTest implements ReflectionProviderDataPointList {
+public class MethodReflectionProviderCompatibilityTest {
 
     private final ReflectionProvider provider = new DefaultMirrorReflectionProvider();
 

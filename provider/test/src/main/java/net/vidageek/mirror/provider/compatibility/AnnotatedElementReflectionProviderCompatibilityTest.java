@@ -16,7 +16,6 @@ import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.provider.ReflectionProviderDataPointList;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Assert;
@@ -31,7 +30,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-public class AnnotatedElementReflectionProviderCompatibilityTest implements ReflectionProviderDataPointList {
+public class AnnotatedElementReflectionProviderCompatibilityTest {
 
     @DataPoint
     public static AnnotatedElement clazz;
