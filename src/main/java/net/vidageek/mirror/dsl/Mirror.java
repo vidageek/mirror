@@ -31,7 +31,7 @@ public final class Mirror {
     private final ReflectionProvider provider;
 
     static {
-        cachedProvider = new MirrorProviderBuilder(Mirror.class.getResource(MIRROR_CFG)).createProvider();
+        cachedProvider = new MirrorProviderBuilder(Mirror.class.getResourceAsStream(MIRROR_CFG)).createProvider();
     }
 
     public Mirror(final ReflectionProvider provider) {

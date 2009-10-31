@@ -26,7 +26,7 @@ public class MirrorProviderBuilderTest {
     @Test
     public void testThatInstantiatesProviderAtProperties() {
         ReflectionProvider provider = new MirrorProviderBuilder(MirrorProviderBuilderTest.class
-                .getResource("/properties/mirror-fake-provider.properties")).createProvider();
+            .getResourceAsStream("/properties/mirror-fake-provider.properties")).createProvider();
 
         Assert.assertEquals(FakeProvider.class, provider.getClass());
     }
