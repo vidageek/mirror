@@ -9,3 +9,4 @@ Issue 28 - add constructor bypasser
 Issue 46 - add method to reflect unique constructor
 Issue 47 - Sun15ReflectionProvider
 Issue 45 - Set final fields
+Issue 51 - Don not read config file using java.io.File
