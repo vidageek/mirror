@@ -19,15 +19,13 @@ for (Field f : target.getClass().getDeclaredFields()) {
 		toSet = f;
 	}
 }
-if (toSet != null && ((toSet.getModifiers() & Modifier.STATIC) == 0) 
-		&& ((toSet.getModifiers() & Modifier.FINAL) == 0)) {
+if (toSet != null && (toSet.getModifiers() & Modifier.STATIC) == 0) {
 	toSet.setAccessible(true);
 	toSet.set(target, value);
 }
 [/java]
 
-Ah! What an obfuscated code! Completely unreadable. What are those Modifier.FINAL and 
-Modifier.STATIC stuffs are doing in my code?
+Ah! What an obfuscated code! Completely unreadable. What is Modifier.STATIC doing in my code?
 
 So, what a good programmer would do? Hide it inside some *Util class, so he would be able to
 use it like this:

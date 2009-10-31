@@ -19,15 +19,13 @@ for (Field f : obj.getClass().getDeclaredFields()) {
 		toSet = f;
 	}
 }
-if (toSet != null && ((toSet.getModifiers() & Modifier.STATIC) == 0) 
-		&& ((toSet.getModifiers() & Modifier.FINAL) == 0)) {
+if (toSet != null && (toSet.getModifiers() & Modifier.STATIC) == 0) {
 	toSet.setAccessible(true);
 	toSet.set(target, value);
 }
 [/java]
 
-Ah! Que código mais sujo! Completamente ilegível. O quê Modifier.FINAL e 
-Modifier.STATIC estão fazendo no meu código?
+Ah! Que código mais sujo! Completamente ilegível. O quê Modifier.STATIC está fazendo no meu código?
 
 Então, o que um programador bom faria? Esconderia isso dentro de uma classe *Util, assim
 ele poderia usar algo como:
