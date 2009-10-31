@@ -50,7 +50,7 @@ Se você usa maven, você pode simplesmente adicioná-lo como dependência do se
 	</dependency>
 ...
 </dependencies>
-[xml]
+[/xml]
 
 Após isso, você apenas precisa instanciar seu Mirror passando um Sun15ReflectionProvider: 
 

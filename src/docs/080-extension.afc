@@ -49,7 +49,7 @@ If you use maven, you can just add it as a dependency on your pom.xml
 	</dependency>
 ...
 </dependencies>
-[xml]
+[/xml]
 
 After that, just instantiate your Mirror passing a Sun15ReflectionProvider:
 
