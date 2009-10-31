@@ -7,3 +7,4 @@ Issue 39 - MirrorList must be thread safe
 Issue 44 - add method to reflect uniquely named methods
 Issue 28 - add constructor bypasser
 Issue 46 - add method to reflect unique constructor
+Issue 47 - Sun15ReflectionProvider
