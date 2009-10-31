@@ -48,9 +48,9 @@ final public class Sun15MethodReflectionProvider implements MethodReflectionProv
             try {
                 methodAccessorAcquirer.invoke(method, emptyObjectArray);
             } catch (IllegalArgumentException e) {
-                throw new ReflectionProviderException("Could not aquire MethodAccessor.", e);
+                throw new ReflectionProviderException("Could not acquire MethodAccessor.", e);
             } catch (InvocationTargetException e) {
-                throw new ReflectionProviderException("Could not aquire MethodAccessor.", e);
+                throw new ReflectionProviderException("Could not acquire MethodAccessor.", e);
             }
             accessor = (MethodAccessor) unsafe.getObject(method, methodAccessorFieldOffset);
         }
