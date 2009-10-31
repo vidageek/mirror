@@ -5,6 +5,7 @@ package net.vidageek.mirror.provider.compatibility;
 
 import java.lang.reflect.Field;
 
+import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.SuperClassFixture;
@@ -175,6 +176,14 @@ public class FieldReflectionProviderCompatibilityTest {
 
         Assert.assertTrue(field.isAccessible());
 
+    }
+
+    @Theory
+    public void testSetFinalFields(final ReflectionProvider r) {
+        final FieldFixture fixture = new FieldFixture(0);
+        Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("finalField");
+        r.getFieldReflectionProvider(fixture, FieldFixture.class, field).setValue(2);
+        Assert.assertEquals(2, new Mirror(provider).on(fixture).get().field("finalField"));
     }
 
 }

@@ -1,6 +1,7 @@
 package net.vidageek.mirror.set;
 
-import net.vidageek.mirror.exception.MirrorException;
+import junit.framework.Assert;
+import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
@@ -36,13 +37,10 @@ public class FieldSetterByNameTest {
         new FieldSetterByName(provider, "field", new Object(), null);
     }
 
-    @Test(expected = MirrorException.class)
-    public void testThatThrowsExceptionIfFieldIsFinalAndStatic() {
-        new FieldSetterByName(provider, "STATIC_FINAL_FIELD", new FieldFixture(0), FieldFixture.class).withValue(0);
-    }
-
-    @Test(expected = MirrorException.class)
-    public void testThatThrowsExceptionIfFieldIsFinal() {
-        new FieldSetterByName(provider, "finalField", new FieldFixture(0), FieldFixture.class).withValue(0);
+    @Test
+    public void testThatCanSetFieldIfFieldIsFinal() {
+        final FieldFixture fixture = new FieldFixture(0);
+        new FieldSetterByName(provider, "finalField", fixture, FieldFixture.class).withValue(2);
+        Assert.assertEquals(2, new Mirror(provider).on(fixture).get().field("finalField"));
     }
 }

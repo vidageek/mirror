@@ -39,10 +39,6 @@ public final class FieldSetterByField implements FieldSetter {
             throw new IllegalArgumentException("field declaring class (" + field.getDeclaringClass().getName()
                     + ") doesn't match clazz " + clazz.getName());
         }
-        if (Modifier.isFinal(field.getModifiers())) {
-            throw new MirrorException("Field " + field.getName() + " from class " + clazz.getName()
-                    + " cannot be set because it's final.");
-        }
         this.provider = provider;
         this.target = target;
         this.clazz = clazz;
