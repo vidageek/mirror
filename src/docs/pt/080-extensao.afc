@@ -28,6 +28,43 @@ mais específicas:
 
 Mas como você faz para que o Mirror use seu Reflection Provider? De uma olhada em Extensão -> Configuração.
 
+[section Sun Reflection Provider]
+
+Existe uma implementação de ReflectionProvider que depende de algumas classes insternas da VM da Sun para 
+acelerar as operações de reflection por ignorar as checagens de segurança. Este provider pode ser 25% mais
+rápido que o provider padrão dependendo de como você usa o Mirror.
+
+Aviso! Este provider provavelmente só funciona nas versões 1.5 e 1.6 das JVMs da Sun.
+
+Para utilizá-lo, você deve adicioná-lo ao build path do seu projeto. Você pode baixar o jar em 
+http://github.com/vidageek/mirror/downloads ou http://maven.vidageek.net/net/vidageek/mirror-sun15-provider .
+
+Se você usa maven, você pode simplesmente adicioná-lo como dependência do seu projeto no pom.xml
+[xml]
+<dependencies>
+...
+	<dependency>
+	    <groupId>net.vidageek</groupId>
+	    <artifactId>mirror-sun15-provider</artifactId>
+	    <version>1.6</version>
+	</dependency>
+...
+</dependencies>
+[xml]
+
+Após isso, você apenas precisa instanciar seu Mirror passando um Sun15ReflectionProvider: 
+
+[java]
+new Mirror(new Sun15ReflectionProvider());
+[/java]
+
+Ou adicionar a seguinte linha ao seu mirror.properties:
+
+[code]
+provider.class = net.vidageek.mirror.provider.sun15.Sun15ReflectionProvider
+[/code]
+
+
 [section Configuração]
 
 Existem duas formas de configurar o Mirror. Você pode instanciar Mirror passando um 
