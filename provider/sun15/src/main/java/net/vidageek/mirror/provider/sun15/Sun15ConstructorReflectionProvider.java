@@ -49,6 +49,7 @@ final public class Sun15ConstructorReflectionProvider<T> implements ConstructorR
     }
 
     public void setAccessible() {
+        constructor.setAccessible(true);
     }
 
 }

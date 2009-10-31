@@ -21,14 +21,14 @@
 			<version>4.7</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>net.vidageek</groupId>
 			<artifactId>mirror-provider-test</artifactId>
 			<version>${pom.version}</version>
 			<scope>test</scope>
 		</dependency>
-		
+
 	</dependencies>
 
 	<organization>
