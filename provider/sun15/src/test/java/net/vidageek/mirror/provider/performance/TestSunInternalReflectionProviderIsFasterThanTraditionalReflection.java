@@ -1,10 +1,12 @@
 package net.vidageek.mirror.provider.performance;
 
+import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
@@ -101,6 +103,34 @@ final public class TestSunInternalReflectionProviderIsFasterThanTraditionalRefle
         long sunGap = System.currentTimeMillis() - begin;
         System.out.println("Sun field setting: " + sunGap);
         System.out.println("Default field setting: " + defaultGap);
+        Assert.assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
+                + defaultGap + " millisseconds.", sunGap < defaultGap);
+    }
+
+    @Test
+    public void testThatContructorInvokingIsFasterUsingSunInternalClasses() {
+        Constructor<ConstructorFixture> constructor = defaultMirror
+            .on(ConstructorFixture.class)
+            .reflect()
+            .constructor()
+            .withoutArgs();
+        long begin = System.currentTimeMillis();
+
+        for (int i = 0; i < BATCH_SIZE; i++) {
+            defaultMirror.on(ConstructorFixture.class).invoke().constructor(constructor).withoutArgs();
+        }
+
+        long defaultGap = System.currentTimeMillis() - begin;
+
+        begin = System.currentTimeMillis();
+
+        for (int i = 0; i < BATCH_SIZE; i++) {
+            sunMirror.on(ConstructorFixture.class).invoke().constructor(constructor).withoutArgs();
+        }
+
+        long sunGap = System.currentTimeMillis() - begin;
+        System.out.println("Sun contructor invoking: " + sunGap);
+        System.out.println("Default constructor invoking: " + defaultGap);
         Assert.assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
                 + defaultGap + " millisseconds.", sunGap < defaultGap);
     }
