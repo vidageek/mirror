@@ -165,4 +165,16 @@ public class FieldReflectionProviderCompatibilityTest {
             .getValue());
     }
 
+    @Theory
+    public void testSetAccessible(final ReflectionProvider r) {
+        Field field = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectField("field");
+
+        Assert.assertFalse(field.isAccessible());
+
+        r.getFieldReflectionProvider(new FieldFixture(1), FieldFixture.class, field).setAccessible();
+
+        Assert.assertTrue(field.isAccessible());
+
+    }
+
 }
