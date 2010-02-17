@@ -17,34 +17,34 @@ public interface ClassController<T> {
 	 * 
 	 * @return An object to control invocation.
 	 */
-	public InvocationHandler<T> invoke() ;
+	public InvocationHandler<T> invoke();
 
 	/**
 	 * This part of the DSL controls setting of fields.
 	 * 
 	 * @return An object to control setting.
 	 */
-	public SetterHandler set() ;
+	public SetterHandler set();
 
 	/**
 	 * This part of the DSL controls getting field values.
 	 * 
 	 * @return An object to control getting of values.
 	 */
-	public GetterHandler get() ;
+	public GetterHandler get();
 
 	/**
 	 * This part of the DSL controls reflection of single reflection elements.
 	 * 
 	 * @return An object to control reflection of single reflection elements.
 	 */
-	public ReflectionHandler<T> reflect() ;
+	public ReflectionHandler<T> reflect();
 
 	/**
 	 * This part of the DSL controls reflection of lists of reflection elements.
 	 * 
 	 * @return An object to control reflection of lists of reflection elements.
 	 */
-	public AllReflectionHandler<T> reflectAll() ;
+	public AllReflectionHandler<T> reflectAll();
 
 }

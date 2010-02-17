@@ -7,18 +7,18 @@ import net.vidageek.mirror.provider.ReflectionProvider;
 
 final public class DefaultSetterMethodHandler implements SetterMethodHandler {
 
-    private final ReflectionProvider provider;
-    private final Object target;
-    private final String fieldName;
+	private final ReflectionProvider provider;
+	private final Object target;
+	private final String fieldName;
 
-    public DefaultSetterMethodHandler(final ReflectionProvider provider, final Object target, final String fieldName) {
-        this.provider = provider;
-        this.target = target;
-        this.fieldName = fieldName;
-    }
+	public DefaultSetterMethodHandler(final ReflectionProvider provider, final Object target, final String fieldName) {
+		this.provider = provider;
+		this.target = target;
+		this.fieldName = fieldName;
+	}
 
-    public void withValue(final Object value) {
-        new Mirror(provider).on(target).invoke().method(new Bean().setter(fieldName)).withArgs(value);
-    }
+	public void withValue(final Object value) {
+		new Mirror(provider).on(target).invoke().method(new Bean().setter(fieldName)).withArgs(value);
+	}
 
 }

@@ -36,234 +36,226 @@ import org.junit.Test;
  */
 public class AllReflectionHandlerTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfClassIsNull() {
-        new DefaultAllReflectionHandler<Object>(provider, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfClassIsNull() {
+		new DefaultAllReflectionHandler<Object>(provider, null);
+	}
 
-    @Test
-    public void testThatReflectAllFields() {
-        List<Field> fields = new DefaultAllReflectionHandler<FieldFixture>(provider, FieldFixture.class).fields();
+	@Test
+	public void testThatReflectAllFields() {
+		List<Field> fields = new DefaultAllReflectionHandler<FieldFixture>(provider, FieldFixture.class).fields();
 
-        assertEquals(8, fields.size());
-    }
+		assertEquals(8, fields.size());
+	}
 
-    @Test
-    public void testThatReflectHierarchyFields() {
-        List<Field> fields = new DefaultAllReflectionHandler<ChildFixture>(provider, ChildFixture.class).fields();
+	@Test
+	public void testThatReflectHierarchyFields() {
+		List<Field> fields = new DefaultAllReflectionHandler<ChildFixture>(provider, ChildFixture.class).fields();
 
-        assertEquals(5, fields.size());
-    }
+		assertEquals(5, fields.size());
+	}
 
-    @Test
-    public void testThatFindsHidingFields() {
-        List<Field> fields = new DefaultAllReflectionHandler<ChildHidingFixture>(provider, ChildHidingFixture.class)
-            .fields();
+	@Test
+	public void testThatFindsHidingFields() {
+		List<Field> fields = new DefaultAllReflectionHandler<ChildHidingFixture>(provider, ChildHidingFixture.class)
+				.fields();
 
-        assertEquals(2, fields.size());
-    }
+		assertEquals(2, fields.size());
+	}
 
-    @Test
-    public void testThatReflectAllMethods() {
-        List<Method> methods = new DefaultAllReflectionHandler<MethodFixture>(provider, MethodFixture.class).methods();
+	@Test
+	public void testThatReflectAllMethods() {
+		List<Method> methods = new DefaultAllReflectionHandler<MethodFixture>(provider, MethodFixture.class).methods();
 
-        assertEquals(24, methods.size());
-    }
+		assertEquals(24, methods.size());
+	}
 
-    @Test
-    public void testThatReflectHierarchyMethods() {
-        List<Method> methods = new DefaultAllReflectionHandler<ChildFixture>(provider, ChildFixture.class).methods();
+	@Test
+	public void testThatReflectHierarchyMethods() {
+		List<Method> methods = new DefaultAllReflectionHandler<ChildFixture>(provider, ChildFixture.class).methods();
 
-        assertEquals(21, methods.size());
-    }
+		assertEquals(21, methods.size());
+	}
 
-    @Test
-    public void testThatFindsOverridingMethods() {
-        List<Method> methods = new DefaultAllReflectionHandler<ChildHidingFixture>(provider, ChildHidingFixture.class)
-            .methods();
+	@Test
+	public void testThatFindsOverridingMethods() {
+		List<Method> methods = new DefaultAllReflectionHandler<ChildHidingFixture>(provider, ChildHidingFixture.class)
+				.methods();
 
-        assertEquals(14, methods.size());
-    }
+		assertEquals(14, methods.size());
+	}
 
-    @Test
-    public void testThatReflectsAllConstructors() {
-        List<Constructor<ConstructorFixture>> constructors = new DefaultAllReflectionHandler<ConstructorFixture>(
-                provider, ConstructorFixture.class).constructors();
+	@Test
+	public void testThatReflectsAllConstructors() {
+		List<Constructor<ConstructorFixture>> constructors = new DefaultAllReflectionHandler<ConstructorFixture>(
+				provider, ConstructorFixture.class).constructors();
 
-        assertEquals(6, constructors.size());
-    }
+		assertEquals(6, constructors.size());
+	}
 
-    @Test
-    public void testThatReflectsAllSetters() {
-        List<Method> setters = new DefaultAllReflectionHandler<BeanFixture>(provider, BeanFixture.class).setters();
-        assertEquals(2, setters.size());
-        assertTrue("should contain setField", setters.get(0).getName().equals("setField"));
-        assertTrue("should contain setBooleanField", setters.get(1).getName().equals("setBooleanField"));
-    }
+	@Test
+	public void testThatReflectsAllSetters() {
+		List<Method> setters = new DefaultAllReflectionHandler<BeanFixture>(provider, BeanFixture.class).setters();
+		assertEquals(2, setters.size());
+		assertTrue("should contain setField", setters.get(0).getName().equals("setField"));
+		assertTrue("should contain setBooleanField", setters.get(1).getName().equals("setBooleanField"));
+	}
 
-    @Test
-    public void testThatDoesntReflectMethodAsSetterIfArgumentNumberIsNotOneOrReturnTypeIsNotVoid() {
-        List<Method> setters = new DefaultAllReflectionHandler<NotABeanFixture>(provider, NotABeanFixture.class)
-            .setters();
-        assertEquals(0, setters.size());
-    }
+	@Test
+	public void testThatDoesntReflectMethodAsSetterIfArgumentNumberIsNotOneOrReturnTypeIsNotVoid() {
+		List<Method> setters = new DefaultAllReflectionHandler<NotABeanFixture>(provider, NotABeanFixture.class)
+				.setters();
+		assertEquals(0, setters.size());
+	}
 
-    @Test
-    public void testThatReflectsAllGetters() {
-        List<Method> getters = new DefaultAllReflectionHandler<BeanFixture>(provider, BeanFixture.class).getters();
-        assertEquals(2, getters.size());
-        assertEquals("getField", getters.get(0).getName());
-        assertEquals("getClass", getters.get(1).getName());
-    }
+	@Test
+	public void testThatReflectsAllGetters() {
+		List<Method> getters = new DefaultAllReflectionHandler<BeanFixture>(provider, BeanFixture.class).getters();
+		assertEquals(2, getters.size());
+		assertEquals("getField", getters.get(0).getName());
+		assertEquals("getClass", getters.get(1).getName());
+	}
 
-    @Test
-    public void testThatDoesntReflectMethodAsGetterIfArgumentNumberIsNotZeroOrReturnTypeIsVoid() {
-        List<Method> getters = new DefaultAllReflectionHandler<NotABeanFixture>(provider, NotABeanFixture.class)
-            .getters();
-        assertEquals(1, getters.size());
-        assertEquals("getClass", getters.get(0).getName());
-    }
+	@Test
+	public void testThatDoesntReflectMethodAsGetterIfArgumentNumberIsNotZeroOrReturnTypeIsVoid() {
+		List<Method> getters = new DefaultAllReflectionHandler<NotABeanFixture>(provider, NotABeanFixture.class)
+				.getters();
+		assertEquals(1, getters.size());
+		assertEquals("getClass", getters.get(0).getName());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatPresentsAllFieldsToMatcher() {
-        List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll().fieldsMatching(
-                new Matcher<Field>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatPresentsAllFieldsToMatcher() {
+		List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll()
+				.fieldsMatching(new Matcher<Field>() {
 
-                    public boolean accepts(final Field element) {
-                        return true;
-                    }
-                });
-        assertEquals(8, list.size());
-    }
+					public boolean accepts(final Field element) {
+						return true;
+					}
+				});
+		assertEquals(8, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatMatcherIsRespectedForFields() {
-        List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll().fieldsMatching(
-                new Matcher<Field>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatMatcherIsRespectedForFields() {
+		List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll()
+				.fieldsMatching(new Matcher<Field>() {
 
-                    public boolean accepts(final Field element) {
-                        return "finalField".equals(element.getName());
-                    }
-                });
-        assertEquals(1, list.size());
-    }
+					public boolean accepts(final Field element) {
+						return "finalField".equals(element.getName());
+					}
+				});
+		assertEquals(1, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatPresentsAllMethodsToMatcher() {
-        List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll().methodsMatching(
-                new Matcher<Method>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatPresentsAllMethodsToMatcher() {
+		List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll()
+				.methodsMatching(new Matcher<Method>() {
 
-                    public boolean accepts(final Method element) {
-                        return true;
-                    }
-                });
-        assertEquals(24, list.size());
-    }
+					public boolean accepts(final Method element) {
+						return true;
+					}
+				});
+		assertEquals(24, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatMatcherIsRespectedForMethods() {
-        List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll().methodsMatching(
-                new Matcher<Method>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatMatcherIsRespectedForMethods() {
+		List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll()
+				.methodsMatching(new Matcher<Method>() {
 
-                    public boolean accepts(final Method element) {
-                        return "methodWithNoArgs".equals(element.getName());
-                    }
-                });
-        assertEquals(1, list.size());
-    }
+					public boolean accepts(final Method element) {
+						return "methodWithNoArgs".equals(element.getName());
+					}
+				});
+		assertEquals(1, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatPresentsAllMethodsToConstructor() {
-        List<Constructor<ConstructorFixture>> list = new Mirror(provider)
-            .on(ConstructorFixture.class)
-            .reflectAll()
-            .constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatPresentsAllMethodsToConstructor() {
+		List<Constructor<ConstructorFixture>> list = new Mirror(provider).on(ConstructorFixture.class).reflectAll()
+				.constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
 
-                public boolean accepts(final Constructor<ConstructorFixture> element) {
-                    return true;
-                }
-            });
-        assertEquals(6, list.size());
-    }
+					public boolean accepts(final Constructor<ConstructorFixture> element) {
+						return true;
+					}
+				});
+		assertEquals(6, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatMatcherIsRespectedForConstructors() {
-        List<Constructor<ConstructorFixture>> list = new Mirror(provider)
-            .on(ConstructorFixture.class)
-            .reflectAll()
-            .constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatMatcherIsRespectedForConstructors() {
+		List<Constructor<ConstructorFixture>> list = new Mirror(provider).on(ConstructorFixture.class).reflectAll()
+				.constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
 
-                public boolean accepts(final Constructor<ConstructorFixture> element) {
-                    return element.getParameterTypes().length == 0;
-                }
-            });
-        assertEquals(1, list.size());
-    }
+					public boolean accepts(final Constructor<ConstructorFixture> element) {
+						return element.getParameterTypes().length == 0;
+					}
+				});
+		assertEquals(1, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatPresentsAllAnnotationsToMatcher() {
-        List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll().annotationsMatching(
-                new Matcher<Annotation>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatPresentsAllAnnotationsToMatcher() {
+		List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll()
+				.annotationsMatching(new Matcher<Annotation>() {
 
-                    public boolean accepts(final Annotation element) {
-                        return true;
-                    }
-                });
-        assertEquals(2, list.size());
-    }
+					public boolean accepts(final Annotation element) {
+						return true;
+					}
+				});
+		assertEquals(2, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatMatcherIsRespectedForAnnotations() {
-        List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll().annotationsMatching(
-                new Matcher<Annotation>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatMatcherIsRespectedForAnnotations() {
+		List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll()
+				.annotationsMatching(new Matcher<Annotation>() {
 
-                    public boolean accepts(final Annotation element) {
-                        return "AnnotationFixture".equals(element.annotationType().getSimpleName());
-                    }
-                });
-        assertEquals(1, list.size());
-    }
+					public boolean accepts(final Annotation element) {
+						return "AnnotationFixture".equals(element.annotationType().getSimpleName());
+					}
+				});
+		assertEquals(1, list.size());
+	}
 
-    @SuppressWarnings("unused")
-    @Test
-    public void testThatAllReflectionHandlersReturnMirrorList() {
-        MirrorList<Constructor<ClassFixture>> constructors = new Mirror(provider)
-            .on(ClassFixture.class)
-            .reflectAll()
-            .constructors();
-        MirrorList<Field> fields = new Mirror(provider).on(FieldFixture.class).reflectAll().fields();
-        MirrorList<Method> methods = new Mirror(provider).on(MethodFixture.class).reflectAll().methods();
-        MirrorList<Annotation> annotations = new Mirror(provider)
-            .on((AnnotatedElement) ClassFixture.class)
-            .reflectAll()
-            .annotations();
-    }
+	@SuppressWarnings("unused")
+	@Test
+	public void testThatAllReflectionHandlersReturnMirrorList() {
+		MirrorList<Constructor<ClassFixture>> constructors = new Mirror(provider).on(ClassFixture.class).reflectAll()
+				.constructors();
+		MirrorList<Field> fields = new Mirror(provider).on(FieldFixture.class).reflectAll().fields();
+		MirrorList<Method> methods = new Mirror(provider).on(MethodFixture.class).reflectAll().methods();
+		MirrorList<Annotation> annotations = new Mirror(provider).on((AnnotatedElement) ClassFixture.class)
+				.reflectAll().annotations();
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatOldMatcherIsStillAccepted() {
-        new Mirror(provider).on(MethodFixture.class).reflectAll().methods().matching(
-                new net.vidageek.mirror.dsl.Matcher<Method>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatOldMatcherIsStillAccepted() {
+		new Mirror(provider).on(MethodFixture.class).reflectAll().methods()
+				.matching(new net.vidageek.mirror.dsl.Matcher<Method>() {
 
-                    public boolean accepts(final Method element) {
-                        return true;
-                    }
-                });
-    }
+					public boolean accepts(final Method element) {
+						return true;
+					}
+				});
+	}
 
 }

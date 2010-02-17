@@ -20,49 +20,49 @@ import org.junit.Test;
 @SuppressWarnings("unchecked")
 public class MethodAnnotationHandlerTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfClassIsNull() throws Exception {
-        new DefaultMethodAnnotationHandler(provider, null, "method", AnnotationFixture.class);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfClassIsNull() throws Exception {
+		new DefaultMethodAnnotationHandler(provider, null, "method", AnnotationFixture.class);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfMethodNameIsNull() throws Exception {
-        new DefaultMethodAnnotationHandler(provider, MethodFixture.class, null, AnnotationFixture.class);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfMethodNameIsNull() throws Exception {
+		new DefaultMethodAnnotationHandler(provider, MethodFixture.class, null, AnnotationFixture.class);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfMethodNameIsEmpty() throws Exception {
-        new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "  \t  \n   ", AnnotationFixture.class);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfMethodNameIsEmpty() throws Exception {
+		new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "  \t  \n   ", AnnotationFixture.class);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfAnnotationIsNull() throws Exception {
-        new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "method", null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfAnnotationIsNull() throws Exception {
+		new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "method", null);
+	}
 
-    @Test
-    public void testThatReturnAnnotationInMethodWithoutArgs() {
-        Annotation annotation = new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "methodWithNoArgs",
-                AnnotationFixture.class).withoutArgs();
+	@Test
+	public void testThatReturnAnnotationInMethodWithoutArgs() {
+		Annotation annotation = new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "methodWithNoArgs",
+				AnnotationFixture.class).withoutArgs();
 
-        assertNotNull(annotation);
-        assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
-    }
+		assertNotNull(annotation);
+		assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
+	}
 
-    @Test
-    public void testThatReturnAnnotationInMethodWithArgs() {
-        Annotation annotation = new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "methodWithOneArg",
-                AnnotationFixture.class).withArgs(String.class);
+	@Test
+	public void testThatReturnAnnotationInMethodWithArgs() {
+		Annotation annotation = new DefaultMethodAnnotationHandler(provider, MethodFixture.class, "methodWithOneArg",
+				AnnotationFixture.class).withArgs(String.class);
 
-        assertNotNull(annotation);
-        assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
-    }
+		assertNotNull(annotation);
+		assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
+	}
 
 }

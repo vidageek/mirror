@@ -24,63 +24,63 @@ import org.junit.Test;
  */
 public class ConstructorReflectorTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThrowsExceptionIfClassIsNull() {
-        new DefaultConstructorReflector<Object>(provider, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThrowsExceptionIfClassIsNull() {
+		new DefaultConstructorReflector<Object>(provider, null);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThrowsExceptionIfClassesIsNull() {
-        new DefaultConstructorReflector<ConstructorFixture>(provider, ConstructorFixture.class)
-            .withArgs((Class<?>[]) null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThrowsExceptionIfClassesIsNull() {
+		new DefaultConstructorReflector<ConstructorFixture>(provider, ConstructorFixture.class)
+				.withArgs((Class<?>[]) null);
+	}
 
-    @Test
-    public void testThatCanReflectConstructor() throws Exception {
-        Constructor<ConstructorFixture> c = new DefaultConstructorReflector<ConstructorFixture>(provider,
-                ConstructorFixture.class).withArgs(String.class);
-        assertNotNull(c);
-        assertEquals(c.newInstance("").getClass(), ConstructorFixture.class);
-    }
+	@Test
+	public void testThatCanReflectConstructor() throws Exception {
+		Constructor<ConstructorFixture> c = new DefaultConstructorReflector<ConstructorFixture>(provider,
+				ConstructorFixture.class).withArgs(String.class);
+		assertNotNull(c);
+		assertEquals(c.newInstance("").getClass(), ConstructorFixture.class);
+	}
 
-    @Test
-    public void testThatCanReflectConstructorWithPrimitiveType() throws Exception {
-        Constructor<ConstructorFixture> c = new DefaultConstructorReflector<ConstructorFixture>(provider,
-                ConstructorFixture.class).withArgs(long.class);
-        c.setAccessible(true);
-        assertNotNull(c);
-        assertEquals(c.newInstance(1L).getClass(), ConstructorFixture.class);
-    }
+	@Test
+	public void testThatCanReflectConstructorWithPrimitiveType() throws Exception {
+		Constructor<ConstructorFixture> c = new DefaultConstructorReflector<ConstructorFixture>(provider,
+				ConstructorFixture.class).withArgs(long.class);
+		c.setAccessible(true);
+		assertNotNull(c);
+		assertEquals(c.newInstance(1L).getClass(), ConstructorFixture.class);
+	}
 
-    @Test
-    public void testThatCanReflectConstructorWithWrapperType() throws Exception {
-        Constructor<ConstructorFixture> c = new DefaultConstructorReflector<ConstructorFixture>(provider,
-                ConstructorFixture.class).withArgs(Long.class);
-        c.setAccessible(true);
-        assertNotNull(c);
-        assertEquals(c.newInstance(new Long(1)).getClass(), ConstructorFixture.class);
-    }
+	@Test
+	public void testThatCanReflectConstructorWithWrapperType() throws Exception {
+		Constructor<ConstructorFixture> c = new DefaultConstructorReflector<ConstructorFixture>(provider,
+				ConstructorFixture.class).withArgs(Long.class);
+		c.setAccessible(true);
+		assertNotNull(c);
+		assertEquals(c.newInstance(new Long(1)).getClass(), ConstructorFixture.class);
+	}
 
-    @Test
-    public void testThatFindsUniqueConstructor() {
-        Constructor<UniqueConstructorFixture> constructor = new DefaultConstructorReflector<UniqueConstructorFixture>(
-                provider, UniqueConstructorFixture.class).withAnyArgs();
-        assertNotNull(constructor);
-        Constructor<UniqueConstructorFixture> constructor2 = new DefaultConstructorReflector<UniqueConstructorFixture>(
-                provider, UniqueConstructorFixture.class).withoutArgs();
-        Assert.assertEquals(constructor2, constructor);
-    }
+	@Test
+	public void testThatFindsUniqueConstructor() {
+		Constructor<UniqueConstructorFixture> constructor = new DefaultConstructorReflector<UniqueConstructorFixture>(
+				provider, UniqueConstructorFixture.class).withAnyArgs();
+		assertNotNull(constructor);
+		Constructor<UniqueConstructorFixture> constructor2 = new DefaultConstructorReflector<UniqueConstructorFixture>(
+				provider, UniqueConstructorFixture.class).withoutArgs();
+		Assert.assertEquals(constructor2, constructor);
+	}
 
-    @Test(expected = MirrorException.class)
-    public void testThatThrowsMirrorExceptionIfMoreThanOneMethodIsFound() {
-        new DefaultConstructorReflector<ConstructorFixture>(provider, ConstructorFixture.class).withAnyArgs();
-    }
+	@Test(expected = MirrorException.class)
+	public void testThatThrowsMirrorExceptionIfMoreThanOneMethodIsFound() {
+		new DefaultConstructorReflector<ConstructorFixture>(provider, ConstructorFixture.class).withAnyArgs();
+	}
 
 }

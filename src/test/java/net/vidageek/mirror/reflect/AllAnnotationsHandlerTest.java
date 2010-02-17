@@ -17,50 +17,50 @@ import org.junit.Test;
 
 public class AllAnnotationsHandlerTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfClassIsNull() {
-        new DefaultAllAnnotationsHandler(provider, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfClassIsNull() {
+		new DefaultAllAnnotationsHandler(provider, null);
+	}
 
-    @Test
-    public void testThatReflectAllAnnotationsInClass() {
-        List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, ClassFixture.class).atClass();
+	@Test
+	public void testThatReflectAllAnnotationsInClass() {
+		List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, ClassFixture.class).atClass();
 
-        assertNotNull(annotations);
-        assertEquals(2, annotations.size());
-    }
+		assertNotNull(annotations);
+		assertEquals(2, annotations.size());
+	}
 
-    @Test
-    public void testThatReflectAllAnnotationsInField() {
-        List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, FieldFixture.class).atField("field");
+	@Test
+	public void testThatReflectAllAnnotationsInField() {
+		List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, FieldFixture.class).atField("field");
 
-        assertNotNull(annotations);
-        assertEquals(2, annotations.size());
-    }
+		assertNotNull(annotations);
+		assertEquals(2, annotations.size());
+	}
 
-    @Test
-    public void testThatReflectAllAnnotationsInMethodWithoutArgs() {
-        List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, MethodFixture.class).atMethod(
-                "methodWithNoArgs").withoutArgs();
+	@Test
+	public void testThatReflectAllAnnotationsInMethodWithoutArgs() {
+		List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, MethodFixture.class)
+				.atMethod("methodWithNoArgs").withoutArgs();
 
-        assertNotNull(annotations);
-        assertEquals(2, annotations.size());
-    }
+		assertNotNull(annotations);
+		assertEquals(2, annotations.size());
+	}
 
-    @Test
-    public void testThatReflectAllAnnotationsInMethodWithArgs() {
-        List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, MethodFixture.class).atMethod(
-                "methodWithOneArg").withArgs(String.class);
+	@Test
+	public void testThatReflectAllAnnotationsInMethodWithArgs() {
+		List<Annotation> annotations = new DefaultAllAnnotationsHandler(provider, MethodFixture.class)
+				.atMethod("methodWithOneArg").withArgs(String.class);
 
-        assertNotNull(annotations);
-        assertEquals(2, annotations.size());
-    }
+		assertNotNull(annotations);
+		assertEquals(2, annotations.size());
+	}
 
 }

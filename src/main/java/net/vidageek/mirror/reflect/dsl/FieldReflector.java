@@ -16,5 +16,5 @@ public interface FieldReflector {
 	 *             if clazz is null
 	 */
 	@SuppressWarnings("unchecked")
-	public Field onClass(final Class clazz) ;
+	public Field onClass(final Class clazz);
 }

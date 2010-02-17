@@ -14,56 +14,56 @@ import net.vidageek.mirror.provider.ReflectionProvider;
  */
 public final class MethodHandlerByName implements MethodHandler {
 
-    private final Object target;
+	private final Object target;
 
-    private final String methodName;
+	private final String methodName;
 
-    private final Class<?> clazz;
+	private final Class<?> clazz;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public MethodHandlerByName(final ReflectionProvider provider, final Object target, final Class<?> clazz,
-            final String methodName) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("clazz can't be null");
-        }
+	public MethodHandlerByName(final ReflectionProvider provider, final Object target, final Class<?> clazz,
+			final String methodName) {
+		if (clazz == null) {
+			throw new IllegalArgumentException("clazz can't be null");
+		}
 
-        if ((methodName == null) || (methodName.trim().length() == 0)) {
-            throw new IllegalArgumentException("methodName can't be null");
-        }
-        this.provider = provider;
+		if ((methodName == null) || (methodName.trim().length() == 0)) {
+			throw new IllegalArgumentException("methodName can't be null");
+		}
+		this.provider = provider;
 
-        this.target = target;
-        this.clazz = clazz;
-        this.methodName = methodName;
-    }
+		this.target = target;
+		this.clazz = clazz;
+		this.methodName = methodName;
+	}
 
-    public Object withoutArgs() {
-        return withArgs(new Object[0]);
-    }
+	public Object withoutArgs() {
+		return withArgs(new Object[0]);
+	}
 
-    public Object withArgs(final Object... args) {
-        return new MethodHandlerByMethod(provider, target, clazz, getMethod(args)).withArgs(args);
-    }
+	public Object withArgs(final Object... args) {
+		return new MethodHandlerByMethod(provider, target, clazz, getMethod(args)).withArgs(args);
+	}
 
-    private Method getMethod(final Object[] args) {
-        int length = args == null ? 0 : args.length;
+	private Method getMethod(final Object[] args) {
+		int length = args == null ? 0 : args.length;
 
-        Class<?>[] classes = new Class<?>[length];
-        for (int i = 0; i < length; i++) {
-            if (args[i] == null) {
-                throw new IllegalArgumentException(
-                        "Cannot invoke a method by name if one of it's arguments is null. First reflect the method.");
-            }
-            classes[i] = args[i].getClass();
-        }
+		Class<?>[] classes = new Class<?>[length];
+		for (int i = 0; i < length; i++) {
+			if (args[i] == null) {
+				throw new IllegalArgumentException(
+						"Cannot invoke a method by name if one of it's arguments is null. First reflect the method.");
+			}
+			classes[i] = args[i].getClass();
+		}
 
-        Method method = new Mirror(provider).on(clazz).reflect().method(methodName).withArgs(classes);
-        if (method == null) {
-            throw new MirrorException("Could not find method " + methodName + " on class " + clazz.getName());
-        }
-        return method;
+		Method method = new Mirror(provider).on(clazz).reflect().method(methodName).withArgs(classes);
+		if (method == null) {
+			throw new MirrorException("Could not find method " + methodName + " on class " + clazz.getName());
+		}
+		return method;
 
-    }
+	}
 
 }

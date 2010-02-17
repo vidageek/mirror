@@ -21,43 +21,43 @@ import net.vidageek.mirror.reflect.dsl.ReflectionHandler;
  */
 public final class DefaultReflectionHandler<T> implements ReflectionHandler<T> {
 
-    private final Class<T> clazz;
+	private final Class<T> clazz;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultReflectionHandler(final ReflectionProvider provider, final Class<T> clazz) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("clazz cannot be null");
-        }
-        this.provider = provider;
-        this.clazz = clazz;
-    }
+	public DefaultReflectionHandler(final ReflectionProvider provider, final Class<T> clazz) {
+		if (clazz == null) {
+			throw new IllegalArgumentException("clazz cannot be null");
+		}
+		this.provider = provider;
+		this.clazz = clazz;
+	}
 
-    public Field field(final String fieldName) {
-        if ((fieldName == null) || (fieldName.trim().length() == 0)) {
-            throw new IllegalArgumentException("fieldName cannot be null or empty.");
-        }
-        return new DefaultFieldReflector(provider, fieldName).onClass(clazz);
-    }
+	public Field field(final String fieldName) {
+		if ((fieldName == null) || (fieldName.trim().length() == 0)) {
+			throw new IllegalArgumentException("fieldName cannot be null or empty.");
+		}
+		return new DefaultFieldReflector(provider, fieldName).onClass(clazz);
+	}
 
-    public MethodReflector method(final String methodName) {
-        if ((methodName == null) || (methodName.trim().length() == 0)) {
-            throw new IllegalArgumentException("methodName cannot be null or empty.");
-        }
-        return new DefaultMethodReflector(provider, methodName, clazz);
-    }
+	public MethodReflector method(final String methodName) {
+		if ((methodName == null) || (methodName.trim().length() == 0)) {
+			throw new IllegalArgumentException("methodName cannot be null or empty.");
+		}
+		return new DefaultMethodReflector(provider, methodName, clazz);
+	}
 
-    public ConstructorReflector<T> constructor() {
-        return new DefaultConstructorReflector<T>(provider, clazz);
-    }
+	public ConstructorReflector<T> constructor() {
+		return new DefaultConstructorReflector<T>(provider, clazz);
+	}
 
-    @SuppressWarnings("unchecked")
-    public <A> AnnotationHandler<? extends A> annotation(final Class<A> annotation) {
-        return new DefaultAnnotationHandler(provider, clazz, annotation);
-    }
+	@SuppressWarnings("unchecked")
+	public <A> AnnotationHandler<? extends A> annotation(final Class<A> annotation) {
+		return new DefaultAnnotationHandler(provider, clazz, annotation);
+	}
 
-    public ParameterizedElementHandler parentGenericType() {
-        PureJavaClassGenericTypeAccessor accessor = new PureJavaClassGenericTypeAccessor(clazz);
-        return new DefaultParameterizedElementHandler(provider, accessor);
-    }
+	public ParameterizedElementHandler parentGenericType() {
+		PureJavaClassGenericTypeAccessor accessor = new PureJavaClassGenericTypeAccessor(clazz);
+		return new DefaultParameterizedElementHandler(provider, accessor);
+	}
 }

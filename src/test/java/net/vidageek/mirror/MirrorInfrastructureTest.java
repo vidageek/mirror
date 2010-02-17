@@ -11,14 +11,14 @@ import org.junit.Test;
 
 public class MirrorInfrastructureTest {
 
-    @Test
-    public void testThatMirrorContainsAllPublicMethodsOfMirrorInfrastructure() {
-        Mirror infrastructure = new Mirror(new DefaultMirrorReflectionProvider());
+	@Test
+	public void testThatMirrorContainsAllPublicMethodsOfMirrorInfrastructure() {
+		Mirror infrastructure = new Mirror(new DefaultMirrorReflectionProvider());
 
-        List<Method> mirrorMethods = infrastructure.on(Mirror.class).reflectAll().methods();
-        List<Method> infraMethods = infrastructure.on(Mirror.class).reflectAll().methods();
+		List<Method> mirrorMethods = infrastructure.on(Mirror.class).reflectAll().methods();
+		List<Method> infraMethods = infrastructure.on(Mirror.class).reflectAll().methods();
 
-        Assert.assertEquals(mirrorMethods.size(), infraMethods.size());
+		Assert.assertEquals(mirrorMethods.size(), infraMethods.size());
 
-    }
+	}
 }

@@ -19,27 +19,27 @@ import net.vidageek.mirror.set.dsl.SetterHandler;
  */
 public final class DefaultAccessorsController implements AccessorsController {
 
-    private final Object target;
+	private final Object target;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultAccessorsController(final ReflectionProvider provider, final Object target) {
-        if (target == null) {
-            throw new IllegalArgumentException("target cannot be null");
-        }
-        this.provider = provider;
-        this.target = target;
-    }
+	public DefaultAccessorsController(final ReflectionProvider provider, final Object target) {
+		if (target == null) {
+			throw new IllegalArgumentException("target cannot be null");
+		}
+		this.provider = provider;
+		this.target = target;
+	}
 
-    public InvocationHandler<Object> invoke() {
-        return new DefaultInvocationHandler<Object>(provider, target);
-    }
+	public InvocationHandler<Object> invoke() {
+		return new DefaultInvocationHandler<Object>(provider, target);
+	}
 
-    public SetterHandler set() {
-        return new DefaultSetterHandler(provider, target);
-    }
+	public SetterHandler set() {
+		return new DefaultSetterHandler(provider, target);
+	}
 
-    public GetterHandler get() {
-        return new DefaultGetterHandler(provider, target);
-    }
+	public GetterHandler get() {
+		return new DefaultGetterHandler(provider, target);
+	}
 }

@@ -18,24 +18,24 @@ import net.vidageek.mirror.reflect.dsl.AllMemberHandler;
  */
 public final class DefaultAllMemberHandler implements AllMemberHandler {
 
-    private final AnnotatedElement member;
+	private final AnnotatedElement member;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultAllMemberHandler(final ReflectionProvider provider, final AnnotatedElement member) {
-        if (member == null) {
-            throw new IllegalArgumentException("Argument member cannot be null");
-        }
-        this.provider = provider;
-        this.member = member;
-    }
+	public DefaultAllMemberHandler(final ReflectionProvider provider, final AnnotatedElement member) {
+		if (member == null) {
+			throw new IllegalArgumentException("Argument member cannot be null");
+		}
+		this.provider = provider;
+		this.member = member;
+	}
 
-    public MirrorList<Annotation> annotations() {
-        return new BackedMirrorList<Annotation>(provider.getAnnotatedElementReflectionProvider(member).getAnnotations());
-    }
+	public MirrorList<Annotation> annotations() {
+		return new BackedMirrorList<Annotation>(provider.getAnnotatedElementReflectionProvider(member).getAnnotations());
+	}
 
-    public List<Annotation> annotationsMatching(final Matcher<Annotation> matcher) {
-        return annotations().matching(matcher);
-    }
+	public List<Annotation> annotationsMatching(final Matcher<Annotation> matcher) {
+		return annotations().matching(matcher);
+	}
 
 }

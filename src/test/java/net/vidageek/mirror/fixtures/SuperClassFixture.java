@@ -9,34 +9,34 @@ package net.vidageek.mirror.fixtures;
  */
 public class SuperClassFixture {
 
-    public String superClassString;
+	public String superClassString;
 
-    public static String staticSuperClassField;
+	public static String staticSuperClassField;
 
-    @SuppressWarnings("unused")
-    private final String superClassPrivateField;
+	@SuppressWarnings("unused")
+	private final String superClassPrivateField;
 
-    public SuperClassFixture(final String value) {
-        superClassPrivateField = value;
-    }
+	public SuperClassFixture(final String value) {
+		superClassPrivateField = value;
+	}
 
-    public int superClassMethod() {
-        return 0;
-    }
+	public int superClassMethod() {
+		return 0;
+	}
 
-    @SuppressWarnings("unused")
-    private int superClassPrivateMethod() {
-        return 1;
-    }
+	@SuppressWarnings("unused")
+	private int superClassPrivateMethod() {
+		return 1;
+	}
 
-    @SuppressWarnings("unused")
-    private void overridenMethod() {
+	@SuppressWarnings("unused")
+	private void overridenMethod() {
 
-    }
+	}
 
-    @SuppressWarnings("unused")
-    private void overridenMethodWithTwoArgs(final int i, final String string) {
+	@SuppressWarnings("unused")
+	private void overridenMethodWithTwoArgs(final int i, final String string) {
 
-    }
+	}
 
 }

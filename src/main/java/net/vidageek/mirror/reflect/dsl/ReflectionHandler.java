@@ -35,7 +35,7 @@ public interface ReflectionHandler<T> {
 	 *             if methodName is null or empty
 	 * @see DefaultMethodReflector
 	 */
-	public MethodReflector method(final String methodName) ;
+	public MethodReflector method(final String methodName);
 
 	/**
 	 * Use this method to reflect a constructor
@@ -43,7 +43,7 @@ public interface ReflectionHandler<T> {
 	 * @return An object responsible for reflecting constructors.
 	 * @see DefaultConstructorReflector
 	 */
-	public ConstructorReflector<T> constructor(); 
+	public ConstructorReflector<T> constructor();
 
 	/**
 	 * Use this method to reflect annotations.
@@ -53,10 +53,8 @@ public interface ReflectionHandler<T> {
 	 * @return An object responsible for reflecting annotations.
 	 * @see AnnotationHandler
 	 */
-	public <A> AnnotationHandler<? extends A> annotation(final Class<A> annotation) ;
+	public <A> AnnotationHandler<? extends A> annotation(final Class<A> annotation);
 
-
-	public ParameterizedElementHandler parentGenericType() ;
-	
+	public ParameterizedElementHandler parentGenericType();
 
 }

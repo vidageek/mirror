@@ -10,10 +10,10 @@ import net.vidageek.mirror.set.FieldSetterByName;
 
 /**
  * @author donizetti
- *
+ * 
  */
 public interface SetterHandler {
-	
+
 	/**
 	 * Invoke this method to set a field by its name.
 	 * 
@@ -36,6 +36,6 @@ public interface SetterHandler {
 	 *             if field is null.
 	 * @see FieldSetterByField
 	 */
-	public FieldSetter field(final Field field) ;
+	public FieldSetter field(final Field field);
 
 }

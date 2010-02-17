@@ -22,85 +22,83 @@ import org.junit.Test;
  */
 public class FieldSetterByFieldTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfClassIsNull() {
-        Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfClassIsNull() {
+		Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");
 
-        new FieldSetterByField(provider, new Object(), null, field);
-    }
+		new FieldSetterByField(provider, new Object(), null, field);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfFieldIsNull() {
-        new FieldSetterByField(provider, new Object(), FieldFixture.class, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfFieldIsNull() {
+		new FieldSetterByField(provider, new Object(), FieldFixture.class, null);
+	}
 
-    /*
-     * Test to avoid bug #57, descripted at
-     * http://bugs.vidageek.net/bug.php?op=show&bugid=57
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfFieldDeclaringClassIsNotAssignableFromClass() {
-        Field field = new Mirror(provider).on(ChildFixture.class).reflect().field("integer");
+	/*
+	 * Test to avoid bug #57, descripted at
+	 * http://bugs.vidageek.net/bug.php?op=show&bugid=57
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfFieldDeclaringClassIsNotAssignableFromClass() {
+		Field field = new Mirror(provider).on(ChildFixture.class).reflect().field("integer");
 
-        new FieldSetterByField(provider, new Object(), SuperClassFixture.class, field);
-    }
+		new FieldSetterByField(provider, new Object(), SuperClassFixture.class, field);
+	}
 
-    @Test
-    public void testThatCanSetFieldIfFieldIsFinal() {
-        final FieldFixture fixture = new FieldFixture(0);
-        new FieldSetterByField(provider, fixture, FieldFixture.class, new Mirror(provider)
-            .on(FieldFixture.class)
-            .reflect()
-            .field("finalField")).withValue(2);
-        Assert.assertEquals(2, new Mirror(new DefaultMirrorReflectionProvider()).on(fixture).get().field("finalField"));
-    }
+	@Test
+	public void testThatCanSetFieldIfFieldIsFinal() {
+		final FieldFixture fixture = new FieldFixture(0);
+		new FieldSetterByField(provider, fixture, FieldFixture.class, new Mirror(provider).on(FieldFixture.class)
+				.reflect().field("finalField")).withValue(2);
+		Assert.assertEquals(2, new Mirror(new DefaultMirrorReflectionProvider()).on(fixture).get().field("finalField"));
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsIllegalArgumentExceptionIfValueTypeDoesntMatchFieldType() {
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsIllegalArgumentExceptionIfValueTypeDoesntMatchFieldType() {
 
-        Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");
+		Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");
 
-        new FieldSetterByField(provider, new FieldFixture(0), FieldFixture.class, field).withValue("string");
+		new FieldSetterByField(provider, new FieldFixture(0), FieldFixture.class, field).withValue("string");
 
-    }
+	}
 
-    @Test
-    public void testThatDoesntThrowsExceptionIfTypeIsAssignableFromValue() {
+	@Test
+	public void testThatDoesntThrowsExceptionIfTypeIsAssignableFromValue() {
 
-        Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("superType");
+		Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("superType");
 
-        new FieldSetterByField(provider, new FieldFixture(0), FieldFixture.class, field).withValue("string");
+		new FieldSetterByField(provider, new FieldFixture(0), FieldFixture.class, field).withValue("string");
 
-    }
+	}
 
-    @Test
-    public void testThatCanSetNullValueOnReferenceField() {
-        Mirror mirror = new Mirror(provider);
-        Field field = mirror.on(FieldFixture.class).reflect().field("referenceField");
+	@Test
+	public void testThatCanSetNullValueOnReferenceField() {
+		Mirror mirror = new Mirror(provider);
+		Field field = mirror.on(FieldFixture.class).reflect().field("referenceField");
 
-        FieldFixture target = new FieldFixture(0);
-        target.referenceField = new Object();
+		FieldFixture target = new FieldFixture(0);
+		target.referenceField = new Object();
 
-        new FieldSetterByField(provider, target, FieldFixture.class, field).withValue(null);
+		new FieldSetterByField(provider, target, FieldFixture.class, field).withValue(null);
 
-        Assert.assertEquals(null, target.referenceField);
+		Assert.assertEquals(null, target.referenceField);
 
-    }
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatCantSetNullValueOnPrimitiveField() {
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatCantSetNullValueOnPrimitiveField() {
 
-        Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");
+		Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");
 
-        new FieldSetterByField(provider, new FieldFixture(0), FieldFixture.class, field).withValue(null);
+		new FieldSetterByField(provider, new FieldFixture(0), FieldFixture.class, field).withValue(null);
 
-    }
+	}
 
 }

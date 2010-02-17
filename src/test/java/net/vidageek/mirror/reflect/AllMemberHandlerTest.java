@@ -24,77 +24,70 @@ import org.junit.Test;
 
 public class AllMemberHandlerTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfMemberIsNull() {
-        new DefaultAllMemberHandler(provider, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfMemberIsNull() {
+		new DefaultAllMemberHandler(provider, null);
+	}
 
-    @Test
-    public void testThatReturnAllAnnotationsFromConstructor() {
-        final Constructor<ConstructorFixture> constructor = new Mirror()
-            .on(ConstructorFixture.class)
-            .reflect()
-            .constructor()
-            .withoutArgs();
-        assertNotNull(constructor);
+	@Test
+	public void testThatReturnAllAnnotationsFromConstructor() {
+		final Constructor<ConstructorFixture> constructor = new Mirror().on(ConstructorFixture.class).reflect()
+				.constructor().withoutArgs();
+		assertNotNull(constructor);
 
-        final List<Annotation> annontations = new DefaultAllMemberHandler(provider, constructor).annotations();
-        assertEquals(2, annontations.size());
-    }
+		final List<Annotation> annontations = new DefaultAllMemberHandler(provider, constructor).annotations();
+		assertEquals(2, annontations.size());
+	}
 
-    @Test
-    public void testThatReturnAllAnnotationsFromMethod() {
-        final Method method = new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
-        assertNotNull(method);
+	@Test
+	public void testThatReturnAllAnnotationsFromMethod() {
+		final Method method = new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
+		assertNotNull(method);
 
-        final List<Annotation> annontations = new DefaultAllMemberHandler(provider, method).annotations();
-        assertEquals(2, annontations.size());
-    }
+		final List<Annotation> annontations = new DefaultAllMemberHandler(provider, method).annotations();
+		assertEquals(2, annontations.size());
+	}
 
-    @Test
-    public void testThatReturnAllAnnotationsFromField() {
-        final Field field = new Mirror().on(FieldFixture.class).reflect().field("field");
-        assertNotNull(field);
+	@Test
+	public void testThatReturnAllAnnotationsFromField() {
+		final Field field = new Mirror().on(FieldFixture.class).reflect().field("field");
+		assertNotNull(field);
 
-        final List<Annotation> annontations = new DefaultAllMemberHandler(provider, field).annotations();
-        assertEquals(2, annontations.size());
-    }
+		final List<Annotation> annontations = new DefaultAllMemberHandler(provider, field).annotations();
+		assertEquals(2, annontations.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatPresentsAllAnnotationsToMatcher() {
-        List<Annotation> list = new Mirror(provider)
-            .on((AnnotatedElement) ClassFixture.class)
-            .reflectAll()
-            .annotationsMatching(new Matcher<Annotation>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatPresentsAllAnnotationsToMatcher() {
+		List<Annotation> list = new Mirror(provider).on((AnnotatedElement) ClassFixture.class).reflectAll()
+				.annotationsMatching(new Matcher<Annotation>() {
 
-                public boolean accepts(final Annotation element) {
-                    return true;
-                }
-            });
-        assertEquals(2, list.size());
-    }
+					public boolean accepts(final Annotation element) {
+						return true;
+					}
+				});
+		assertEquals(2, list.size());
+	}
 
-    @SuppressWarnings("deprecation")
-    @Test
-    public void testThatMatcherIsRespectedForAnnotations() {
-        List<Annotation> list = new Mirror(provider)
-            .on((AnnotatedElement) ClassFixture.class)
-            .reflectAll()
-            .annotationsMatching(new Matcher<Annotation>() {
+	@SuppressWarnings("deprecation")
+	@Test
+	public void testThatMatcherIsRespectedForAnnotations() {
+		List<Annotation> list = new Mirror(provider).on((AnnotatedElement) ClassFixture.class).reflectAll()
+				.annotationsMatching(new Matcher<Annotation>() {
 
-                public boolean accepts(final Annotation element) {
-                    return "AnnotationFixture".equals(element.annotationType().getSimpleName());
-                }
-            });
-        assertEquals(1, list.size());
-    }
+					public boolean accepts(final Annotation element) {
+						return "AnnotationFixture".equals(element.annotationType().getSimpleName());
+					}
+				});
+		assertEquals(1, list.size());
+	}
 
 }

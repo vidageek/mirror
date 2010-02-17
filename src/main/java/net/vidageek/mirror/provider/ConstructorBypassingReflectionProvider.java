@@ -8,11 +8,11 @@ import net.vidageek.mirror.exception.ReflectionProviderException;
  */
 public interface ConstructorBypassingReflectionProvider<T> {
 
-    /**
-     * This method is used to create an object without using a constructor.
-     * 
-     * @throws ReflectionProviderException
-     */
-    T bypassConstructor();
+	/**
+	 * This method is used to create an object without using a constructor.
+	 * 
+	 * @throws ReflectionProviderException
+	 */
+	T bypassConstructor();
 
 }

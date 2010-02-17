@@ -9,20 +9,20 @@ import net.vidageek.mirror.exception.ReflectionProviderException;
  */
 public interface FieldReflectionProvider extends ReflectionElementReflectionProvider {
 
-    /**
-     * This method is used to set value on wrapped field.
-     * 
-     * @param value
-     *            value to be set on wrapped field.
-     * @throws ReflectionProviderException
-     */
-    void setValue(Object value);
+	/**
+	 * This method is used to set value on wrapped field.
+	 * 
+	 * @param value
+	 *            value to be set on wrapped field.
+	 * @throws ReflectionProviderException
+	 */
+	void setValue(Object value);
 
-    /**
-     * This method is used to get wrapped field's value.
-     * 
-     * @return the value of the field represented by wrapped field.
-     * @throws ReflectionProviderException
-     */
-    Object getValue();
+	/**
+	 * This method is used to get wrapped field's value.
+	 * 
+	 * @return the value of the field represented by wrapped field.
+	 * @throws ReflectionProviderException
+	 */
+	Object getValue();
 }

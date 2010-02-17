@@ -16,32 +16,32 @@ import net.vidageek.mirror.reflect.dsl.AllMethodAnnotationsHandler;
  */
 public final class DefaultAllAnnotationsHandler implements AllAnnotationsHandler {
 
-    private final Class<?> clazz;
+	private final Class<?> clazz;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultAllAnnotationsHandler(final ReflectionProvider provider, final Class<?> clazz) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("Argument clazz cannot be null.");
-        }
-        this.provider = provider;
-        this.clazz = clazz;
-    }
+	public DefaultAllAnnotationsHandler(final ReflectionProvider provider, final Class<?> clazz) {
+		if (clazz == null) {
+			throw new IllegalArgumentException("Argument clazz cannot be null.");
+		}
+		this.provider = provider;
+		this.clazz = clazz;
+	}
 
-    public List<Annotation> atClass() {
-        return provider.getAnnotatedElementReflectionProvider(clazz).getAnnotations();
-    }
+	public List<Annotation> atClass() {
+		return provider.getAnnotatedElementReflectionProvider(clazz).getAnnotations();
+	}
 
-    public List<Annotation> atField(final String fieldName) {
-        Field field = new Mirror(provider).on(clazz).reflect().field(fieldName);
-        if (field == null) {
-            throw new IllegalArgumentException("could not find field " + fieldName + " at class " + clazz);
-        }
-        return provider.getAnnotatedElementReflectionProvider(field).getAnnotations();
-    }
+	public List<Annotation> atField(final String fieldName) {
+		Field field = new Mirror(provider).on(clazz).reflect().field(fieldName);
+		if (field == null) {
+			throw new IllegalArgumentException("could not find field " + fieldName + " at class " + clazz);
+		}
+		return provider.getAnnotatedElementReflectionProvider(field).getAnnotations();
+	}
 
-    public AllMethodAnnotationsHandler atMethod(final String methodName) {
-        return new DefaultAllMethodAnnotationsHandler(provider, clazz, methodName);
-    }
+	public AllMethodAnnotationsHandler atMethod(final String methodName) {
+		return new DefaultAllMethodAnnotationsHandler(provider, clazz, methodName);
+	}
 
 }

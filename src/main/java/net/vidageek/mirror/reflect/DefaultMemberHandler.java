@@ -14,20 +14,20 @@ import net.vidageek.mirror.reflect.dsl.MemberHandler;
  */
 public final class DefaultMemberHandler implements MemberHandler {
 
-    private final AnnotatedElement member;
+	private final AnnotatedElement member;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultMemberHandler(final ReflectionProvider provider, final AnnotatedElement member) {
-        if (member == null) {
-            throw new IllegalArgumentException("Argument member cannot be null");
-        }
-        this.provider = provider;
-        this.member = member;
-    }
+	public DefaultMemberHandler(final ReflectionProvider provider, final AnnotatedElement member) {
+		if (member == null) {
+			throw new IllegalArgumentException("Argument member cannot be null");
+		}
+		this.provider = provider;
+		this.member = member;
+	}
 
-    public <T extends Annotation> T annotation(final Class<T> annotation) {
-        return provider.getAnnotatedElementReflectionProvider(member).getAnnotation(annotation);
-    }
+	public <T extends Annotation> T annotation(final Class<T> annotation) {
+		return provider.getAnnotatedElementReflectionProvider(member).getAnnotation(annotation);
+	}
 
 }

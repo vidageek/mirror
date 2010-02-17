@@ -2,8 +2,8 @@ package net.vidageek.mirror.fixtures;
 
 public interface InterfaceFixture {
 
-    String interfaceField = "interfaceField";
+	String interfaceField = "interfaceField";
 
-    void interfaceMethod(String arg);
+	void interfaceMethod(String arg);
 
 }

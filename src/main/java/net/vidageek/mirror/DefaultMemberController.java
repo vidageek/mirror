@@ -16,23 +16,23 @@ import net.vidageek.mirror.reflect.dsl.MemberHandler;
  */
 public final class DefaultMemberController implements MemberController {
 
-    private final AnnotatedElement member;
+	private final AnnotatedElement member;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultMemberController(final ReflectionProvider provider, final AnnotatedElement member) {
-        if (member == null) {
-            throw new IllegalArgumentException("Argument member cannot be null");
-        }
-        this.provider = provider;
-        this.member = member;
-    }
+	public DefaultMemberController(final ReflectionProvider provider, final AnnotatedElement member) {
+		if (member == null) {
+			throw new IllegalArgumentException("Argument member cannot be null");
+		}
+		this.provider = provider;
+		this.member = member;
+	}
 
-    public AllMemberHandler reflectAll() {
-        return new DefaultAllMemberHandler(provider, member);
-    }
+	public AllMemberHandler reflectAll() {
+		return new DefaultAllMemberHandler(provider, member);
+	}
 
-    public MemberHandler reflect() {
-        return new DefaultMemberHandler(provider, member);
-    }
+	public MemberHandler reflect() {
+		return new DefaultMemberHandler(provider, member);
+	}
 }

@@ -19,22 +19,22 @@ import org.junit.Test;
  */
 public class MirrorProviderBuilderTest {
 
-    @Test
-    public void testThatInstantiatesPureJavaReflectionProviderIfPropertiesNotFound() {
-        ReflectionProvider provider = new MirrorProviderBuilder(null).createProvider();
+	@Test
+	public void testThatInstantiatesPureJavaReflectionProviderIfPropertiesNotFound() {
+		ReflectionProvider provider = new MirrorProviderBuilder(null).createProvider();
 
-        Assert.assertEquals(DefaultMirrorReflectionProvider.class, provider.getClass());
-    }
+		Assert.assertEquals(DefaultMirrorReflectionProvider.class, provider.getClass());
+	}
 
-    @Test
-    public void testThatInstantiatesProviderAtProperties() {
-        ReflectionProvider provider = new MirrorProviderBuilder(
-                asStream("provider.class = net.vidageek.mirror.fake.FakeProvider")).createProvider();
+	@Test
+	public void testThatInstantiatesProviderAtProperties() {
+		ReflectionProvider provider = new MirrorProviderBuilder(
+				asStream("provider.class = net.vidageek.mirror.fake.FakeProvider")).createProvider();
 
-        Assert.assertEquals(FakeProvider.class, provider.getClass());
-    }
+		Assert.assertEquals(FakeProvider.class, provider.getClass());
+	}
 
-    private InputStream asStream(final String string) {
-        return new ByteArrayInputStream(string.getBytes());
-    }
+	private InputStream asStream(final String string) {
+		return new ByteArrayInputStream(string.getBytes());
+	}
 }

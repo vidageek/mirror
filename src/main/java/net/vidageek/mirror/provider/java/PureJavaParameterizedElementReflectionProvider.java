@@ -12,13 +12,11 @@ import net.vidageek.mirror.provider.ParameterizedElementReflectionProvider;
 /**
  * @author dnfeitosa
  */
-public class PureJavaParameterizedElementReflectionProvider implements
-		ParameterizedElementReflectionProvider {
+public class PureJavaParameterizedElementReflectionProvider implements ParameterizedElementReflectionProvider {
 
 	private final GenericTypeAccessor accessor;
 
-	public PureJavaParameterizedElementReflectionProvider(
-			GenericTypeAccessor accessor) {
+	public PureJavaParameterizedElementReflectionProvider(GenericTypeAccessor accessor) {
 		this.accessor = accessor;
 	}
 
@@ -27,15 +25,13 @@ public class PureJavaParameterizedElementReflectionProvider implements
 		try {
 			genericType = (ParameterizedType) accessor.getGenericTypes();
 		} catch (ClassCastException e) {
-			throw new MirrorException(
-					"Element is not parameterized with a generic type.", e);
+			throw new MirrorException("Element is not parameterized with a generic type.", e);
 		}
 		Type[] typeArguments = genericType.getActualTypeArguments();
 		try {
 			return (Class<?>) typeArguments[index];
 		} catch (ArrayIndexOutOfBoundsException e) {
-			throw new MirrorException(format(
-					"No type declared at position %d.", index));
+			throw new MirrorException(format("No type declared at position %d.", index));
 		}
 	}
 }

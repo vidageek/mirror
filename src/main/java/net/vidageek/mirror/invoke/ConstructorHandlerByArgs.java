@@ -17,51 +17,51 @@ import net.vidageek.mirror.provider.ReflectionProvider;
  */
 public final class ConstructorHandlerByArgs<T> implements ConstructorHandler<T> {
 
-    private final Class<T> clazz;
+	private final Class<T> clazz;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public ConstructorHandlerByArgs(final ReflectionProvider provider, final Class<T> clazz) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("Argument class cannot be null");
-        }
-        this.provider = provider;
-        this.clazz = clazz;
-    }
+	public ConstructorHandlerByArgs(final ReflectionProvider provider, final Class<T> clazz) {
+		if (clazz == null) {
+			throw new IllegalArgumentException("Argument class cannot be null");
+		}
+		this.provider = provider;
+		this.clazz = clazz;
+	}
 
-    public T withoutArgs() {
-        return this.withArgs(new Object[0]);
-    }
+	public T withoutArgs() {
+		return this.withArgs(new Object[0]);
+	}
 
-    public T withArgs(final Object... args) {
-        return new ConstructorHandlerByConstructor<T>(provider, clazz, getConstructor(args)).withArgs(args);
-    }
+	public T withArgs(final Object... args) {
+		return new ConstructorHandlerByConstructor<T>(provider, clazz, getConstructor(args)).withArgs(args);
+	}
 
-    public T bypasser() {
-        ConstructorBypassingReflectionProvider<T> bypassingProvider = provider
-            .getConstructorBypassingReflectionProvider(clazz);
-        return bypassingProvider.bypassConstructor();
-    }
+	public T bypasser() {
+		ConstructorBypassingReflectionProvider<T> bypassingProvider = provider
+				.getConstructorBypassingReflectionProvider(clazz);
+		return bypassingProvider.bypassConstructor();
+	}
 
-    private Constructor<T> getConstructor(final Object... args) {
-        int length = args == null ? 0 : args.length;
+	private Constructor<T> getConstructor(final Object... args) {
+		int length = args == null ? 0 : args.length;
 
-        Class<?>[] classes = new Class<?>[length];
-        for (int i = 0; i < length; i++) {
-            if (args[i] == null) {
-                throw new IllegalArgumentException(
-                        "Cannot invoke a constructor by args if one of it's arguments is null. First reflect the constructor.");
-            }
-            classes[i] = args[i].getClass();
-        }
+		Class<?>[] classes = new Class<?>[length];
+		for (int i = 0; i < length; i++) {
+			if (args[i] == null) {
+				throw new IllegalArgumentException(
+						"Cannot invoke a constructor by args if one of it's arguments is null. First reflect the constructor.");
+			}
+			classes[i] = args[i].getClass();
+		}
 
-        Constructor<T> con = new Mirror(provider).on(clazz).reflect().constructor().withArgs(classes);
-        if (con == null) {
-            throw new MirrorException("Could not find constructor with args " + Arrays.asList(classes) + " on class "
-                    + this.clazz.getName());
-        }
+		Constructor<T> con = new Mirror(provider).on(clazz).reflect().constructor().withArgs(classes);
+		if (con == null) {
+			throw new MirrorException("Could not find constructor with args " + Arrays.asList(classes) + " on class "
+					+ this.clazz.getName());
+		}
 
-        return con;
-    }
+		return con;
+	}
 
 }

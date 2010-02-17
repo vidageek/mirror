@@ -6,6 +6,6 @@ import java.lang.annotation.RetentionPolicy;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface AnnotationFixture {
 
-    String value() default "foo";
+	String value() default "foo";
 
 }

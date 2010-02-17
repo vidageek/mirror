@@ -21,47 +21,39 @@ import org.junit.Test;
  */
 public class ConstructorHandlerByConstructorTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfClassIsNull() {
-        Constructor<ConstructorFixture> con = new Mirror(provider)
-            .on(ConstructorFixture.class)
-            .reflect()
-            .constructor()
-            .withoutArgs();
-        new ConstructorHandlerByConstructor<ConstructorFixture>(provider, null, con);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfClassIsNull() {
+		Constructor<ConstructorFixture> con = new Mirror(provider).on(ConstructorFixture.class).reflect().constructor()
+				.withoutArgs();
+		new ConstructorHandlerByConstructor<ConstructorFixture>(provider, null, con);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfConstructorIsNull() {
-        new ConstructorHandlerByConstructor<ConstructorFixture>(provider, ConstructorFixture.class, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfConstructorIsNull() {
+		new ConstructorHandlerByConstructor<ConstructorFixture>(provider, ConstructorFixture.class, null);
+	}
 
-    @SuppressWarnings("unchecked")
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfConstrucorIsNotFromClass() {
-        Constructor<ConstructorFixture> con = new Mirror(provider)
-            .on(ConstructorFixture.class)
-            .reflect()
-            .constructor()
-            .withoutArgs();
-        new ConstructorHandlerByConstructor(provider, Object.class, con);
-    }
+	@SuppressWarnings("unchecked")
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfConstrucorIsNotFromClass() {
+		Constructor<ConstructorFixture> con = new Mirror(provider).on(ConstructorFixture.class).reflect().constructor()
+				.withoutArgs();
+		new ConstructorHandlerByConstructor(provider, Object.class, con);
+	}
 
-    @Test
-    public void testThatInstantiatesWithoutUsingConstructor() {
-        ConstructorThatThrowsException instance = new Mirror()
-            .on(ConstructorThatThrowsException.class)
-            .invoke()
-            .constructor(
-                    new Mirror(provider).on(ConstructorThatThrowsException.class).reflect().constructor().withoutArgs())
-            .bypasser();
-        Assert.assertNotNull(instance);
-    }
+	@Test
+	public void testThatInstantiatesWithoutUsingConstructor() {
+		ConstructorThatThrowsException instance = new Mirror().on(ConstructorThatThrowsException.class).invoke()
+				.constructor(
+								new Mirror(provider).on(ConstructorThatThrowsException.class).reflect().constructor()
+										.withoutArgs()).bypasser();
+		Assert.assertNotNull(instance);
+	}
 }

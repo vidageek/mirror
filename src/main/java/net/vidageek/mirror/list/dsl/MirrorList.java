@@ -11,7 +11,7 @@ import java.util.List;
  */
 public interface MirrorList<T> extends List<T> {
 
-    MirrorList<T> matching(final Matcher<T> matcher);
+	MirrorList<T> matching(final Matcher<T> matcher);
 
-    <E> MirrorList<E> mappingTo(Mapper<T, E> mapper);
+	<E> MirrorList<E> mappingTo(Mapper<T, E> mapper);
 }

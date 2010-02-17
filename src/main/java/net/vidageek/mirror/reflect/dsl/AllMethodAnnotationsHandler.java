@@ -12,7 +12,7 @@ public interface AllMethodAnnotationsHandler {
 	 * 
 	 * @see AllMethodAnnotationsHandler#withArgs(Class...)
 	 */
-	public List<Annotation> withoutArgs() ;
+	public List<Annotation> withoutArgs();
 
 	/**
 	 * Use this method to reflect a list of annotations on the method that
@@ -23,6 +23,6 @@ public interface AllMethodAnnotationsHandler {
 	 * @return The list of annotation or a empty list if none was found.
 	 * @see AnnotatedElementReflectionProvider#getAnnotations()
 	 */
-	public List<Annotation> withArgs(final Class<?>... classes) ;
+	public List<Annotation> withArgs(final Class<?>... classes);
 
 }

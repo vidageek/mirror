@@ -21,76 +21,77 @@ import net.vidageek.mirror.provider.ReflectionProvider;
  */
 public final class DefaultInvocationHandler<T> implements InvocationHandler<T> {
 
-    private final Object target;
+	private final Object target;
 
-    private final Class<?> clazz;
+	private final Class<?> clazz;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultInvocationHandler(final ReflectionProvider provider, final Object target) {
-        if (target == null) {
-            throw new IllegalArgumentException("target can't be null");
-        }
-        this.provider = provider;
-        this.target = target;
-        clazz = target.getClass();
-    }
-
-    public DefaultInvocationHandler(final ReflectionProvider provider, final Class<T> target) {
-        if (target == null) {
-            throw new IllegalArgumentException("target can't be null");
-        }
-        this.provider = provider;
-        clazz = target;
-        this.target = null;
-    }
-
-    public MethodHandler method(final String methodName) {
-        if (methodName == null) {
-            throw new IllegalArgumentException("methodName can't be null");
-        }
-        return new MethodHandlerByName(provider, target, clazz, methodName);
-    }
-
-    @SuppressWarnings("unchecked")
-    public ConstructorHandler<T> constructor() {
-        if (this.target != null) {
-            throw new IllegalStateException(
-                    "must use constructor InvocationHandler(Class<T>) instead of InvocationHandler(Object).");
-        }
-        return new ConstructorHandlerByArgs<T>(provider, (Class<T>) clazz);
-    }
-
-    public MethodHandler method(final Method method) {
-        return new MethodHandlerByMethod(provider, target, clazz, method);
-    }
-
-    @SuppressWarnings("unchecked")
-    public <C> ConstructorHandler<C> constructor(final Constructor<C> con) {
-        return new ConstructorHandlerByConstructor(provider, clazz, con);
-    }
-
-    public Object getterFor(final String fieldName) {
-    	Method method = null;
-    	for (String string : new Bean().getter(fieldName)) {
-    		 method = new Mirror(provider).on(target.getClass()).reflect().method(string).withoutArgs();
-    		 if (method != null) break;
+	public DefaultInvocationHandler(final ReflectionProvider provider, final Object target) {
+		if (target == null) {
+			throw new IllegalArgumentException("target can't be null");
 		}
-    	if(method == null) {
-    		throw new MirrorException("Could not find getter for field " + fieldName);
-    	}
-        return new Mirror(provider).on(target).invoke().method(method).withoutArgs();
-    }
+		this.provider = provider;
+		this.target = target;
+		clazz = target.getClass();
+	}
 
-    public Object getterFor(final Field field) {
-        return getterFor(field.getName());
-    }
+	public DefaultInvocationHandler(final ReflectionProvider provider, final Class<T> target) {
+		if (target == null) {
+			throw new IllegalArgumentException("target can't be null");
+		}
+		this.provider = provider;
+		clazz = target;
+		this.target = null;
+	}
 
-    public SetterMethodHandler setterFor(final String fieldName) {
-        return new DefaultSetterMethodHandler(provider, target, fieldName);
-    }
+	public MethodHandler method(final String methodName) {
+		if (methodName == null) {
+			throw new IllegalArgumentException("methodName can't be null");
+		}
+		return new MethodHandlerByName(provider, target, clazz, methodName);
+	}
 
-    public SetterMethodHandler setterFor(final Field field) {
-        return setterFor(field.getName());
-    }
+	@SuppressWarnings("unchecked")
+	public ConstructorHandler<T> constructor() {
+		if (this.target != null) {
+			throw new IllegalStateException(
+					"must use constructor InvocationHandler(Class<T>) instead of InvocationHandler(Object).");
+		}
+		return new ConstructorHandlerByArgs<T>(provider, (Class<T>) clazz);
+	}
+
+	public MethodHandler method(final Method method) {
+		return new MethodHandlerByMethod(provider, target, clazz, method);
+	}
+
+	@SuppressWarnings("unchecked")
+	public <C> ConstructorHandler<C> constructor(final Constructor<C> con) {
+		return new ConstructorHandlerByConstructor(provider, clazz, con);
+	}
+
+	public Object getterFor(final String fieldName) {
+		Method method = null;
+		for (String string : new Bean().getter(fieldName)) {
+			method = new Mirror(provider).on(target.getClass()).reflect().method(string).withoutArgs();
+			if (method != null)
+				break;
+		}
+		if (method == null) {
+			throw new MirrorException("Could not find getter for field " + fieldName);
+		}
+		return new Mirror(provider).on(target).invoke().method(method).withoutArgs();
+	}
+
+	public Object getterFor(final Field field) {
+		return getterFor(field.getName());
+	}
+
+	public SetterMethodHandler setterFor(final String fieldName) {
+		return new DefaultSetterMethodHandler(provider, target, fieldName);
+	}
+
+	public SetterMethodHandler setterFor(final Field field) {
+		return setterFor(field.getName());
+	}
 }

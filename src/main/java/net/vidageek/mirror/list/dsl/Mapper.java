@@ -6,6 +6,6 @@ package net.vidageek.mirror.list.dsl;
  */
 public interface Mapper<F, T> {
 
-    public T map(final F element);
+	public T map(final F element);
 
 }

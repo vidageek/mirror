@@ -24,61 +24,59 @@ import org.junit.Test;
  */
 public class FieldReflectorTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfFieldNameIsNull() {
-        new DefaultFieldReflector(provider, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfFieldNameIsNull() {
+		new DefaultFieldReflector(provider, null);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfFieldNameBlank() {
-        new DefaultFieldReflector(provider, "   \n   \t   ");
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfFieldNameBlank() {
+		new DefaultFieldReflector(provider, "   \n   \t   ");
+	}
 
-    @Test
-    public void testThatCanReflectField() {
-        Field field = new Mirror().on(ChildFixture.class).reflect().field("integer");
-        assertNotNull(field);
-        assertEquals(field.getType(), Integer.class);
-    }
+	@Test
+	public void testThatCanReflectField() {
+		Field field = new Mirror().on(ChildFixture.class).reflect().field("integer");
+		assertNotNull(field);
+		assertEquals(field.getType(), Integer.class);
+	}
 
-    @Test
-    public void testThatCanReflectSuperClassField() {
-        Field field = new Mirror().on(ChildFixture.class).reflect().field("superClassString");
-        assertNotNull(field);
-        assertEquals(field.getType(), String.class);
-    }
+	@Test
+	public void testThatCanReflectSuperClassField() {
+		Field field = new Mirror().on(ChildFixture.class).reflect().field("superClassString");
+		assertNotNull(field);
+		assertEquals(field.getType(), String.class);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfTargetIsNull() {
-        new Mirror().on((Class<?>) null).reflect().field("anyField");
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfTargetIsNull() {
+		new Mirror().on((Class<?>) null).reflect().field("anyField");
+	}
 
-    @Test
-    public void testThatCanReflectInterfaceFields() {
-        Assert.assertNotNull(new DefaultFieldReflector(new DefaultMirrorReflectionProvider(), "interfaceField")
-            .onClass(InterfaceFixture.class));
-    }
+	@Test
+	public void testThatCanReflectInterfaceFields() {
+		Assert.assertNotNull(new DefaultFieldReflector(new DefaultMirrorReflectionProvider(), "interfaceField")
+				.onClass(InterfaceFixture.class));
+	}
 
-    @Test
-    public void testThatFieldLookupIsDoneOnInterfaces() {
-        Assert.assertEquals("interfaceField", new Mirror(new DefaultMirrorReflectionProvider())
-            .on(new ChildFixture())
-            .get()
-            .field("interfaceField"));
-    }
+	@Test
+	public void testThatFieldLookupIsDoneOnInterfaces() {
+		Assert.assertEquals("interfaceField", new Mirror(new DefaultMirrorReflectionProvider()).on(new ChildFixture())
+				.get().field("interfaceField"));
+	}
 
-    @Test
-    public void testThatFieldLookupIsDoneOnInterfacesUsingInterfaceFieldRepresentation() {
-        Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
-        Field field = mirror.on(InterfaceFixture.class).reflect().field("interfaceField");
+	@Test
+	public void testThatFieldLookupIsDoneOnInterfacesUsingInterfaceFieldRepresentation() {
+		Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
+		Field field = mirror.on(InterfaceFixture.class).reflect().field("interfaceField");
 
-        Assert.assertEquals("interfaceField", mirror.on(new ChildFixture()).get().field(field));
-    }
+		Assert.assertEquals("interfaceField", mirror.on(new ChildFixture()).get().field(field));
+	}
 }

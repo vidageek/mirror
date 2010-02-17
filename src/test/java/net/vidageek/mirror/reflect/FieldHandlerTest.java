@@ -19,25 +19,25 @@ import org.junit.Test;
  */
 public class FieldHandlerTest {
 
-    private DefaultMirrorReflectionProvider provider;
-    private Field annotatedField;
+	private DefaultMirrorReflectionProvider provider;
+	private Field annotatedField;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-        annotatedField = new Mirror().on(FieldFixture.class).reflect().field("field");
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+		annotatedField = new Mirror().on(FieldFixture.class).reflect().field("field");
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfFieldIsNull() {
-        new DefaultFieldHandler(provider, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfFieldIsNull() {
+		new DefaultFieldHandler(provider, null);
+	}
 
-    @Test
-    public void testThatAnnotationsReflectorIsProperlyDispatched() {
-        Annotation annotation = new DefaultFieldHandler(provider, annotatedField).annotation(AnnotationFixture.class);
+	@Test
+	public void testThatAnnotationsReflectorIsProperlyDispatched() {
+		Annotation annotation = new DefaultFieldHandler(provider, annotatedField).annotation(AnnotationFixture.class);
 
-        Assert.assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
-    }
+		Assert.assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
+	}
 
 }

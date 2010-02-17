@@ -10,19 +10,19 @@ import org.junit.Test;
 
 final public class DefaultSetterMethodHandlerTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test
-    public void testThatInvokesSetter() {
-        BeanFixture target = new BeanFixture();
-        new DefaultSetterMethodHandler(provider, target, "field").withValue("bar");
+	@Test
+	public void testThatInvokesSetter() {
+		BeanFixture target = new BeanFixture();
+		new DefaultSetterMethodHandler(provider, target, "field").withValue("bar");
 
-        Assert.assertEquals("bar", target.getField());
+		Assert.assertEquals("bar", target.getField());
 
-    }
+	}
 }

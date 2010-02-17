@@ -9,8 +9,8 @@ package net.vidageek.mirror.fixtures;
  */
 public class SuperclassHidingFixture {
 
-    public String field;
+	public String field;
 
-    public void method() {
-    }
+	public void method() {
+	}
 }

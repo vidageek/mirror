@@ -12,7 +12,7 @@ public interface AllAnnotationsHandler {
 	 * @return A list containing all annotations found at clazz.
 	 * @see AnnotatedElementReflectionProvider#getAnnotations()
 	 */
-	public List<Annotation> atClass() ;
+	public List<Annotation> atClass();
 
 	/**
 	 * Use this method to reflect all annotations at field fieldName.
@@ -22,7 +22,7 @@ public interface AllAnnotationsHandler {
 	 * @return A list containing all annotations found at field.
 	 * @see AnnotatedElementReflectionProvider#getAnnotations()
 	 */
-	public List<Annotation> atField(final String fieldName) ;
+	public List<Annotation> atField(final String fieldName);
 
 	/**
 	 * Use this method to reflect all annotations at method.
@@ -31,5 +31,5 @@ public interface AllAnnotationsHandler {
 	 *            Name of the method from where to search for annotations.
 	 * @return An object responsible for reflecting annotations at method.
 	 */
-	public AllMethodAnnotationsHandler atMethod(final String methodName) ;
+	public AllMethodAnnotationsHandler atMethod(final String methodName);
 }

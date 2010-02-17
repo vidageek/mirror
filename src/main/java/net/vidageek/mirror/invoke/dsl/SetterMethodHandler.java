@@ -7,6 +7,6 @@ package net.vidageek.mirror.invoke.dsl;
  */
 public interface SetterMethodHandler {
 
-    void withValue(Object value);
+	void withValue(Object value);
 
 }

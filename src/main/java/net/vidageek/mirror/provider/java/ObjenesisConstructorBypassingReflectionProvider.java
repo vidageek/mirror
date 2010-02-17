@@ -10,24 +10,24 @@ import net.vidageek.mirror.thirdparty.org.objenesis.ObjenesisStd;
  * 
  */
 final public class ObjenesisConstructorBypassingReflectionProvider<T> implements
-        ConstructorBypassingReflectionProvider<T> {
+		ConstructorBypassingReflectionProvider<T> {
 
-    private final Class<T> clazz;
+	private final Class<T> clazz;
 
-    public ObjenesisConstructorBypassingReflectionProvider(final Class<T> clazz) {
-        this.clazz = clazz;
-    }
+	public ObjenesisConstructorBypassingReflectionProvider(final Class<T> clazz) {
+		this.clazz = clazz;
+	}
 
-    @SuppressWarnings("unchecked")
-    public T bypassConstructor() {
-        try {
-            ObjenesisStd objenesis = new ObjenesisStd();
-            return (T) objenesis.getInstantiatorOf(clazz).newInstance();
-        } catch (ObjenesisException e) {
-            throw new ReflectionProviderException(
-                    "could not instantiate without using a constructor. Maybe your VM is not supported by Objenesis."
-                            + " Please check http://code.google.com/p/objenesis/wiki/ListOfCurrentlySupportedVMs.", e);
-        }
-    }
+	@SuppressWarnings("unchecked")
+	public T bypassConstructor() {
+		try {
+			ObjenesisStd objenesis = new ObjenesisStd();
+			return (T) objenesis.getInstantiatorOf(clazz).newInstance();
+		} catch (ObjenesisException e) {
+			throw new ReflectionProviderException(
+					"could not instantiate without using a constructor. Maybe your VM is not supported by Objenesis."
+							+ " Please check http://code.google.com/p/objenesis/wiki/ListOfCurrentlySupportedVMs.", e);
+		}
+	}
 
 }

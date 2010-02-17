@@ -7,7 +7,7 @@ import net.vidageek.mirror.set.dsl.SetterHandler;
 /**
  * 
  * @author donizetti
- *
+ * 
  */
 public interface AccessorsController {
 
@@ -16,20 +16,20 @@ public interface AccessorsController {
 	 * 
 	 * @return An object to control invocation.
 	 */
-	public InvocationHandler<Object> invoke() ;
+	public InvocationHandler<Object> invoke();
 
 	/**
 	 * This part of the DSL controls setting of fields.
 	 * 
 	 * @return An object to control setting.
 	 */
-	public SetterHandler set() ;
+	public SetterHandler set();
 
 	/**
 	 * This part of the DSL controls getting field values.
 	 * 
 	 * @return An object to control getting of values.
 	 */
-	public GetterHandler get(); 
+	public GetterHandler get();
 
 }

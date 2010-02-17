@@ -19,45 +19,42 @@ import org.junit.Test;
  */
 public class ConstructorHandlerByArgsTest {
 
-    private DefaultMirrorReflectionProvider provider;
+	private DefaultMirrorReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfClassIsNull() {
-        new ConstructorHandlerByArgs<ConstructorFixture>(provider, null);
-    }
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfClassIsNull() {
+		new ConstructorHandlerByArgs<ConstructorFixture>(provider, null);
+	}
 
-    @Test
-    public void testThatThrowsInvocationTargetExceptionCause() {
-        try {
-            new Mirror().on(ConstructorExceptionFixture.class).invoke().constructor().withoutArgs();
-        } catch (MirrorException e) {
-            if (!RuntimeException.class.equals(e.getCause().getClass())) {
-                Assert.fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
-            }
-        }
-    }
+	@Test
+	public void testThatThrowsInvocationTargetExceptionCause() {
+		try {
+			new Mirror().on(ConstructorExceptionFixture.class).invoke().constructor().withoutArgs();
+		} catch (MirrorException e) {
+			if (!RuntimeException.class.equals(e.getCause().getClass())) {
+				Assert.fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
+			}
+		}
+	}
 
-    /**
-     * Test for issue #79, described at
-     * http://bugs.vidageek.net/bug.php?op=show&bugid=79&pos=1
-     */
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsIEAWhenValueIsNullOnConstructorInvocation() {
-        new Mirror().on(MethodFixture.class).invoke().constructor().withArgs((String) null);
-    }
+	/**
+	 * Test for issue #79, described at
+	 * http://bugs.vidageek.net/bug.php?op=show&bugid=79&pos=1
+	 */
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsIEAWhenValueIsNullOnConstructorInvocation() {
+		new Mirror().on(MethodFixture.class).invoke().constructor().withArgs((String) null);
+	}
 
-    @Test
-    public void testThatInstantiatesWithoutUsingConstructor() {
-        ConstructorThatThrowsException instance = new Mirror()
-            .on(ConstructorThatThrowsException.class)
-            .invoke()
-            .constructor()
-            .bypasser();
-        Assert.assertNotNull(instance);
-    }
+	@Test
+	public void testThatInstantiatesWithoutUsingConstructor() {
+		ConstructorThatThrowsException instance = new Mirror().on(ConstructorThatThrowsException.class).invoke()
+				.constructor().bypasser();
+		Assert.assertNotNull(instance);
+	}
 }

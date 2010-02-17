@@ -35,8 +35,7 @@ public class DefaultFieldHandler implements FieldHandler {
 	}
 
 	public ParameterizedElementHandler genericType() {
-		PureJavaFieldGenericTypeAccessor accessor = new PureJavaFieldGenericTypeAccessor(
-				field);
+		PureJavaFieldGenericTypeAccessor accessor = new PureJavaFieldGenericTypeAccessor(field);
 		return new DefaultParameterizedElementHandler(provider, accessor);
 	}
 

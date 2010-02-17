@@ -23,47 +23,47 @@ import net.vidageek.mirror.provider.ReflectionProvider;
  */
 public final class DefaultMirrorReflectionProvider implements ReflectionProvider {
 
-    public ClassReflectionProvider<?> getClassReflectionProvider(final String className) {
-        return new PureJavaClassReflectionProvider<Object>(className);
-    }
+	public ClassReflectionProvider<?> getClassReflectionProvider(final String className) {
+		return new PureJavaClassReflectionProvider<Object>(className);
+	}
 
-    public <T> ClassReflectionProvider<T> getClassReflectionProvider(final Class<T> clazz) {
-        return new PureJavaClassReflectionProvider<T>(clazz);
-    }
+	public <T> ClassReflectionProvider<T> getClassReflectionProvider(final Class<T> clazz) {
+		return new PureJavaClassReflectionProvider<T>(clazz);
+	}
 
-    public FieldReflectionProvider getFieldReflectionProvider(final Object target, final Class<?> clazz,
-            final Field field) {
-        return new PureJavaFieldReflectionProvider(target, clazz, field);
-    }
+	public FieldReflectionProvider getFieldReflectionProvider(final Object target, final Class<?> clazz,
+			final Field field) {
+		return new PureJavaFieldReflectionProvider(target, clazz, field);
+	}
 
-    public <T> ConstructorReflectionProvider<T> getConstructorReflectionProvider(final Class<T> clazz,
-            final Constructor<T> constructor) {
-        return new PureJavaConstructorReflectionProvider<T>(clazz, constructor);
-    }
+	public <T> ConstructorReflectionProvider<T> getConstructorReflectionProvider(final Class<T> clazz,
+			final Constructor<T> constructor) {
+		return new PureJavaConstructorReflectionProvider<T>(clazz, constructor);
+	}
 
-    public AnnotatedElementReflectionProvider getAnnotatedElementReflectionProvider(final AnnotatedElement element) {
-        return new PureJavaAnnotatedElementReflectionProvider(element);
-    }
+	public AnnotatedElementReflectionProvider getAnnotatedElementReflectionProvider(final AnnotatedElement element) {
+		return new PureJavaAnnotatedElementReflectionProvider(element);
+	}
 
-    public MethodReflectionProvider getMethodReflectionProvider(final Object target, final Class<?> clazz,
-            final Method method) {
-        return new PureJavaMethodReflectionProvider(target, clazz, method);
-    }
+	public MethodReflectionProvider getMethodReflectionProvider(final Object target, final Class<?> clazz,
+			final Method method) {
+		return new PureJavaMethodReflectionProvider(target, clazz, method);
+	}
 
-    public ParameterizedElementReflectionProvider getParameterizedElementProvider(final GenericTypeAccessor accessor) {
-        return new PureJavaParameterizedElementReflectionProvider(accessor);
-    }
+	public ParameterizedElementReflectionProvider getParameterizedElementProvider(final GenericTypeAccessor accessor) {
+		return new PureJavaParameterizedElementReflectionProvider(accessor);
+	}
 
-    public GenericTypeAccessor getClassGenericTypeAccessor(final Class<?> clazz) {
-        return new PureJavaClassGenericTypeAccessor(clazz);
-    }
+	public GenericTypeAccessor getClassGenericTypeAccessor(final Class<?> clazz) {
+		return new PureJavaClassGenericTypeAccessor(clazz);
+	}
 
-    public GenericTypeAccessor getFieldGenericTypeAccessor(final Field field) {
-        return new PureJavaFieldGenericTypeAccessor(field);
-    }
+	public GenericTypeAccessor getFieldGenericTypeAccessor(final Field field) {
+		return new PureJavaFieldGenericTypeAccessor(field);
+	}
 
-    public <T> ConstructorBypassingReflectionProvider<T> getConstructorBypassingReflectionProvider(final Class<T> clazz) {
-        return new ObjenesisConstructorBypassingReflectionProvider<T>(clazz);
-    }
+	public <T> ConstructorBypassingReflectionProvider<T> getConstructorBypassingReflectionProvider(final Class<T> clazz) {
+		return new ObjenesisConstructorBypassingReflectionProvider<T>(clazz);
+	}
 
 }

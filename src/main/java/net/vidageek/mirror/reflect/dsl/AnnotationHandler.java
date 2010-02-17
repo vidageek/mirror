@@ -27,7 +27,7 @@ public interface AnnotationHandler<T extends Annotation> {
 	 *             if fieldName is null or empty
 	 * @see AnnotatedElementReflectionProvider#getAnnotation(Class)
 	 */
-	public MethodAnnotationHandler<T> atMethod(final String methodName) ;
+	public MethodAnnotationHandler<T> atMethod(final String methodName);
 
 	/**
 	 * Use this method to reflect a single annotation at class
@@ -35,5 +35,5 @@ public interface AnnotationHandler<T extends Annotation> {
 	 * @return The annotation or null if it was not found.
 	 * @see AnnotatedElementReflectionProvider#getAnnotation(Class)
 	 */
-	public T atClass() ;
+	public T atClass();
 }

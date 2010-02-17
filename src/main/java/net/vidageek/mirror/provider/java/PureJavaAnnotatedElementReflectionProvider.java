@@ -11,13 +11,11 @@ import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
  * @author jonasabreu
  * 
  */
-public final class PureJavaAnnotatedElementReflectionProvider implements
-		AnnotatedElementReflectionProvider {
+public final class PureJavaAnnotatedElementReflectionProvider implements AnnotatedElementReflectionProvider {
 
 	private final AnnotatedElement element;
 
-	public PureJavaAnnotatedElementReflectionProvider(
-			final AnnotatedElement element) {
+	public PureJavaAnnotatedElementReflectionProvider(final AnnotatedElement element) {
 		this.element = element;
 	}
 

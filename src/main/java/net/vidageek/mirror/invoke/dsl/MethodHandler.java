@@ -7,20 +7,20 @@ package net.vidageek.mirror.invoke.dsl;
  */
 public interface MethodHandler {
 
-    /**
-     * Invoke a method without arguments.
-     * 
-     * @return The value returned by the method or null if the method was void.
-     */
-    public Object withoutArgs();
+	/**
+	 * Invoke a method without arguments.
+	 * 
+	 * @return The value returned by the method or null if the method was void.
+	 */
+	public Object withoutArgs();
 
-    /**
-     * Invoke a method using arguments args.
-     * 
-     * @param args
-     *            arguments to be used to invoke method.
-     * @return The value returned by the method or null if the method was void.
-     */
-    public Object withArgs(final Object... args);
+	/**
+	 * Invoke a method using arguments args.
+	 * 
+	 * @param args
+	 *            arguments to be used to invoke method.
+	 * @return The value returned by the method or null if the method was void.
+	 */
+	public Object withArgs(final Object... args);
 
 }

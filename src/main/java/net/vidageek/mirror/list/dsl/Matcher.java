@@ -11,13 +11,13 @@ package net.vidageek.mirror.list.dsl;
  */
 public interface Matcher<T> {
 
-    /**
-     * This method determines if the element must be allowed to be on the list.
-     * 
-     * @param element
-     * 
-     * @return true if the element is allowed. false otherwise.
-     */
-    boolean accepts(T element);
+	/**
+	 * This method determines if the element must be allowed to be on the list.
+	 * 
+	 * @param element
+	 * 
+	 * @return true if the element is allowed. false otherwise.
+	 */
+	boolean accepts(T element);
 
 }

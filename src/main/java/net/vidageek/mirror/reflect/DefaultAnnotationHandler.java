@@ -14,43 +14,43 @@ import net.vidageek.mirror.reflect.dsl.MethodAnnotationHandler;
  */
 public final class DefaultAnnotationHandler<T extends Annotation> implements AnnotationHandler<T> {
 
-    private final Class<?> clazz;
+	private final Class<?> clazz;
 
-    private final Class<T> annotation;
+	private final Class<T> annotation;
 
-    private final ReflectionProvider provider;
+	private final ReflectionProvider provider;
 
-    public DefaultAnnotationHandler(final ReflectionProvider provider, final Class<?> clazz, final Class<T> annotation) {
-        if (clazz == null) {
-            throw new IllegalArgumentException("Argument clazz cannot be null.");
-        }
-        if (annotation == null) {
-            throw new IllegalArgumentException("Argument annotation cannot be null.");
-        }
-        this.provider = provider;
-        this.clazz = clazz;
-        this.annotation = annotation;
-    }
+	public DefaultAnnotationHandler(final ReflectionProvider provider, final Class<?> clazz, final Class<T> annotation) {
+		if (clazz == null) {
+			throw new IllegalArgumentException("Argument clazz cannot be null.");
+		}
+		if (annotation == null) {
+			throw new IllegalArgumentException("Argument annotation cannot be null.");
+		}
+		this.provider = provider;
+		this.clazz = clazz;
+		this.annotation = annotation;
+	}
 
-    public T atField(final String fieldName) {
-        if ((fieldName == null) || (fieldName.trim().length() == 0)) {
-            throw new IllegalArgumentException("fieldName cannot be null or empty.");
-        }
-        return provider
-                       .getAnnotatedElementReflectionProvider(new Mirror(provider).on(clazz).reflect().field(fieldName))
-                       .getAnnotation(annotation);
-    }
+	public T atField(final String fieldName) {
+		if ((fieldName == null) || (fieldName.trim().length() == 0)) {
+			throw new IllegalArgumentException("fieldName cannot be null or empty.");
+		}
+		return provider
+				.getAnnotatedElementReflectionProvider(new Mirror(provider).on(clazz).reflect().field(fieldName))
+				.getAnnotation(annotation);
+	}
 
-    @SuppressWarnings("unchecked")
-    public MethodAnnotationHandler<T> atMethod(final String methodName) {
-        if ((methodName == null) || (methodName.trim().length() == 0)) {
-            throw new IllegalArgumentException("methodName cannot be null or empty");
-        }
-        return new DefaultMethodAnnotationHandler(provider, clazz, methodName, annotation);
-    }
+	@SuppressWarnings("unchecked")
+	public MethodAnnotationHandler<T> atMethod(final String methodName) {
+		if ((methodName == null) || (methodName.trim().length() == 0)) {
+			throw new IllegalArgumentException("methodName cannot be null or empty");
+		}
+		return new DefaultMethodAnnotationHandler(provider, clazz, methodName, annotation);
+	}
 
-    public T atClass() {
-        return provider.getAnnotatedElementReflectionProvider(clazz).getAnnotation(annotation);
-    }
+	public T atClass() {
+		return provider.getAnnotatedElementReflectionProvider(clazz).getAnnotation(annotation);
+	}
 
 }

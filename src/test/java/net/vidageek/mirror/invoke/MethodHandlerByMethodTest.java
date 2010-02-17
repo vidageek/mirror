@@ -22,64 +22,64 @@ import org.junit.Test;
  */
 public class MethodHandlerByMethodTest {
 
-    private ReflectionProvider provider;
+	private ReflectionProvider provider;
 
-    @Before
-    public void setup() {
-        provider = new DefaultMirrorReflectionProvider();
-    }
+	@Before
+	public void setup() {
+		provider = new DefaultMirrorReflectionProvider();
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfClassIsNull() {
-        Method method = new Mirror(provider).on(Object.class).reflect().method("equals").withArgs(Object.class);
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfClassIsNull() {
+		Method method = new Mirror(provider).on(Object.class).reflect().method("equals").withArgs(Object.class);
 
-        new MethodHandlerByMethod(provider, new Object(), null, method);
-    }
+		new MethodHandlerByMethod(provider, new Object(), null, method);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfMethodIsNull() {
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfMethodIsNull() {
 
-        new MethodHandlerByMethod(provider, new Object(), Object.class, null);
-    }
+		new MethodHandlerByMethod(provider, new Object(), Object.class, null);
+	}
 
-    @Test
-    public void testThatAcceptsMethodAssignableFromClass() {
-        Method method = new Mirror(provider).on(Object.class).reflect().method("equals").withArgs(Object.class);
+	@Test
+	public void testThatAcceptsMethodAssignableFromClass() {
+		Method method = new Mirror(provider).on(Object.class).reflect().method("equals").withArgs(Object.class);
 
-        new MethodHandlerByMethod(provider, new Object(), String.class, method);
-    }
+		new MethodHandlerByMethod(provider, new Object(), String.class, method);
+	}
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testThatThrowsExceptionIfMethodIsNotFromClass() {
-        Method method = new Mirror(provider).on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatThrowsExceptionIfMethodIsNotFromClass() {
+		Method method = new Mirror(provider).on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
 
-        new MethodHandlerByMethod(provider, new Object(), String.class, method);
-    }
+		new MethodHandlerByMethod(provider, new Object(), String.class, method);
+	}
 
-    @Test
-    public void testThatDoesntThrowsExceptionIfObjectIsNull() {
-        Method method = new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
+	@Test
+	public void testThatDoesntThrowsExceptionIfObjectIsNull() {
+		Method method = new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
 
-        new MethodHandlerByMethod(provider, null, MethodFixture.class, method);
-    }
+		new MethodHandlerByMethod(provider, null, MethodFixture.class, method);
+	}
 
-    @Test(expected = IllegalStateException.class)
-    public void testThrowsExceptionIfCallInstanceMethodOnClass() {
-        Method method = new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
+	@Test(expected = IllegalStateException.class)
+	public void testThrowsExceptionIfCallInstanceMethodOnClass() {
+		Method method = new Mirror().on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
 
-        new Mirror().on(MethodFixture.class).invoke().method(method).withoutArgs();
-    }
+		new Mirror().on(MethodFixture.class).invoke().method(method).withoutArgs();
+	}
 
-    @Test
-    public void testThatThrowsInvocationTargetExceptionCause() {
-        Method method = new Mirror().on(MethodExceptionFixture.class).reflect().method("method").withoutArgs();
+	@Test
+	public void testThatThrowsInvocationTargetExceptionCause() {
+		Method method = new Mirror().on(MethodExceptionFixture.class).reflect().method("method").withoutArgs();
 
-        try {
-            new Mirror().on(MethodExceptionFixture.class).invoke().method(method).withoutArgs();
-        } catch (MirrorException e) {
-            if (!RuntimeException.class.equals(e.getCause().getClass())) {
-                Assert.fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
-            }
-        }
-    }
+		try {
+			new Mirror().on(MethodExceptionFixture.class).invoke().method(method).withoutArgs();
+		} catch (MirrorException e) {
+			if (!RuntimeException.class.equals(e.getCause().getClass())) {
+				Assert.fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
+			}
+		}
+	}
 }

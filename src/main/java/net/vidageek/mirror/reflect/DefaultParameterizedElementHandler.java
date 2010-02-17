@@ -14,18 +14,15 @@ public class DefaultParameterizedElementHandler implements ParameterizedElementH
 	private final ReflectionProvider provider;
 	private final GenericTypeAccessor accessor;
 
-	public DefaultParameterizedElementHandler(ReflectionProvider provider,
-			GenericTypeAccessor accessor) {
+	public DefaultParameterizedElementHandler(ReflectionProvider provider, GenericTypeAccessor accessor) {
 		if (accessor == null) {
-			throw new IllegalArgumentException(
-					"Argument accessor cannot be null");
+			throw new IllegalArgumentException("Argument accessor cannot be null");
 		}
 		this.provider = provider;
 		this.accessor = accessor;
 	}
 
 	public Class<?> atPosition(int index) {
-		return provider.getParameterizedElementProvider(accessor)
-				.getTypeAtPosition(index);
+		return provider.getParameterizedElementProvider(accessor).getTypeAtPosition(index);
 	}
 }
