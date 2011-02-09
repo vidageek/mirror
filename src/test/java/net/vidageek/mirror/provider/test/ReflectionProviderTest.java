@@ -16,37 +16,40 @@ import net.vidageek.mirror.provider.compatibility.ParameterizedTypeReflectionPro
 import net.vidageek.mirror.provider.compatibility.PrimitiveClassReflectionProviderCompatibilityTest;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
+import org.junit.Ignore;
+
 /**
  * @author jonasabreu
  * 
  */
+@Ignore
 public class ReflectionProviderTest implements Test {
 
-    private final Class<?>[] testClasses = { AnnotatedElementReflectionProviderCompatibilityTest.class,
-            ClassReflectionProviderCompatibilityTest.class, ConstructorReflectionProviderCompatibilityTest.class,
-            FieldReflectionProviderCompatibilityTest.class, MethodReflectionProviderCompatibilityTest.class,
-            ObjenesisConstructorBypassingReflectionProviderCompatibilityTest.class,
-            ParameterizedTypeReflectionProviderCompatibilityTest.class,
-            PrimitiveClassReflectionProviderCompatibilityTest.class };
+	private final Class<?>[] testClasses = { AnnotatedElementReflectionProviderCompatibilityTest.class,
+			ClassReflectionProviderCompatibilityTest.class, ConstructorReflectionProviderCompatibilityTest.class,
+			FieldReflectionProviderCompatibilityTest.class, MethodReflectionProviderCompatibilityTest.class,
+			ObjenesisConstructorBypassingReflectionProviderCompatibilityTest.class,
+			ParameterizedTypeReflectionProviderCompatibilityTest.class,
+			PrimitiveClassReflectionProviderCompatibilityTest.class };
 
-    private final Test test;
+	private final Test test;
 
-    public ReflectionProviderTest(final ReflectionProvider provider) {
-        Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
-        TestSuite testSuite = new TestSuite();
-        for (Class<?> clazz : testClasses) {
-            mirror.on(clazz).set().field("provider").withValue(provider);
-            testSuite.addTest(new JUnit4TestAdapter(clazz));
-        }
-        test = testSuite;
-    }
+	public ReflectionProviderTest(final ReflectionProvider provider) {
+		Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
+		TestSuite testSuite = new TestSuite();
+		for (Class<?> clazz : testClasses) {
+			mirror.on(clazz).set().field("provider").withValue(provider);
+			testSuite.addTest(new JUnit4TestAdapter(clazz));
+		}
+		test = testSuite;
+	}
 
-    public int countTestCases() {
-        return test.countTestCases();
-    }
+	public int countTestCases() {
+		return test.countTestCases();
+	}
 
-    public void run(final TestResult result) {
-        test.run(result);
-    }
+	public void run(final TestResult result) {
+		test.run(result);
+	}
 
 }
