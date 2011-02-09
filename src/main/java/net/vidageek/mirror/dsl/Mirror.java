@@ -11,6 +11,7 @@ import net.vidageek.mirror.DefaultMemberController;
 import net.vidageek.mirror.config.MirrorProviderBuilder;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
+import net.vidageek.mirror.proxy.dsl.ProxyController;
 
 /**
  * This is the basic class to use Mirror. All Reflection features can be
@@ -122,5 +123,52 @@ public final class Mirror {
 	 */
 	public FieldController on(final Field field) {
 		return new DefaultFieldController(provider, field);
+	}
+
+	/**
+	 * Convenience method for {@link Mirror#proxify(Class...)}
+	 * 
+	 * @see {@link Mirror#on(Class)}
+	 * @see {@link Mirror#proxify(Class...)}
+	 */
+	@SuppressWarnings("unchecked")
+	public <T> ProxyController<T> proxify(final Class<T> clazz) {
+		return (ProxyController<T>) proxify(new Class[] { clazz });
+	}
+
+	/**
+	 * Convenience method for {@link Mirror#proxify(Class...)}
+	 * 
+	 * @see {@link Mirror#on(Class)}
+	 * @see {@link Mirror#proxify(Class...)}
+	 */
+	public ProxyController<Object> proxify(final String string) {
+		return null;
+	}
+
+	/**
+	 * Convenience method for {@link Mirror#proxify(Class...)}
+	 * 
+	 * @see {@link Mirror#on(Class)}
+	 * @see {@link Mirror#proxify(Class...)}
+	 */
+	public ProxyController<Object> proxify(final String... classNames) {
+		return null;
+	}
+
+	/**
+	 * Method to create proxys of classes. There can be only one actual class.
+	 * All the remaining "classes" must be interfaces.
+	 * 
+	 * @param classes
+	 *            to be proxified
+	 * 
+	 * @return An object responsible for setting method interceptors
+	 * @throws IllegalArgumentException
+	 *             if any class is null or there is more than one class that is
+	 *             not an interface
+	 */
+	public ProxyController<Object> proxify(final Class<?>... classes) {
+		return null;
 	}
 }

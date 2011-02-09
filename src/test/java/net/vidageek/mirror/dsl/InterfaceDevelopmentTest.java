@@ -7,12 +7,15 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import net.vidageek.mirror.fixtures.AnnotationFixture;
+import net.vidageek.mirror.fixtures.AnotherProxifierFixture;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.fixtures.ClassFixture;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.ConstructorThatThrowsException;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
+import net.vidageek.mirror.fixtures.MethodInterceptorFixture;
+import net.vidageek.mirror.fixtures.ProxifierFixture;
 import net.vidageek.mirror.fixtures.SubClassOfTypedClassFixture;
 import net.vidageek.mirror.fixtures.UniqueConstructorFixture;
 
@@ -293,5 +296,20 @@ public class InterfaceDevelopmentTest {
 	@Test
 	public void testConstructorBypasserInterface() {
 		new Mirror().on(ConstructorThatThrowsException.class).invoke().constructor().bypasser();
+	}
+
+	@Test
+	public void testProxifierInterface() {
+		new Mirror().proxify(ProxifierFixture.class).interceptingWith(new MethodInterceptorFixture());
+
+		new Mirror().proxify("net.vidageek.mirror.fixtures.ProxifierFixture")
+				.interceptingWith(new MethodInterceptorFixture());
+
+		new Mirror().proxify(ProxifierFixture.class, AnotherProxifierFixture.class)
+				.interceptingWith(new MethodInterceptorFixture());
+
+		new Mirror().proxify("net.vidageek.mirror.fixtures.ProxifierFixture",
+								"net.vidageek.mirror.fixturesAnother.ProxifierFixture")
+				.interceptingWith(new MethodInterceptorFixture());
 	}
 }
