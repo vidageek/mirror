@@ -22,7 +22,7 @@ import org.junit.Ignore;
  * @author jonasabreu
  * 
  */
-@Ignore
+@Ignore("This is not a test class. It's simply a helper to run all provider tests.")
 public class ReflectionProviderTest implements Test {
 
 	private final Class<?>[] testClasses = { AnnotatedElementReflectionProviderCompatibilityTest.class,
