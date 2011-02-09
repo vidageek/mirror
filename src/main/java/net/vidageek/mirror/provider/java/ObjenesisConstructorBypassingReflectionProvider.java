@@ -2,8 +2,9 @@ package net.vidageek.mirror.provider.java;
 
 import net.vidageek.mirror.exception.ReflectionProviderException;
 import net.vidageek.mirror.provider.ConstructorBypassingReflectionProvider;
-import net.vidageek.mirror.thirdparty.org.objenesis.ObjenesisException;
-import net.vidageek.mirror.thirdparty.org.objenesis.ObjenesisStd;
+
+import org.objenesis.ObjenesisException;
+import org.objenesis.ObjenesisStd;
 
 /**
  * @author jonasabreu

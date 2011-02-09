@@ -2,6 +2,8 @@ package net.vidageek.mirror.reflect.dsl;
 
 import java.lang.annotation.Annotation;
 
+import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
+
 public interface MethodAnnotationHandler<T extends Annotation> {
 
 	/**

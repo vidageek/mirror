@@ -9,8 +9,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.BackedMirrorList;
+import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.matcher.GetterMatcher;
 import net.vidageek.mirror.matcher.SetterMatcher;

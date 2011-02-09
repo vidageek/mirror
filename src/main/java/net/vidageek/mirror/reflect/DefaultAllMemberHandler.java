@@ -4,8 +4,8 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.util.List;
 
-import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.BackedMirrorList;
+import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllMemberHandler;

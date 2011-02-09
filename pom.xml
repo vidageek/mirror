@@ -18,10 +18,9 @@
 
 		<!-- Dependencies to be shaded and included on the main jar -->
 		<dependency>
-			<groupId>net.vidageek</groupId>
-			<artifactId>mirror-magic</artifactId>
-			<version>${pom.version}</version>
-			<scope>compile</scope>
+			<groupId>org.objenesis</groupId>
+			<artifactId>objenesis</artifactId>
+			<version>1.2</version>
 		</dependency>
 		
 	</dependencies>
@@ -116,6 +115,27 @@
 						<goals>
 							<goal>shade</goal>
 						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-shade-plugin</artifactId>
+				<version>1.2.1</version>
+				<executions>
+					<execution>
+						<phase>package</phase>
+						<goals>
+							<goal>shade</goal>
+						</goals>
+						<configuration>
+							<relocations>
+								<relocation>
+									<pattern>org.objenesis</pattern>
+									<shadedPattern>net.vidageek.mirror.thirdparty.org.objenesis</shadedPattern>
+								</relocation>
+							</relocations>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>

@@ -10,11 +10,6 @@
 
 	<dependencies>
 		<!-- Dependencies to be shaded and included on the main jar -->
-		<dependency>
-			<groupId>org.objenesis</groupId>
-			<artifactId>objenesis</artifactId>
-			<version>1.2</version>
-		</dependency>
 	</dependencies>
 
 	<build>
