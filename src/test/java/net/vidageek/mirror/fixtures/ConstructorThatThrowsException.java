@@ -6,8 +6,8 @@ package net.vidageek.mirror.fixtures;
  */
 final public class ConstructorThatThrowsException {
 
-	public ConstructorThatThrowsException() {
-		throw new RuntimeException();
-	}
+    public ConstructorThatThrowsException() {
+        throw new RuntimeException();
+    }
 
 }

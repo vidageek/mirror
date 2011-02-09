@@ -9,7 +9,7 @@ package net.vidageek.mirror.fixtures;
  */
 public class ConstructorExceptionFixture {
 
-	public ConstructorExceptionFixture() {
-		throw new RuntimeException();
-	}
+    public ConstructorExceptionFixture() {
+        throw new RuntimeException();
+    }
 }

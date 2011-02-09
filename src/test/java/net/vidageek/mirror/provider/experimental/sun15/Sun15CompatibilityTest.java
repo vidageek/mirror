@@ -1,4 +1,4 @@
-package net.vidageek.mirror.provider.sun15;
+package net.vidageek.mirror.provider.experimental.sun15;
 
 import junit.framework.Test;
 import net.vidageek.mirror.provider.experimental.sun15.Sun15ReflectionProvider;
