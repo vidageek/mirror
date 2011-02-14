@@ -5,7 +5,7 @@
 		<meta http-equiv="Content-Language" content="Portuguese" />
 		<link rel="stylesheet" type="text/css" href="${relative}/../mirror/includes/css/style.css" />
 		<link rel="stylesheet" type="text/css" href="${relative}/../mirror/includes/css/java.css" />
-		<title> Mirror - Porque meta-programa&ccedil;&atilde;o deve ser f&aacute;cil. | ${chapter_name} 
+		<title> Mirror - Porque Reflection em Java tem que ser f&aacute;cil. | ${chapter_name} 
 			
 			<#if section_name != "none">
 				-> ${section_name}
