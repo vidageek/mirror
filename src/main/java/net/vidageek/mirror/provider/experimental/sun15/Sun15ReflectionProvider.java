@@ -4,6 +4,7 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
@@ -13,6 +14,7 @@ import net.vidageek.mirror.provider.FieldReflectionProvider;
 import net.vidageek.mirror.provider.GenericTypeAccessor;
 import net.vidageek.mirror.provider.MethodReflectionProvider;
 import net.vidageek.mirror.provider.ParameterizedElementReflectionProvider;
+import net.vidageek.mirror.provider.ProxyReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.ObjenesisConstructorBypassingReflectionProvider;
 import net.vidageek.mirror.provider.java.PureJavaAnnotatedElementReflectionProvider;
@@ -20,6 +22,8 @@ import net.vidageek.mirror.provider.java.PureJavaClassGenericTypeAccessor;
 import net.vidageek.mirror.provider.java.PureJavaClassReflectionProvider;
 import net.vidageek.mirror.provider.java.PureJavaFieldGenericTypeAccessor;
 import net.vidageek.mirror.provider.java.PureJavaParameterizedElementReflectionProvider;
+import net.vidageek.mirror.proxy.cglib.CGLibProxyReflectionProvider;
+import net.vidageek.mirror.proxy.cglib.CGLibInvocationHandler;
 
 /**
  * This is a ReflectionProvider implementation that relies on some sun.reflect
@@ -73,4 +77,8 @@ final public class Sun15ReflectionProvider implements ReflectionProvider {
         return new PureJavaParameterizedElementReflectionProvider(accessor);
     }
 
+	public ProxyReflectionProvider getProxyReflectionProvider(Class<?> clazz,
+			List<Class<?>> interfaces, CGLibInvocationHandler invocationHandler) {
+		return new CGLibProxyReflectionProvider(clazz, interfaces, invocationHandler);
+	}
 }
