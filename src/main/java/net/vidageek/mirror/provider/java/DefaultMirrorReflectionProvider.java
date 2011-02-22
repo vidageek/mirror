@@ -4,6 +4,7 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
@@ -13,7 +14,10 @@ import net.vidageek.mirror.provider.FieldReflectionProvider;
 import net.vidageek.mirror.provider.GenericTypeAccessor;
 import net.vidageek.mirror.provider.MethodReflectionProvider;
 import net.vidageek.mirror.provider.ParameterizedElementReflectionProvider;
+import net.vidageek.mirror.provider.ProxyReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
+import net.vidageek.mirror.proxy.cglib.CGLibProxyReflectionProvider;
+import net.vidageek.mirror.proxy.cglib.CGLibInvocationHandler;
 
 /**
  * Class which supplies all native Java reflection features plus some non
@@ -66,4 +70,8 @@ public final class DefaultMirrorReflectionProvider implements ReflectionProvider
 		return new ObjenesisConstructorBypassingReflectionProvider<T>(clazz);
 	}
 
+	public ProxyReflectionProvider getProxyReflectionProvider(final Class<?> clazz, final List<Class<?>> interfaces,
+			final CGLibInvocationHandler invocationHandler) {
+		return new CGLibProxyReflectionProvider(clazz, interfaces, invocationHandler);
+	}
 }

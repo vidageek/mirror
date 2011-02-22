@@ -4,8 +4,15 @@
 package net.vidageek.mirror.dsl;
 
 import static org.junit.Assert.assertEquals;
+
+import java.lang.reflect.Method;
+
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.ClassFixture;
+import net.vidageek.mirror.proxy.OneClass;
+import net.vidageek.mirror.proxy.OneInterface;
+import net.vidageek.mirror.proxy.OtherClass;
+import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 
 import org.junit.Test;
 
@@ -56,4 +63,47 @@ public class MirrorTest {
 		assertEquals(void.class, clazz);
 	}
 
+	@Test(expected = IllegalArgumentException.class)
+	public void testThatProxifyClassThrowsExceptionIfClassNameIsEmpty() {
+		new Mirror().proxify("  \n  \t  ");
+	}
+
+	@Test(expected = MirrorException.class)
+	public void testThatProxifyClassThrowsMirrorExceptionIfClassDoesntExists() {
+		new Mirror().proxify("some.class.that.doesnt.Exists");
+	}
+
+	@Test
+	public void testThatProxifyOneInterfaceIsCorrect() {
+		OneInterface proxy = new Mirror().proxify(OneInterface.class).interceptingWith(new MethodInterceptor(){
+
+			public boolean accepts(Method method) {
+				return true;
+			}
+
+			public Object intercepts(Object target, Method method,
+					Object... parameters) {
+				return "foo";
+			}});
+
+		assertEquals("foo", proxy.interfaceMethod());
+	}
+
+	@Test
+	public void testThatProxifyMoreThanOneInterfaceIsCorrect() {
+		Object proxy = new Mirror().proxify(OneClass.class, String.class).interceptingWith(new MethodInterceptor(){
+
+			public boolean accepts(Method method) {
+				return true;
+			}
+
+			public Object intercepts(Object target, Method method,
+					Object... parameters) {
+				return "foo";
+			}});
+
+//		assertEquals("foo", ((OneInterface) proxy).interfaceMethod());
+//		assertEquals("foo", ((OtherInterface) proxy).otherInterfaceMethod());
+		assertEquals("foo", ((OtherClass) proxy).classMethod());
+	}
 }
