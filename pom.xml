@@ -7,6 +7,7 @@
 	<name>Mirror</name>
 	<packaging>jar</packaging>
 	<description>Mirror is a simple DSL to make Java reflection easier.</description>
+	<url>http://projetos.vidageek.net/mirror</url>
 
 	<dependencies>
 		<dependency>
