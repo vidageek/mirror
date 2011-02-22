@@ -126,6 +126,10 @@
 									<pattern>org.objenesis</pattern>
 									<shadedPattern>net.vidageek.mirror.thirdparty.org.objenesis</shadedPattern>
 								</relocation>
+								<relocation>
+									<pattern>net.sf.cglib</pattern>
+									<shadedPattern>net.vidageek.mirror.thirdparty.net.sf.cglib</shadedPattern>
+								</relocation>
 							</relocations>
 						</configuration>
 					</execution>
