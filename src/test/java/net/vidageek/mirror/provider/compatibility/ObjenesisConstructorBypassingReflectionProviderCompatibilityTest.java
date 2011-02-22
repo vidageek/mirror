@@ -16,14 +16,14 @@ import org.junit.runner.RunWith;
 @RunWith(Theories.class)
 final public class ObjenesisConstructorBypassingReflectionProviderCompatibilityTest {
 
-    @DataPoint
-    public static ReflectionProvider provider;
+	@DataPoint
+	public static ReflectionProvider provider;
 
-    @Theory
-    public void testThatInstantiatesWithoutInvokingAConstructor(final ReflectionProvider r) {
-        ConstructorThatThrowsException instance = r.getConstructorBypassingReflectionProvider(
-                ConstructorThatThrowsException.class).bypassConstructor();
-        Assert.assertNotNull(instance);
-    }
+	@Theory
+	public void testThatInstantiatesWithoutInvokingAConstructor(final ReflectionProvider r) {
+		ConstructorThatThrowsException instance = r
+				.getConstructorBypassingReflectionProvider(ConstructorThatThrowsException.class).bypassConstructor();
+		Assert.assertNotNull(instance);
+	}
 
 }
