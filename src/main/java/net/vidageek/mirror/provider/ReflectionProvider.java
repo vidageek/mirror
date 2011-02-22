@@ -4,8 +4,10 @@ import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.List;
 
 import net.vidageek.mirror.exception.ReflectionProviderException;
+import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 
 /**
  * This is the interface defines methods to get all specific reflection
@@ -108,4 +110,16 @@ public interface ReflectionProvider {
 	 * @throws ReflectionProviderException
 	 */
 	GenericTypeAccessor getFieldGenericTypeAccessor(Field field);
+
+	/**
+	 * @param clazz
+	 *            Base inheritance class of the proxy
+	 * @param interfaces
+	 *            List of the interfaces this proxy should implement
+	 * @param methodInterceptors
+	 *            List of method interceptors
+	 * @throws ReflectionProviderException
+	 */
+	ProxyReflectionProvider getProxyReflectionProvider(Class<?> clazz, List<Class<?>> interfaces,
+			MethodInterceptor... methodInterceptors);
 }

@@ -4,3 +4,4 @@
 target/
 todo.log
 infinitest.filters
+.byecycle

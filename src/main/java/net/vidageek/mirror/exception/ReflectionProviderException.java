@@ -11,7 +11,7 @@ package net.vidageek.mirror.exception;
  * 
  */
 @SuppressWarnings("serial")
-public final class ReflectionProviderException extends MirrorException {
+public class ReflectionProviderException extends MirrorException {
 
 	public ReflectionProviderException(final String message) {
 		super(message);

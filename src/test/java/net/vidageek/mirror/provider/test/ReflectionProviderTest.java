@@ -14,6 +14,7 @@ import net.vidageek.mirror.provider.compatibility.MethodReflectionProviderCompat
 import net.vidageek.mirror.provider.compatibility.ObjenesisConstructorBypassingReflectionProviderCompatibilityTest;
 import net.vidageek.mirror.provider.compatibility.ParameterizedTypeReflectionProviderCompatibilityTest;
 import net.vidageek.mirror.provider.compatibility.PrimitiveClassReflectionProviderCompatibilityTest;
+import net.vidageek.mirror.provider.compatibility.ProxyfyReflectionProviderCompatibilityTest;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Ignore;
@@ -30,7 +31,7 @@ public class ReflectionProviderTest implements Test {
 			FieldReflectionProviderCompatibilityTest.class, MethodReflectionProviderCompatibilityTest.class,
 			ObjenesisConstructorBypassingReflectionProviderCompatibilityTest.class,
 			ParameterizedTypeReflectionProviderCompatibilityTest.class,
-			PrimitiveClassReflectionProviderCompatibilityTest.class };
+			PrimitiveClassReflectionProviderCompatibilityTest.class, ProxyfyReflectionProviderCompatibilityTest.class };
 
 	private final Test test;
 

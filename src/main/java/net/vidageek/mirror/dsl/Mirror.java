@@ -3,15 +3,18 @@ package net.vidageek.mirror.dsl;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.vidageek.mirror.DefaultAccessorsController;
 import net.vidageek.mirror.DefaultClassController;
 import net.vidageek.mirror.DefaultFieldController;
 import net.vidageek.mirror.DefaultMemberController;
+import net.vidageek.mirror.DefaultProxyHandler;
 import net.vidageek.mirror.config.MirrorProviderBuilder;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.proxy.dsl.ProxyController;
+import net.vidageek.mirror.proxy.dsl.ProxyHandler;
 
 /**
  * This is the basic class to use Mirror. All Reflection features can be
@@ -132,8 +135,8 @@ public final class Mirror {
 	 * @see {@link Mirror#proxify(Class...)}
 	 */
 	@SuppressWarnings("unchecked")
-	public <T> ProxyController<T> proxify(final Class<T> clazz) {
-		return (ProxyController<T>) proxify(new Class[] { clazz });
+	public <T> ProxyHandler<T> proxify(final Class<T> clazz) {
+		return (ProxyHandler<T>) proxify(new Class[] { clazz });
 	}
 
 	/**
@@ -142,8 +145,8 @@ public final class Mirror {
 	 * @see {@link Mirror#on(Class)}
 	 * @see {@link Mirror#proxify(Class...)}
 	 */
-	public ProxyController<Object> proxify(final String string) {
-		return null;
+	public ProxyHandler<Object> proxify(final String className) {
+		return proxify(new String[] { className });
 	}
 
 	/**
@@ -151,9 +154,14 @@ public final class Mirror {
 	 * 
 	 * @see {@link Mirror#on(Class)}
 	 * @see {@link Mirror#proxify(Class...)}
+	 * @see {@link Mirror#reflectClass(String)}
 	 */
-	public ProxyController<Object> proxify(final String... classNames) {
-		return null;
+	public ProxyHandler<Object> proxify(final String... classNames) {
+		List<Class<?>> classes = new ArrayList<Class<?>>();
+		for (String className : classNames) {
+			classes.add(reflectClass(className));
+		}
+		return proxify(classes.toArray(new Class<?>[classNames.length]));
 	}
 
 	/**
@@ -168,7 +176,7 @@ public final class Mirror {
 	 *             if any class is null or there is more than one class that is
 	 *             not an interface
 	 */
-	public ProxyController<Object> proxify(final Class<?>... classes) {
-		return null;
+	public ProxyHandler<Object> proxify(final Class<?>... classes) {
+		return new DefaultProxyHandler(provider, classes);
 	}
 }

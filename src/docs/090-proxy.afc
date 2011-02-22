@@ -1,0 +1,15 @@
+[chapter Proxy]
+
+Release 1.6 added a new feature to Mirror. The ability to create proxys of classes and interfaces.
+
+[java]
+SomeClass proxy = new Mirror().proxify(SomeClass.class)
+		.interceptingWith(new YourCustomMethodInterceptor());
+[/java]
+
+The method ::interceptingWith:: receives any number of objects that implement 
+::net.vidageek.mirror.proxy.dsl.MethodInterceptor::. These are called one after another until one of them
+accepts intercepting the invoked method.
+
+
+
