@@ -1,11 +1,11 @@
-package net.vidageek.mirror.proxy;
+package net.vidageek.mirror.fixtures;
 
 /**
  * 
  * @author Juliano Alves
  *
  */
-public class OneClass {
+public class OneClassFixture {
 
 	public String classMethod() {
 		return "test";

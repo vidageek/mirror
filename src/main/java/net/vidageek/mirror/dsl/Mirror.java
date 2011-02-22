@@ -154,6 +154,7 @@ public final class Mirror {
 	 * 
 	 * @see {@link Mirror#on(Class)}
 	 * @see {@link Mirror#proxify(Class...)}
+	 * @see {@link Mirror#reflectClass(String)}
 	 */
 	public ProxyHandler<Object> proxify(final String... classNames) {
 		List<Class<?>> classes = new ArrayList<Class<?>>();
