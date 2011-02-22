@@ -17,7 +17,7 @@ import net.vidageek.mirror.provider.ParameterizedElementReflectionProvider;
 import net.vidageek.mirror.provider.ProxyReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.proxy.cglib.CGLibProxyReflectionProvider;
-import net.vidageek.mirror.proxy.cglib.CGLibInvocationHandler;
+import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 
 /**
  * Class which supplies all native Java reflection features plus some non
@@ -71,7 +71,7 @@ public final class DefaultMirrorReflectionProvider implements ReflectionProvider
 	}
 
 	public ProxyReflectionProvider getProxyReflectionProvider(final Class<?> clazz, final List<Class<?>> interfaces,
-			final CGLibInvocationHandler invocationHandler) {
-		return new CGLibProxyReflectionProvider(clazz, interfaces, invocationHandler);
+			final MethodInterceptor... methodInterceptors) {
+		return new CGLibProxyReflectionProvider(clazz, interfaces, methodInterceptors);
 	}
 }

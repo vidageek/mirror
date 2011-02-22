@@ -19,7 +19,7 @@ import net.vidageek.mirror.provider.MethodReflectionProvider;
 import net.vidageek.mirror.provider.ParameterizedElementReflectionProvider;
 import net.vidageek.mirror.provider.ProxyReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.proxy.cglib.CGLibInvocationHandler;
+import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 
 /**
  * @author jonasabreu
@@ -70,8 +70,8 @@ public class FakeProvider implements ReflectionProvider {
 		return null;
 	}
 
-	public ProxyReflectionProvider getProxyReflectionProvider(Class<?> clazz,
-			List<Class<?>> interfaces, CGLibInvocationHandler invocationHandler) {
+	public ProxyReflectionProvider getProxyReflectionProvider(final Class<?> clazz, final List<Class<?>> interfaces,
+			final MethodInterceptor... methodInterceptors) {
 		return null;
 	}
 }

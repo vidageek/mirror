@@ -1,12 +1,12 @@
 package net.vidageek.mirror;
 
-import java.lang.reflect.Modifier;
+import static java.lang.reflect.Modifier.isFinal;
+
 import java.util.ArrayList;
 import java.util.List;
 
 import net.vidageek.mirror.provider.ProxyReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
-import net.vidageek.mirror.proxy.cglib.CGLibInvocationHandler;
 import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 import net.vidageek.mirror.proxy.dsl.ProxyHandler;
 
@@ -15,7 +15,7 @@ import net.vidageek.mirror.proxy.dsl.ProxyHandler;
  * @author Juliano Alves
  * 
  */
-public class DefaultProxyHandler implements ProxyHandler<Object> {
+public class DefaultProxyHandler<T> implements ProxyHandler<T> {
 
 	private Class<?> baseClass = Object.class;
 	private final List<Class<?>> interfaces = new ArrayList<Class<?>>();
@@ -33,7 +33,7 @@ public class DefaultProxyHandler implements ProxyHandler<Object> {
 			if (clazz.isInterface()) {
 				interfaces.add(clazz);
 			} else if (!baseClassAlreadyFound) {
-				if (isFinalClass(clazz)) {
+				if (isFinal(clazz.getModifiers())) {
 					throw new IllegalArgumentException("Cannot proxify final class " + clazz.getName());
 				}
 
@@ -45,18 +45,15 @@ public class DefaultProxyHandler implements ProxyHandler<Object> {
 		}
 	}
 
-	private boolean isFinalClass(final Class<?> clazz) {
-		return Modifier.isFinal(clazz.getModifiers());
-	}
-
-	public Object interceptingWith(final MethodInterceptor... interceptors) {
+	@SuppressWarnings("unchecked")
+	public T interceptingWith(final MethodInterceptor... interceptors) {
 		if ((interceptors == null) || (interceptors.length == 0)) {
 			throw new IllegalArgumentException("interceptors cannot be null or empty");
 		}
-		CGLibInvocationHandler invocationHandler = new CGLibInvocationHandler(interceptors);
-		ProxyReflectionProvider proxyReflectionProvider = provider.getProxyReflectionProvider(	baseClass, interfaces,
-																								invocationHandler);
 
-		return proxyReflectionProvider.createProxy();
+		ProxyReflectionProvider proxyReflectionProvider = provider.getProxyReflectionProvider(	baseClass, interfaces,
+																								interceptors);
+
+		return (T) proxyReflectionProvider.createProxy();
 	}
 }

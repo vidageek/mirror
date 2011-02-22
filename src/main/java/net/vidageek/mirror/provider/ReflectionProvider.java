@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.util.List;
 
 import net.vidageek.mirror.exception.ReflectionProviderException;
-import net.vidageek.mirror.proxy.cglib.CGLibInvocationHandler;
+import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 
 /**
  * This is the interface defines methods to get all specific reflection
@@ -111,6 +111,15 @@ public interface ReflectionProvider {
 	 */
 	GenericTypeAccessor getFieldGenericTypeAccessor(Field field);
 
-	ProxyReflectionProvider getProxyReflectionProvider(Class<?> clazz,
-			List<Class<?>> interfaces, CGLibInvocationHandler invocationHandler);
+	/**
+	 * @param clazz
+	 *            Base inheritance class of the proxy
+	 * @param interfaces
+	 *            List of the interfaces this proxy should implement
+	 * @param methodInterceptors
+	 *            List of method interceptors
+	 * @throws ReflectionProviderException
+	 */
+	ProxyReflectionProvider getProxyReflectionProvider(Class<?> clazz, List<Class<?>> interfaces,
+			MethodInterceptor... methodInterceptors);
 }
