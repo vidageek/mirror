@@ -18,21 +18,21 @@ import net.vidageek.mirror.proxy.dsl.ProxyHandler;
 public class DefaultProxyHandler implements ProxyHandler<Object> {
 
 	private Class<?> baseClass = Object.class;
-	private List<Class<?>> interfaces = new ArrayList<Class<?>>();
+	private final List<Class<?>> interfaces = new ArrayList<Class<?>>();
 	private final ReflectionProvider provider;
-	
+
 	public DefaultProxyHandler(final ReflectionProvider provider, final Class<?>[] classes) {
 		this.provider = provider;
 		extractBaseClassAndInterfaces(classes);
 	}
 
-	private void extractBaseClassAndInterfaces(Class<?>[] classes) {
+	private void extractBaseClassAndInterfaces(final Class<?>[] classes) {
 		boolean baseClassAlreadyFound = false;
 
 		for (Class<?> clazz : classes) {
 			if (clazz.isInterface()) {
 				interfaces.add(clazz);
-			} else if(!baseClassAlreadyFound) {
+			} else if (!baseClassAlreadyFound) {
 				if (isFinalClass(clazz)) {
 					throw new IllegalArgumentException("Cannot proxify final class " + clazz.getName());
 				}
@@ -44,15 +44,18 @@ public class DefaultProxyHandler implements ProxyHandler<Object> {
 			}
 		}
 	}
-	
-	private boolean isFinalClass(Class<?> clazz) {
+
+	private boolean isFinalClass(final Class<?> clazz) {
 		return Modifier.isFinal(clazz.getModifiers());
 	}
 
-	public Object interceptingWith(MethodInterceptor... interceptors) {
+	public Object interceptingWith(final MethodInterceptor... interceptors) {
+		if ((interceptors == null) || (interceptors.length == 0)) {
+			throw new IllegalArgumentException("interceptors cannot be null or empty");
+		}
 		CGLibInvocationHandler invocationHandler = new CGLibInvocationHandler(interceptors);
-		ProxyReflectionProvider proxyReflectionProvider = 
-			provider.getProxyReflectionProvider(baseClass, interfaces, invocationHandler);
+		ProxyReflectionProvider proxyReflectionProvider = provider.getProxyReflectionProvider(	baseClass, interfaces,
+																								invocationHandler);
 
 		return proxyReflectionProvider.createProxy();
 	}
