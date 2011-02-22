@@ -11,3 +11,4 @@ Issue 47 - Sun15ReflectionProvider
 Issue 45 - Set final fields
 Issue 51 - Do not read config file using java.io.File
 Issue 52 - license clarity
+Issue 33 - Proxyfier similar to the one in vraptor
