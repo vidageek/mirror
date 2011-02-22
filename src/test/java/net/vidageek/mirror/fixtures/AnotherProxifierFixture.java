@@ -2,8 +2,8 @@ package net.vidageek.mirror.fixtures;
 
 /**
  * @author jonasabreu
- *
+ * 
  */
-final public class AnotherProxifierFixture {
+public interface AnotherProxifierFixture {
 
 }

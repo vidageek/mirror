@@ -75,35 +75,35 @@ public class MirrorTest {
 
 	@Test
 	public void testThatProxifyOneInterfaceIsCorrect() {
-		OneInterface proxy = new Mirror().proxify(OneInterface.class).interceptingWith(new MethodInterceptor(){
+		OneInterface proxy = new Mirror().proxify(OneInterface.class).interceptingWith(new MethodInterceptor() {
 
-			public boolean accepts(Method method) {
+			public boolean accepts(final Method method) {
 				return true;
 			}
 
-			public Object intercepts(Object target, Method method,
-					Object... parameters) {
+			public Object intercepts(final Object target, final Method method, final Object... parameters) {
 				return "foo";
-			}});
+			}
+		});
 
 		assertEquals("foo", proxy.interfaceMethod());
 	}
 
 	@Test
 	public void testThatProxifyMoreThanOneInterfaceIsCorrect() {
-		Object proxy = new Mirror().proxify(OneClass.class, String.class).interceptingWith(new MethodInterceptor(){
+		Object proxy = new Mirror().proxify(OneClass.class).interceptingWith(new MethodInterceptor() {
 
-			public boolean accepts(Method method) {
+			public boolean accepts(final Method method) {
 				return true;
 			}
 
-			public Object intercepts(Object target, Method method,
-					Object... parameters) {
+			public Object intercepts(final Object target, final Method method, final Object... parameters) {
 				return "foo";
-			}});
+			}
+		});
 
-//		assertEquals("foo", ((OneInterface) proxy).interfaceMethod());
-//		assertEquals("foo", ((OtherInterface) proxy).otherInterfaceMethod());
+		// assertEquals("foo", ((OneInterface) proxy).interfaceMethod());
+		// assertEquals("foo", ((OtherInterface) proxy).otherInterfaceMethod());
 		assertEquals("foo", ((OtherClass) proxy).classMethod());
 	}
 }

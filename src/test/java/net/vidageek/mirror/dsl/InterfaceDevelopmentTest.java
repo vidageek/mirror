@@ -309,7 +309,7 @@ public class InterfaceDevelopmentTest {
 				.interceptingWith(new MethodInterceptorFixture());
 
 		new Mirror().proxify("net.vidageek.mirror.fixtures.ProxifierFixture",
-								"net.vidageek.mirror.fixturesAnother.ProxifierFixture")
+								"net.vidageek.mirror.fixtures.AnotherProxifierFixture")
 				.interceptingWith(new MethodInterceptorFixture());
 	}
 }
