@@ -1,0 +1,15 @@
+[chapter Proxy]
+
+Uma nova feature foi adicionada ao Mirror no release 1.6. A capacidade de criar proxys de classes e interfaces.
+
+[java]
+UmaClasse proxy = new Mirror().proxify(UmaClasse.class)
+		.interceptingWith(new OSeuMethodInterceptor());
+[/java]
+
+O método ::interceptingWith:: recebe qualquer número de objetos que implementem
+::net.vidageek.mirror.proxy.dsl.MethodInterceptor::. Quando um método for invocado no proxy, o primeiro
+::MethodInterceptor:: que aceitar aquele método será usado para interceptar o método. 
+
+
+
