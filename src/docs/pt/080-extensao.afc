@@ -36,23 +36,7 @@ rápido que o provider padrão dependendo de como você usa o Mirror.
 
 Aviso! Este provider provavelmente só funciona nas versões 1.5 e 1.6 das JVMs da Sun.
 
-Para utilizá-lo, você deve adicioná-lo ao build path do seu projeto. Você pode baixar o jar em 
-http://github.com/vidageek/mirror/downloads ou http://maven.vidageek.net/net/vidageek/mirror-sun15-provider .
-
-Se você usa maven, você pode simplesmente adicioná-lo como dependência do seu projeto no pom.xml
-[xml]
-<dependencies>
-...
-	<dependency>
-	    <groupId>net.vidageek</groupId>
-	    <artifactId>mirror-sun15-provider</artifactId>
-	    <version>1.6</version>
-	</dependency>
-...
-</dependencies>
-[/xml]
-
-Após isso, você apenas precisa instanciar seu Mirror passando um Sun15ReflectionProvider: 
+Existem duas formas de utilizar este provider:
 
 [java]
 new Mirror(new Sun15ReflectionProvider());

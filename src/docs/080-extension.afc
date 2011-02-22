@@ -35,23 +35,7 @@ depending on how you're using mirror.
 
 Warning!!! This will probably only work on Sun JVM 1.5 and 1.6.
 
-To use it, you need to add it to the build path of your project. You can download it's jar at 
-http://github.com/vidageek/mirror/downloads or http://maven.vidageek.net/net/vidageek/mirror-sun15-provider .
-
-If you use maven, you can just add it as a dependency on your pom.xml
-[xml]
-<dependencies>
-...
-	<dependency>
-	    <groupId>net.vidageek</groupId>
-	    <artifactId>mirror-sun15-provider</artifactId>
-	    <version>1.6</version>
-	</dependency>
-...
-</dependencies>
-[/xml]
-
-After that, just instantiate your Mirror passing a Sun15ReflectionProvider:
+There are two ways to use it:
 
 [java]
 new Mirror(new Sun15ReflectionProvider());
