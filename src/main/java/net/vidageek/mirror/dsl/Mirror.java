@@ -143,10 +143,8 @@ public final class Mirror {
 	 * @see {@link Mirror#on(Class)}
 	 * @see {@link Mirror#proxify(Class...)}
 	 */
-	@SuppressWarnings("unchecked")
 	public ProxyHandler<Object> proxify(final String className) {
-		Class<?> clazz = reflectClass(className);
-		return (ProxyHandler<Object>) proxify(clazz);
+		return proxify(new String[] { className });
 	}
 
 	/**
