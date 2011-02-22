@@ -3,6 +3,8 @@ package net.vidageek.mirror.dsl;
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.AnnotatedElement;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.List;
 
 import net.vidageek.mirror.DefaultAccessorsController;
 import net.vidageek.mirror.DefaultClassController;
@@ -154,7 +156,11 @@ public final class Mirror {
 	 * @see {@link Mirror#proxify(Class...)}
 	 */
 	public ProxyHandler<Object> proxify(final String... classNames) {
-		return null;
+		List<Class<?>> classes = new ArrayList<Class<?>>();
+		for (String className : classNames) {
+			classes.add(reflectClass(className));
+		}
+		return proxify(classes.toArray(new Class<?>[classNames.length]));
 	}
 
 	/**
