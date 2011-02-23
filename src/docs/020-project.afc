@@ -31,19 +31,32 @@ Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API cha
 * **Mirror 1.6 - 2011 February 22**
 
 - Issue 17 - Add documentation link to other languages (BUGFIX)
+
 - Issue 28 - add constructor bypasser (FEATURE)
-- Issue 35 - Must return MirrorList (FEATURE)
-- Issue 36 - Deprecate fields/constructors/methods/annotationsMatching (FEATURE)
-- Issue 38 - Implement mapping (FEATURE)
-- Issue 39 - MirrorList must be thread safe (FEATURE)
-- Issue 43 - Move Matcher to list.dsl (BUGFIX)
-- Issue 44 - add method to reflect uniquely named methods (FEATURE)
-- Issue 45 - Set final fields (FEATURE)
-- Issue 46 - add method to reflect unique constructor (FEATURE)
-- Issue 47 - Sun15ReflectionProvider (FEATURE)
-- Issue 51 - Do not read config file using java.io.File (BUGFIX)
-- Issue 52 - license clarity (BUGFIX)
+
 - Issue 33 - Proxyfier similar to the one in vraptor (FEATURE)
+
+- Issue 35 - Must return MirrorList (FEATURE)
+
+- Issue 36 - Deprecate fields/constructors/methods/annotationsMatching (FEATURE)
+
+- Issue 38 - Implement mapping (FEATURE)
+
+- Issue 39 - MirrorList must be thread safe (FEATURE)
+
+- Issue 43 - Move Matcher to list.dsl (BUGFIX)
+
+- Issue 44 - add method to reflect uniquely named methods (FEATURE)
+
+- Issue 45 - Set final fields (FEATURE)
+
+- Issue 46 - add method to reflect unique constructor (FEATURE)
+
+- Issue 47 - Sun15ReflectionProvider (FEATURE)
+
+- Issue 51 - Do not read config file using java.io.File (BUGFIX)
+
+- Issue 52 - license clarity (BUGFIX)
 
 
 * **Mirror 1.5.1 - 2009 August 04**
