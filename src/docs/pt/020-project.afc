@@ -33,18 +33,31 @@ levada em consideração.
 * **Mirror 1.6 - 22 de Fevereiro de 2011**
 
 - Issue 17 - Adicionar link para a documentação em outras linguas (BUGFIX)
+
 - Issue 28 - instanciar sem chamar construtor (FEATURE)
+
 - Issue 35 - Deve devolver MirrorList (FEATURE)
+
 - Issue 36 - Marcar como deprecated fields/constructors/methods/annotationsMatching (FEATURE)
+
 - Issue 38 - Implementar mapping (FEATURE)
+
 - Issue 39 - MirrorList deve ser thread safe (FEATURE)
+
 - Issue 43 - Mover Matcher para list.dsl (BUGFIX)
+
 - Issue 44 - Adicionar método para refletir métodos com nome único (FEATURE)
+
 - Issue 45 - Setar final fields (FEATURE)
+
 - Issue 46 - Adicionar método para refletir construtor único (FEATURE)
+
 - Issue 47 - Sun15ReflectionProvider (FEATURE)
+
 - Issue 51 - Não ler configuração com java.io.File (BUGFIX)
+
 - Issue 52 - Colocar a licensa em um lugar proeminente (BUGFIX)
+
 - Issue 33 - Proxyfier parecido com o do VRaptor (FEATURE)
 
 * **Mirror 1.5.1 - 04 de Agosto de 2009**
