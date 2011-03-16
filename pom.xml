@@ -54,20 +54,6 @@
 		<url>http://github.com/vidageek/mirror/issues</url>
 	</issueManagement>
 
-	<distributionManagement>
-		<repository>
-			<id>vidageek.net</id>
-			<name>VidaGeek.net Maven Repository</name>
-			<url>scp://maven_sync@vidageek.net/home/maven_sync/maven.vidageek.net/</url>
-		</repository>
-		<snapshotRepository>
-			<id>vidageek.net</id>
-			<name>VidaGeek.net Maven Snapshot Repository</name>
-			<url>scp://maven_sync@vidageek.net/home/maven_sync/snapshots.vidageek.net/</url>
-			<uniqueVersion>false</uniqueVersion>
-		</snapshotRepository>
-	</distributionManagement>
-
 	<reporting>
 		<plugins>
 			<plugin>
