@@ -1,7 +1,9 @@
 #! /bin/bash
 
-echo "packaging Mirror so we can test things after the jar is built"
+echo "installing Mirror so we can test things after the jar is built"
 
-mvn -Dmaven.test.skip clean package
+mvn -Dmaven.test.skip -Ptest clean install
 
 mvn test
+
+cd packaged && mvn clean test;
