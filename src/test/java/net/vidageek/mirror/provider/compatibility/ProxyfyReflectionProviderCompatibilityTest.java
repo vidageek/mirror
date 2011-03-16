@@ -11,7 +11,6 @@ import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 
 import org.junit.Assert;
-import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -21,10 +20,7 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-final public class ProxyfyReflectionProviderCompatibilityTest {
-
-	@DataPoint
-	public static ReflectionProvider provider;
+final public class ProxyfyReflectionProviderCompatibilityTest implements ReflectionProviderDatapoints {
 
 	@Theory
 	public void testThatCanCreateAProxyOfANonFinalClass(final ReflectionProvider r) {

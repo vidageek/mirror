@@ -30,55 +30,52 @@ import org.junit.runner.RunWith;
  * 
  */
 @RunWith(Theories.class)
-public class AnnotatedElementReflectionProviderCompatibilityTest {
+public class AnnotatedElementReflectionProviderCompatibilityTest implements ReflectionProviderDatapoints {
 
-    @DataPoint
-    public static ReflectionProvider provider;
+	@DataPoint
+	public static AnnotatedElement clazz;
+	@DataPoint
+	public static AnnotatedElement field;
+	@DataPoint
+	public static AnnotatedElement method;
+	@DataPoint
+	public static AnnotatedElement constructor;
 
-    @DataPoint
-    public static AnnotatedElement clazz;
-    @DataPoint
-    public static AnnotatedElement field;
-    @DataPoint
-    public static AnnotatedElement method;
-    @DataPoint
-    public static AnnotatedElement constructor;
+	@Theory
+	public void testGetAnnotations(final AnnotatedElement element, final ReflectionProvider r) {
+		AnnotatedElementReflectionProvider provider = r.getAnnotatedElementReflectionProvider(element);
 
-    @Theory
-    public void testGetAnnotations(final AnnotatedElement element, final ReflectionProvider r) {
-        AnnotatedElementReflectionProvider provider = r.getAnnotatedElementReflectionProvider(element);
+		List<Annotation> list = provider.getAnnotations();
 
-        List<Annotation> list = provider.getAnnotations();
+		Assert.assertTrue("List should contain AnnotationFixture", contains(list, AnnotationFixture.class));
+		Assert.assertTrue(	"List should contain AnotherAnnotationFixture",
+							contains(list, AnotherAnnotationFixture.class));
+	}
 
-        Assert.assertTrue("List should contain AnnotationFixture", contains(list, AnnotationFixture.class));
-        Assert.assertTrue("List should contain AnotherAnnotationFixture",
-                contains(list, AnotherAnnotationFixture.class));
-    }
+	@Theory
+	public void testGetAnnotation(final AnnotatedElement element, final ReflectionProvider r) {
+		AnnotatedElementReflectionProvider provider = r.getAnnotatedElementReflectionProvider(element);
 
-    @Theory
-    public void testGetAnnotation(final AnnotatedElement element, final ReflectionProvider r) {
-        AnnotatedElementReflectionProvider provider = r.getAnnotatedElementReflectionProvider(element);
+		Assert.assertNotNull(provider.getAnnotation(AnnotationFixture.class));
 
-        Assert.assertNotNull(provider.getAnnotation(AnnotationFixture.class));
+		Assert.assertNotNull(provider.getAnnotation(AnotherAnnotationFixture.class));
+	}
 
-        Assert.assertNotNull(provider.getAnnotation(AnotherAnnotationFixture.class));
-    }
+	private boolean contains(final List<Annotation> list, final Class<? extends Annotation> ann) {
+		for (Annotation annotation : list) {
+			if (ann.equals(annotation.getClass().getInterfaces()[0])) {
+				return true;
+			}
+		}
+		return false;
+	}
 
-    private boolean contains(final List<Annotation> list, final Class<? extends Annotation> ann) {
-        for (Annotation annotation : list) {
-            if (ann.equals(annotation.getClass().getInterfaces()[0])) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    @BeforeClass
-    public static void init() {
-        Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
-        clazz = ClassFixture.class;
-        field = mirror.on(FieldFixture.class).reflect().field("field");
-        method = mirror.on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
-        constructor = mirror.on(ConstructorFixture.class).reflect().constructor().withoutArgs();
-    }
+	@BeforeClass
+	public static void init() {
+		Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
+		clazz = ClassFixture.class;
+		field = mirror.on(FieldFixture.class).reflect().field("field");
+		method = mirror.on(MethodFixture.class).reflect().method("methodWithNoArgs").withoutArgs();
+		constructor = mirror.on(ConstructorFixture.class).reflect().constructor().withoutArgs();
+	}
 }
