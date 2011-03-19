@@ -6,7 +6,42 @@
 	<version>1.0</version>
 	<name>Mirror Magic</name>
 	<packaging>jar</packaging>
-	<description>Optional Dependêncies to advanced features.</description>
+	<description>Optional Dependêncies to Mirror's advanced features.</description>
+
+	<url>http://projetos.vidageek.net/mirror</url>
+
+	<organization>
+		<name>VidaGeek.net</name>
+		<url>http://vidageek.net</url>
+	</organization>
+
+	<licenses>
+		<license>
+			<distribution>repo</distribution>
+			<name>Apache License, Version 2.0</name>
+			<url>http://apache.org/licenses/LICENSE-2.0.txt</url>
+		</license>
+	</licenses>
+
+	<scm>
+		<connection>scm:git:git://github.com:vidageek/mirror.git</connection>
+		<url>git://github.com:vidageek/mirror.git</url>
+	</scm>
+
+	<developers>
+		<developer>
+			<name>Jonas Abreu</name>
+			<id>jonasabreu</id>
+			<email>jonas@vidageek.net</email>
+			<organization>VidaGeek.net</organization>
+			<organizationUrl>http://vidageek.net</organizationUrl>
+			<roles>
+				<role>Project Owner</role>
+				<role>Developer</role>
+			</roles>
+		</developer>
+	</developers>
+
 
 	<dependencies>
 		<dependency>
@@ -32,6 +67,32 @@
 					<source>1.5</source>
 					<target>1.5</target>
 				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-source-plugin</artifactId>
+				<version>2.1.2</version>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<version>2.7</version>
+				<executions>
+					<execution>
+						<phase>verify</phase>
+						<goals>
+							<goal>jar</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
