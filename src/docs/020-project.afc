@@ -28,6 +28,10 @@ Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API cha
 [section Release Notes]
 
 [list]
+* **Mirror 1.6.1 - 2011 March 19**
+
+- Issue 54 - Proxyfy won't work (BUGFIX)
+
 * **Mirror 1.6 - 2011 February 22**
 
 - Issue 17 - Add documentation link to other languages (BUGFIX)

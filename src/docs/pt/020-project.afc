@@ -30,6 +30,10 @@ levada em consideração.
 [section Release Notes]
 
 [list]
+* **Mirror 1.6.1 - 2011 March 19**
+
+- Issue 54 - Proxyfy não funciona (BUGFIX)
+
 * **Mirror 1.6 - 22 de Fevereiro de 2011**
 
 - Issue 17 - Adicionar link para a documentação em outras linguas (BUGFIX)
