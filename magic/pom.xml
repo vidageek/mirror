@@ -3,13 +3,24 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>net.vidageek</groupId>
 	<artifactId>mirror-magic</artifactId>
-	<version>1.6-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>Mirror Magic</name>
 	<packaging>jar</packaging>
-	<description>Project to produce shaded jars used by mirror</description>
+	<description>Optional Dependêncies to advanced features.</description>
 
 	<dependencies>
+		<dependency>
+			<groupId>cglib</groupId>
+			<artifactId>cglib-nodep</artifactId>
+			<version>2.1_3</version>
+		</dependency>
+
 		<!-- Dependencies to be shaded and included on the main jar -->
+		<dependency>
+			<groupId>org.objenesis</groupId>
+			<artifactId>objenesis</artifactId>
+			<version>1.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -33,6 +44,11 @@
 							<goal>shade</goal>
 						</goals>
 						<configuration>
+							<artifactSet>
+								<excludes>
+									<exclude>cglib:cglib-nodep</exclude>
+								</excludes>
+							</artifactSet>
 							<relocations>
 								<relocation>
 									<pattern>org.objenesis</pattern>
