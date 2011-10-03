@@ -32,6 +32,11 @@ public class ChildFixture extends SuperClassFixture implements InterfaceFixture 
     private void overridenMethodWithTwoArgs(final int i, final String string) {
 
     }
+    
+    @SuppressWarnings("unused")
+    private void methodWithParametersfromSomeTypes(final int i, final String string, final String... args) {
+
+    }
 
     @Override
     public boolean equals(final Object obj) {

@@ -32,4 +32,13 @@ public interface MethodReflector {
 	 *             if more than one method with the same name was found.
 	 */
 	public Method withAnyArgs();
-}
+	
+	/**
+	 * Use this method to get a Class of current index parameter
+	 * @param index 
+	 * 		a index in array of parameters
+	 * @return Class Type from param at index
+	 * @throws MirrorException
+	 * 				if index is out range
+	 */
+	public Class<?> getParameterClass(int index);}

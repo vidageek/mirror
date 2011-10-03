@@ -137,4 +137,20 @@ public class MethodReflectorTest {
 		Method method = new DefaultMethodReflector(provider, "equals", ChildFixture.class).withAnyArgs();
 		assertNotNull(method);
 	}
+	
+	@Test
+	public void testGetParameterClass(){
+		DefaultMethodReflector methodReflector = new DefaultMethodReflector(provider, "methodWithParametersfromSomeTypes", ChildFixture.class);
+		Class clazzMustBePrimitiveInt = methodReflector.getParameterClass(0);
+		Class clazzMustBeString = methodReflector.getParameterClass(1);
+		Class clazzMustBeStringArray = methodReflector.getParameterClass(2);
+		Assert.assertEquals(clazzMustBePrimitiveInt, int.class);
+		Assert.assertEquals(clazzMustBeString, String.class);
+		Assert.assertEquals(clazzMustBeStringArray, String[].class);
+	}
+	
+	@Test(expected = ArrayIndexOutOfBoundsException.class)
+	public void testGetParameterClassIndexOutOfBounds(){
+		new DefaultMethodReflector(provider, "methodWithParametersfromSomeTypes", ChildFixture.class).getParameterClass(10);
+	}	
 }
