@@ -47,4 +47,11 @@ public interface ClassController<T> {
 	 */
 	public AllReflectionHandler<T> reflectAll();
 
+	/**
+	 * This part of the DSL verifies if the class is a collection.
+	 * 
+	 * @return true if reflected class is a collection.
+	 */
+	public boolean isCollection();
+
 }
