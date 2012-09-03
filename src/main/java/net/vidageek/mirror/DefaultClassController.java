@@ -11,6 +11,7 @@ import net.vidageek.mirror.invoke.dsl.InvocationHandler;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.DefaultAllReflectionHandler;
 import net.vidageek.mirror.reflect.DefaultReflectionHandler;
+import net.vidageek.mirror.reflect.DefaultTypeHandler;
 import net.vidageek.mirror.reflect.dsl.AllReflectionHandler;
 import net.vidageek.mirror.reflect.dsl.ReflectionHandler;
 import net.vidageek.mirror.set.DefaultSetterHandler;
@@ -23,9 +24,9 @@ import net.vidageek.mirror.set.dsl.SetterHandler;
  */
 public final class DefaultClassController<T> implements ClassController<T> {
 
-	private final Class<T> clazz;
+	private final Class<T>				clazz;
 
-	private final ReflectionProvider provider;
+	private final ReflectionProvider	provider;
 
 	public DefaultClassController(final ReflectionProvider provider, final Class<T> clazz) {
 		this.provider = provider;
@@ -55,4 +56,11 @@ public final class DefaultClassController<T> implements ClassController<T> {
 		return new DefaultAllReflectionHandler<T>(provider, clazz);
 	}
 
+	public boolean isCollection() {
+		return new DefaultTypeHandler(clazz).isCollection();
+	}
+
+	public boolean isPrimitive() {
+		return new DefaultTypeHandler(clazz).isPrimitive();
+	}
 }

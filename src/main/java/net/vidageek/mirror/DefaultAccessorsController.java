@@ -9,6 +9,7 @@ import net.vidageek.mirror.get.dsl.GetterHandler;
 import net.vidageek.mirror.invoke.DefaultInvocationHandler;
 import net.vidageek.mirror.invoke.dsl.InvocationHandler;
 import net.vidageek.mirror.provider.ReflectionProvider;
+import net.vidageek.mirror.reflect.DefaultTypeHandler;
 import net.vidageek.mirror.set.DefaultSetterHandler;
 import net.vidageek.mirror.set.dsl.SetterHandler;
 
@@ -19,9 +20,9 @@ import net.vidageek.mirror.set.dsl.SetterHandler;
  */
 public final class DefaultAccessorsController implements AccessorsController {
 
-	private final Object target;
+	private final Object				target;
 
-	private final ReflectionProvider provider;
+	private final ReflectionProvider	provider;
 
 	public DefaultAccessorsController(final ReflectionProvider provider, final Object target) {
 		if (target == null) {
@@ -41,5 +42,13 @@ public final class DefaultAccessorsController implements AccessorsController {
 
 	public GetterHandler get() {
 		return new DefaultGetterHandler(provider, target);
+	}
+
+	public boolean isCollection() {
+		return new DefaultTypeHandler(target.getClass()).isCollection();
+	}
+
+	public boolean isPrimitive() {
+		return new DefaultTypeHandler(target.getClass()).isPrimitive();
 	}
 }

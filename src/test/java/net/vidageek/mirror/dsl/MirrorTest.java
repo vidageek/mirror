@@ -93,7 +93,7 @@ public class MirrorTest {
 	@Test
 	public void testThatProxifyMoreThanOneInterfaceIsCorrect() {
 		Object proxy = new Mirror().proxify(OneClassFixture.class, OneInterfaceFixture.class,
-											OtherInterfaceFixture.class).interceptingWith(new MethodInterceptor() {
+				OtherInterfaceFixture.class).interceptingWith(new MethodInterceptor() {
 
 			public boolean accepts(final Method method) {
 				return true;
