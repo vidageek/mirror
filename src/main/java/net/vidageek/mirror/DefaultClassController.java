@@ -3,11 +3,6 @@
  */
 package net.vidageek.mirror;
 
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.util.Collection;
-import java.util.Map;
-
 import net.vidageek.mirror.dsl.ClassController;
 import net.vidageek.mirror.get.DefaultGetterHandler;
 import net.vidageek.mirror.get.dsl.GetterHandler;
@@ -16,6 +11,7 @@ import net.vidageek.mirror.invoke.dsl.InvocationHandler;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.DefaultAllReflectionHandler;
 import net.vidageek.mirror.reflect.DefaultReflectionHandler;
+import net.vidageek.mirror.reflect.DefaultTypeHandler;
 import net.vidageek.mirror.reflect.dsl.AllReflectionHandler;
 import net.vidageek.mirror.reflect.dsl.ReflectionHandler;
 import net.vidageek.mirror.set.DefaultSetterHandler;
@@ -61,14 +57,10 @@ public final class DefaultClassController<T> implements ClassController<T> {
 	}
 
 	public boolean isCollection() {
-		Type type = clazz;
-		if (type instanceof ParameterizedType) {
-			ParameterizedType ptype = (ParameterizedType) type;
-			return Collection.class.isAssignableFrom((Class<?>) ptype.getRawType())
-					|| Map.class.isAssignableFrom((Class<?>) ptype.getRawType());
-		}
-
-		return Collection.class.isAssignableFrom((Class<?>) type);
+		return new DefaultTypeHandler(clazz).isCollection();
 	}
 
+	public boolean isPrimitive() {
+		return new DefaultTypeHandler(clazz).isPrimitive();
+	}
 }

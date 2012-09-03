@@ -4,11 +4,8 @@
 package net.vidageek.mirror.dsl;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.ClassFixture;
@@ -110,11 +107,5 @@ public class MirrorTest {
 		assertEquals("foo", ((OneInterfaceFixture) proxy).interfaceMethod());
 		assertEquals("foo", ((OtherInterfaceFixture) proxy).otherInterfaceMethod());
 		assertEquals("foo", ((OneClassFixture) proxy).classMethod());
-	}
-
-	@Test
-	public void testThatReflectClassIsACollection() {
-		assertTrue(new Mirror().on(ArrayList.class).isCollection());
-		assertFalse(new Mirror().on(Integer.class).isCollection());
 	}
 }
