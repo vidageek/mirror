@@ -3,6 +3,8 @@
  */
 package net.vidageek.mirror.reflect;
 
+import static java.lang.String.format;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,4 +71,14 @@ public final class DefaultMethodReflector implements MethodReflector {
 		throw new MirrorException("more than one method named " + methodName + " was found on class " + clazz.getName()
 				+ " while attempting to find a uniquely named method. Methods are: " + list);
 	}
+	
+	public Class<?> getParameterClass(int index) {
+		Class<?>[] types = new Mirror(provider).on(clazz).reflect().method(methodName).withAnyArgs().getParameterTypes();
+		
+		try {
+			return (Class<?>) types[index];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			throw new ArrayIndexOutOfBoundsException(format("No parameter declared at position %d.", index));
+		}
+	}	
 }
