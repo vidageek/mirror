@@ -22,7 +22,6 @@ import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.fixtures.NotABeanFixture;
-import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
@@ -131,110 +130,6 @@ public class AllReflectionHandlerTest {
 		assertEquals("getClass", getters.get(0).getName());
 	}
 
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatPresentsAllFieldsToMatcher() {
-		List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll()
-				.fieldsMatching(new Matcher<Field>() {
-
-					public boolean accepts(final Field element) {
-						return true;
-					}
-				});
-		assertEquals(8, list.size());
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatMatcherIsRespectedForFields() {
-		List<Field> list = new Mirror(provider).on(FieldFixture.class).reflectAll()
-				.fieldsMatching(new Matcher<Field>() {
-
-					public boolean accepts(final Field element) {
-						return "finalField".equals(element.getName());
-					}
-				});
-		assertEquals(1, list.size());
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatPresentsAllMethodsToMatcher() {
-		List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll()
-				.methodsMatching(new Matcher<Method>() {
-
-					public boolean accepts(final Method element) {
-						return true;
-					}
-				});
-		assertEquals(24, list.size());
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatMatcherIsRespectedForMethods() {
-		List<Method> list = new Mirror(provider).on(MethodFixture.class).reflectAll()
-				.methodsMatching(new Matcher<Method>() {
-
-					public boolean accepts(final Method element) {
-						return "methodWithNoArgs".equals(element.getName());
-					}
-				});
-		assertEquals(1, list.size());
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatPresentsAllMethodsToConstructor() {
-		List<Constructor<ConstructorFixture>> list = new Mirror(provider).on(ConstructorFixture.class).reflectAll()
-				.constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
-
-					public boolean accepts(final Constructor<ConstructorFixture> element) {
-						return true;
-					}
-				});
-		assertEquals(6, list.size());
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatMatcherIsRespectedForConstructors() {
-		List<Constructor<ConstructorFixture>> list = new Mirror(provider).on(ConstructorFixture.class).reflectAll()
-				.constructorsMatching(new Matcher<Constructor<ConstructorFixture>>() {
-
-					public boolean accepts(final Constructor<ConstructorFixture> element) {
-						return element.getParameterTypes().length == 0;
-					}
-				});
-		assertEquals(1, list.size());
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatPresentsAllAnnotationsToMatcher() {
-		List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll()
-				.annotationsMatching(new Matcher<Annotation>() {
-
-					public boolean accepts(final Annotation element) {
-						return true;
-					}
-				});
-		assertEquals(2, list.size());
-	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatMatcherIsRespectedForAnnotations() {
-		List<Annotation> list = new Mirror(provider).on(ClassFixture.class).reflectAll()
-				.annotationsMatching(new Matcher<Annotation>() {
-
-					public boolean accepts(final Annotation element) {
-						return "AnnotationFixture".equals(element.annotationType().getSimpleName());
-					}
-				});
-		assertEquals(1, list.size());
-	}
-
 	@SuppressWarnings("unused")
 	@Test
 	public void testThatAllReflectionHandlersReturnMirrorList() {
@@ -245,17 +140,4 @@ public class AllReflectionHandlerTest {
 		MirrorList<Annotation> annotations = new Mirror(provider).on((AnnotatedElement) ClassFixture.class)
 				.reflectAll().annotations();
 	}
-
-	@SuppressWarnings("deprecation")
-	@Test
-	public void testThatOldMatcherIsStillAccepted() {
-		new Mirror(provider).on(MethodFixture.class).reflectAll().methods()
-				.matching(new net.vidageek.mirror.dsl.Matcher<Method>() {
-
-					public boolean accepts(final Method element) {
-						return true;
-					}
-				});
-	}
-
 }

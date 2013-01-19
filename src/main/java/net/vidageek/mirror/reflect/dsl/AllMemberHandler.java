@@ -1,9 +1,7 @@
 package net.vidageek.mirror.reflect.dsl;
 
 import java.lang.annotation.Annotation;
-import java.util.List;
 
-import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
 import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 
@@ -16,17 +14,4 @@ public interface AllMemberHandler {
 	 * @see AnnotatedElementReflectionProvider#getAnnotations()
 	 */
 	public MirrorList<Annotation> annotations();
-
-	/**
-	 * Use this method to reflect all annotations on the wrapped
-	 * AnnotatedElement that matches matcher.
-	 * 
-	 * @return The list of annotations or an empty list if none was accepted by
-	 *         the matcher.
-	 * @see AllMemberHandler#annotations()
-	 * @deprecated Use annotations().matching(Matcher<Annotation>) instead.
-	 */
-	@Deprecated
-	public List<Annotation> annotationsMatching(Matcher<Annotation> matcher);
-
 }
