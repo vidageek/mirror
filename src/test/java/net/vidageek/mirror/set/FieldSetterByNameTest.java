@@ -1,7 +1,6 @@
 package net.vidageek.mirror.set;
 
 import static org.junit.Assert.assertEquals;
-
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;

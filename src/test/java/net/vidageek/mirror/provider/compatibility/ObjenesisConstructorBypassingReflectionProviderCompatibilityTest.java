@@ -1,7 +1,6 @@
 package net.vidageek.mirror.provider.compatibility;
 
 import static org.junit.Assert.assertNotNull;
-
 import net.vidageek.mirror.fixtures.ConstructorThatThrowsException;
 import net.vidageek.mirror.provider.ReflectionProvider;
 

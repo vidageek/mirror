@@ -1,7 +1,6 @@
 package net.vidageek.mirror.invoke;
 
 import static org.junit.Assert.fail;
-
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.MethodExceptionFixture;
