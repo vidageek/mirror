@@ -18,6 +18,7 @@ import net.vidageek.mirror.provider.ProxyReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.proxy.cglib.CGLibProxyReflectionProvider;
 import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
+import net.vidageek.mirror.proxy.javassist.JavassistProxyReflectionProvider;
 
 /**
  * Class which supplies all native Java reflection features plus some non
@@ -72,6 +73,19 @@ public final class DefaultMirrorReflectionProvider implements ReflectionProvider
 
 	public ProxyReflectionProvider getProxyReflectionProvider(final Class<?> clazz, final List<Class<?>> interfaces,
 			final MethodInterceptor... methodInterceptors) {
-		return new CGLibProxyReflectionProvider(clazz, interfaces, methodInterceptors);
+		if (isClassPresent("net.sf.cglib.proxy.Factory")) {
+			return new CGLibProxyReflectionProvider(clazz, interfaces, methodInterceptors);
+		}
+
+		return new JavassistProxyReflectionProvider(clazz, interfaces, methodInterceptors);
 	}
+
+	private static boolean isClassPresent(String className) {
+        try {
+            Class.forName(className);
+            return true;
+        } catch (ClassNotFoundException e) {
+            return false;
+        }
+    }
 }
