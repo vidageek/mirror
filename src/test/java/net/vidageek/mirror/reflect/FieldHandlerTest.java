@@ -1,9 +1,10 @@
 package net.vidageek.mirror.reflect;
 
+import static org.junit.Assert.assertTrue;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.AnnotationFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
@@ -37,7 +38,7 @@ public class FieldHandlerTest {
 	public void testThatAnnotationsReflectorIsProperlyDispatched() {
 		Annotation annotation = new DefaultFieldHandler(provider, annotatedField).annotation(AnnotationFixture.class);
 
-		Assert.assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
+		assertTrue(AnnotationFixture.class.isAssignableFrom(annotation.getClass()));
 	}
 
 }

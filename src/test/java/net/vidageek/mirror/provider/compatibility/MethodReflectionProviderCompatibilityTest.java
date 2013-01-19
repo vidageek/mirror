@@ -3,6 +3,11 @@
  */
 package net.vidageek.mirror.provider.compatibility;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
@@ -15,7 +20,6 @@ import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
-import org.junit.Assert;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -34,7 +38,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("privateMethod", new Class<?>[] {});
 
-		Assert.assertFalse(method.isAccessible());
+		assertFalse(method.isAccessible());
 	}
 
 	@Theory
@@ -42,11 +46,11 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		Method method = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("privateMethod", new Class<?>[] {});
 
-		Assert.assertFalse(method.isAccessible());
+		assertFalse(method.isAccessible());
 
 		r.getMethodReflectionProvider(null, MethodFixture.class, method).setAccessible();
 
-		Assert.assertTrue(method.isAccessible());
+		assertTrue(method.isAccessible());
 	}
 
 	@Theory
@@ -57,7 +61,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		Class<?>[] types = r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
 				.getParameters();
 
-		Assert.assertEquals(0, types.length);
+		assertEquals(0, types.length);
 	}
 
 	@Theory
@@ -69,11 +73,11 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		Class<?>[] types = r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
 				.getParameters();
 
-		Assert.assertEquals(4, types.length);
-		Assert.assertEquals(String.class, types[0]);
-		Assert.assertEquals(Boolean.class, types[1]);
-		Assert.assertEquals(Class.class, types[2]);
-		Assert.assertEquals(Long.class, types[3]);
+		assertEquals(4, types.length);
+		assertEquals(String.class, types[0]);
+		assertEquals(Boolean.class, types[1]);
+		assertEquals(Class.class, types[2]);
+		assertEquals(Long.class, types[3]);
 	}
 
 	@Theory
@@ -83,7 +87,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 
 		r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method).invoke(new Object[] { "" });
 
-		Assert.assertEquals(new Integer(1), MethodFixture.getArgNum());
+		assertEquals(new Integer(1), MethodFixture.getArgNum());
 	}
 
 	@Theory
@@ -93,7 +97,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 
 		r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method).invoke(new Object[] {});
 
-		Assert.assertEquals(new Integer(0), MethodFixture.getArgNum());
+		assertEquals(new Integer(0), MethodFixture.getArgNum());
 	}
 
 	@Theory
@@ -103,7 +107,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 
 		r.getMethodReflectionProvider(null, MethodFixture.class, method).invoke(new Object[] { "" });
 
-		Assert.assertEquals(new Integer(300), MethodFixture.getArgNum());
+		assertEquals(new Integer(300), MethodFixture.getArgNum());
 	}
 
 	@Theory
@@ -113,7 +117,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 
 		r.getMethodReflectionProvider(null, MethodFixture.class, method).invoke(new Object[] {});
 
-		Assert.assertEquals(new Integer(200), MethodFixture.getArgNum());
+		assertEquals(new Integer(200), MethodFixture.getArgNum());
 	}
 
 	@Theory
@@ -124,7 +128,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		Object returnValue = r.getMethodReflectionProvider(new ChildFixture(), ChildFixture.class, method)
 				.invoke(new Object[] {});
 
-		Assert.assertEquals(new Integer(0), returnValue);
+		assertEquals(new Integer(0), returnValue);
 	}
 
 	@Theory
@@ -135,7 +139,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method)
 				.invoke(new Object[] { 1, false });
 
-		Assert.assertEquals(new Integer(2), MethodFixture.getArgNum());
+		assertEquals(new Integer(2), MethodFixture.getArgNum());
 	}
 
 	@Theory
@@ -145,7 +149,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 
 		r.getMethodReflectionProvider(new MethodFixture(), MethodFixture.class, method).invoke(new Object[] {});
 
-		Assert.assertEquals(new Integer(100), MethodFixture.getArgNum());
+		assertEquals(new Integer(100), MethodFixture.getArgNum());
 	}
 
 	@Theory
@@ -156,7 +160,7 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		Object returnValue = r.getMethodReflectionProvider(new ChildFixture(), ChildFixture.class, method)
 				.invoke(new Object[] {});
 
-		Assert.assertEquals(new Integer(1), returnValue);
+		assertEquals(new Integer(1), returnValue);
 	}
 
 	@Theory
@@ -185,9 +189,9 @@ public class MethodReflectionProviderCompatibilityTest implements ReflectionProv
 		Method method = defaultProvider.getClassReflectionProvider(AnnotationFixture.class)
 				.reflectMethod("value", new Class<?>[] {});
 
-		Assert.assertNotNull(method);
+		assertNotNull(method);
 
-		Assert.assertEquals("foo",
+		assertEquals("foo",
 							r.getMethodReflectionProvider(annotation, AnnotationFixture.class, method)
 									.invoke(new Object[] {}));
 	}

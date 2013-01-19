@@ -3,9 +3,10 @@
  */
 package net.vidageek.mirror.invoke;
 
+import static org.junit.Assert.fail;
+
 import java.lang.reflect.Method;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.MethodExceptionFixture;
@@ -78,7 +79,7 @@ public class MethodHandlerByMethodTest {
 			new Mirror().on(MethodExceptionFixture.class).invoke().method(method).withoutArgs();
 		} catch (MirrorException e) {
 			if (!RuntimeException.class.equals(e.getCause().getClass())) {
-				Assert.fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
+				fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
 			}
 		}
 	}
