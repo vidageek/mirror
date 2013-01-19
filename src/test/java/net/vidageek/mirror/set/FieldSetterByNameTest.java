@@ -1,6 +1,7 @@
 package net.vidageek.mirror.set;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
+
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -41,6 +42,6 @@ public class FieldSetterByNameTest {
 	public void testThatCanSetFieldIfFieldIsFinal() {
 		final FieldFixture fixture = new FieldFixture(0);
 		new FieldSetterByName(provider, "finalField", fixture, FieldFixture.class).withValue(2);
-		Assert.assertEquals(2, new Mirror(provider).on(fixture).get().field("finalField"));
+		assertEquals(2, new Mirror(provider).on(fixture).get().field("finalField"));
 	}
 }

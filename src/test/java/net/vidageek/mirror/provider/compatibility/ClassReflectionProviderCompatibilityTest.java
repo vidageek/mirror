@@ -3,6 +3,11 @@
  */
 package net.vidageek.mirror.provider.compatibility;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -17,7 +22,6 @@ import net.vidageek.mirror.fixtures.MethodFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
-import org.junit.Assert;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -33,9 +37,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 
 	@Theory
 	public void testReflectClass(final ReflectionProvider r) {
-		Assert.assertEquals(ClassFixture.class, r.getClassReflectionProvider(ClassFixture.class).reflectClass());
+		assertEquals(ClassFixture.class, r.getClassReflectionProvider(ClassFixture.class).reflectClass());
 
-		Assert.assertEquals(ClassFixture.class, r.getClassReflectionProvider(ClassFixture.class.getName())
+		assertEquals(ClassFixture.class, r.getClassReflectionProvider(ClassFixture.class.getName())
 				.reflectClass());
 	}
 
@@ -43,29 +47,29 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 	public void testReflectField(final ReflectionProvider r) {
 		Field reference = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectField("publicField");
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference, r.getClassReflectionProvider(FieldFixture.class).reflectField("publicField"));
+		assertEquals(reference, r.getClassReflectionProvider(FieldFixture.class).reflectField("publicField"));
 
-		Assert.assertEquals(null, r.getClassReflectionProvider(FieldFixture.class).reflectField("fieldasdf"));
+		assertEquals(null, r.getClassReflectionProvider(FieldFixture.class).reflectField("fieldasdf"));
 	}
 
 	@Theory
 	public void testReflectPrivateField(final ReflectionProvider r) {
 		Field reference = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectField("field");
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference, r.getClassReflectionProvider(FieldFixture.class).reflectField("field"));
+		assertEquals(reference, r.getClassReflectionProvider(FieldFixture.class).reflectField("field"));
 	}
 
 	@Theory
 	public void testReflectStaticField(final ReflectionProvider r) {
 		Field reference = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectField("staticField");
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference, r.getClassReflectionProvider(FieldFixture.class).reflectField("staticField"));
+		assertEquals(reference, r.getClassReflectionProvider(FieldFixture.class).reflectField("staticField"));
 	}
 
 	@Theory
@@ -73,9 +77,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Field reference = defaultProvider.getClassReflectionProvider(ChildFixture.class)
 				.reflectField("staticSuperClassField");
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ChildFixture.class).reflectField("staticSuperClassField"));
 	}
 
@@ -84,9 +88,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Field reference = defaultProvider.getClassReflectionProvider(ChildFixture.class)
 				.reflectField("superClassString");
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference, r.getClassReflectionProvider(ChildFixture.class)
+		assertEquals(reference, r.getClassReflectionProvider(ChildFixture.class)
 				.reflectField("superClassString"));
 	}
 
@@ -95,16 +99,16 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Field reference = defaultProvider.getClassReflectionProvider(ChildFixture.class)
 				.reflectField("superClassPrivateField");
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ChildFixture.class).reflectField("superClassPrivateField"));
 
 	}
 
 	@Theory
 	public void testReflectMethod(final ReflectionProvider r) {
-		Assert.assertNull(r.getClassReflectionProvider(MethodFixture.class)
+		assertNull(r.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("methodasdf", new Class<?>[] { Object.class }));
 
 	}
@@ -115,9 +119,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("methodWithOneArg", new Class<?>[] { String.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class)
 									.reflectMethod("methodWithOneArg", new Class<?>[] { String.class }));
 
@@ -128,9 +132,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("methodWithNoArgs", new Class<?>[0]);
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithNoArgs",
 																							new Class<?>[0]));
 
@@ -141,9 +145,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("staticMethodWithOneArg", new Class<?>[] { String.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class)
 									.reflectMethod("staticMethodWithOneArg", new Class<?>[] { String.class }));
 	}
@@ -153,9 +157,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("staticMethod", new Class<?>[0]);
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class).reflectMethod("staticMethod",
 																							new Class<?>[0]));
 	}
@@ -165,9 +169,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("equals", new Class<?>[] { Object.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class)
 									.reflectMethod("equals", new Class<?>[] { Object.class }));
 	}
@@ -177,9 +181,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("methodWithTwoPrimitives", new Class<?>[] { int.class, boolean.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithTwoPrimitives",
 																							new Class<?>[] { int.class,
 																									boolean.class }));
@@ -190,9 +194,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("methodWithTwoPrimitives", new Class<?>[] { Integer.class, Boolean.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithTwoPrimitives",
 																							new Class<?>[] {
 																									Integer.class,
@@ -205,9 +209,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 				.reflectMethod("methodWithFourArgs",
 								new Class<?>[] { String.class, boolean.class, Class.class, long.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class).reflectMethod("methodWithFourArgs",
 																							new Class<?>[] {
 																									String.class,
@@ -221,9 +225,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(MethodFixture.class)
 				.reflectMethod("privateMethod", new Class<?>[] {});
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(MethodFixture.class).reflectMethod("privateMethod",
 																							new Class<?>[] {}));
 	}
@@ -233,16 +237,16 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Method reference = defaultProvider.getClassReflectionProvider(ChildFixture.class)
 				.reflectMethod("superClassPrivateMethod", new Class<?>[] {});
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ChildFixture.class).reflectMethod("superClassPrivateMethod",
 																							new Class<?>[] {}));
 	}
 
 	@Theory
 	public void testReflectConstructor(final ReflectionProvider r) {
-		Assert.assertNull(r.getClassReflectionProvider(ConstructorFixture.class)
+		assertNull(r.getClassReflectionProvider(ConstructorFixture.class)
 				.reflectConstructor(new Class<?>[] { Object.class }));
 
 	}
@@ -252,9 +256,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Constructor<ConstructorFixture> reference = defaultProvider
 				.getClassReflectionProvider(ConstructorFixture.class).reflectConstructor(new Class<?>[] {});
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ConstructorFixture.class)
 									.reflectConstructor(new Class<?>[] {}));
 	}
@@ -265,9 +269,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 				.getClassReflectionProvider(ConstructorFixture.class)
 				.reflectConstructor(new Class<?>[] { String.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ConstructorFixture.class)
 									.reflectConstructor(new Class<?>[] { String.class }));
 	}
@@ -279,9 +283,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 																									long.class,
 																									boolean.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ConstructorFixture.class)
 									.reflectConstructor(new Class<?>[] { int.class, long.class, boolean.class }));
 	}
@@ -294,9 +298,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 																									Long.class,
 																									Boolean.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ConstructorFixture.class)
 									.reflectConstructor(new Class<?>[] { Integer.class, Long.class, Boolean.class }));
 	}
@@ -308,9 +312,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 																									String.class,
 																									int.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ConstructorFixture.class)
 									.reflectConstructor(new Class<?>[] { String.class, int.class }));
 	}
@@ -320,9 +324,9 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		Constructor<ConstructorFixture> reference = defaultProvider
 				.getClassReflectionProvider(ConstructorFixture.class).reflectConstructor(new Class<?>[] { Long.class });
 
-		Assert.assertNotNull(reference);
+		assertNotNull(reference);
 
-		Assert.assertEquals(reference,
+		assertEquals(reference,
 							r.getClassReflectionProvider(ConstructorFixture.class)
 									.reflectConstructor(new Class<?>[] { Long.class }));
 	}
@@ -332,10 +336,10 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		List<Field> reference = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectAllFields();
 		List<Field> underTest = r.getClassReflectionProvider(FieldFixture.class).reflectAllFields();
 
-		Assert.assertEquals(reference.size(), underTest.size());
+		assertEquals(reference.size(), underTest.size());
 
 		for (Field field : reference) {
-			Assert.assertTrue(underTest.contains(field));
+			assertTrue(underTest.contains(field));
 		}
 	}
 
@@ -344,10 +348,10 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		List<Method> reference = defaultProvider.getClassReflectionProvider(MethodFixture.class).reflectAllMethods();
 		List<Method> underTest = r.getClassReflectionProvider(MethodFixture.class).reflectAllMethods();
 
-		Assert.assertEquals(reference.size(), underTest.size());
+		assertEquals(reference.size(), underTest.size());
 
 		for (Method method : reference) {
-			Assert.assertTrue(underTest.contains(method));
+			assertTrue(underTest.contains(method));
 		}
 	}
 
@@ -358,23 +362,23 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 		List<Constructor<ConstructorFixture>> underTest = r.getClassReflectionProvider(ConstructorFixture.class)
 				.reflectAllConstructors();
 
-		Assert.assertEquals(reference.size(), underTest.size());
+		assertEquals(reference.size(), underTest.size());
 
 		for (Constructor<ConstructorFixture> constructor : reference) {
-			Assert.assertTrue(underTest.contains(constructor));
+			assertTrue(underTest.contains(constructor));
 		}
 	}
 
 	@Theory
 	public void testThatCanReflectInterfaceFields(final ReflectionProvider r) {
-		Assert.assertNotNull(r.getClassReflectionProvider(InterfaceFixture.class).reflectField("interfaceField"));
+		assertNotNull(r.getClassReflectionProvider(InterfaceFixture.class).reflectField("interfaceField"));
 	}
 
 	@Theory
 	public void testThatFieldLookupIsDoneOnInterfaces(final ReflectionProvider r) {
 		Field field = defaultProvider.getClassReflectionProvider(ChildFixture.class).reflectField("interfaceField");
 
-		Assert.assertEquals("interfaceField",
+		assertEquals("interfaceField",
 							r.getFieldReflectionProvider(new ChildFixture(), ChildFixture.class, field).getValue());
 	}
 
@@ -382,7 +386,7 @@ public class ClassReflectionProviderCompatibilityTest implements ReflectionProvi
 	public void testThatFieldLookupIsDoneOnInterfacesUsingInterfaceFieldRepresentation(final ReflectionProvider r) {
 		Field field = defaultProvider.getClassReflectionProvider(InterfaceFixture.class).reflectField("interfaceField");
 
-		Assert.assertEquals("interfaceField",
+		assertEquals("interfaceField",
 							r.getFieldReflectionProvider(new ChildFixture(), ChildFixture.class, field).getValue());
 	}
 

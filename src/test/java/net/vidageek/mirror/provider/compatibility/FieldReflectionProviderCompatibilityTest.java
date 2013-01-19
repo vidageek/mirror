@@ -3,6 +3,10 @@
  */
 package net.vidageek.mirror.provider.compatibility;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Field;
 
 import net.vidageek.mirror.dsl.Mirror;
@@ -12,7 +16,6 @@ import net.vidageek.mirror.fixtures.SuperClassFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
-import org.junit.Assert;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -32,7 +35,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 		FieldFixture target = new FieldFixture(0);
 		target.publicField = 100;
 
-		Assert.assertEquals(new Integer(100), r.getFieldReflectionProvider(target, FieldFixture.class, field)
+		assertEquals(new Integer(100), r.getFieldReflectionProvider(target, FieldFixture.class, field)
 				.getValue());
 
 	}
@@ -42,7 +45,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 		Field field = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectField("field");
 		FieldFixture target = new FieldFixture(100);
 
-		Assert.assertEquals(new Integer(100), r.getFieldReflectionProvider(target, FieldFixture.class, field)
+		assertEquals(new Integer(100), r.getFieldReflectionProvider(target, FieldFixture.class, field)
 				.getValue());
 	}
 
@@ -51,7 +54,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 		Field field = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectField("staticField");
 		FieldFixture target = new FieldFixture(100);
 
-		Assert.assertEquals(new Integer(100), r.getFieldReflectionProvider(target, FieldFixture.class, field)
+		assertEquals(new Integer(100), r.getFieldReflectionProvider(target, FieldFixture.class, field)
 				.getValue());
 	}
 
@@ -61,7 +64,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 				.reflectField("staticSuperClassField");
 		SuperClassFixture.staticSuperClassField = "100";
 
-		Assert.assertEquals("100", r.getFieldReflectionProvider(null, ChildFixture.class, field).getValue());
+		assertEquals("100", r.getFieldReflectionProvider(null, ChildFixture.class, field).getValue());
 	}
 
 	@Theory
@@ -70,7 +73,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 		SuperClassFixture target = new SuperClassFixture("");
 		target.superClassString = "100";
 
-		Assert.assertEquals("100", r.getFieldReflectionProvider(target, ChildFixture.class, field).getValue());
+		assertEquals("100", r.getFieldReflectionProvider(target, ChildFixture.class, field).getValue());
 	}
 
 	@Theory
@@ -79,7 +82,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 				.reflectField("superClassPrivateField");
 		SuperClassFixture target = new SuperClassFixture("100");
 
-		Assert.assertEquals("100", r.getFieldReflectionProvider(target, ChildFixture.class, field).getValue());
+		assertEquals("100", r.getFieldReflectionProvider(target, ChildFixture.class, field).getValue());
 	}
 
 	@Theory
@@ -90,7 +93,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 
 		r.getFieldReflectionProvider(target, FieldFixture.class, field).setValue(100);
 
-		Assert.assertEquals(new Integer(100),
+		assertEquals(new Integer(100),
 							defaultProvider.getFieldReflectionProvider(target, FieldFixture.class, field).getValue());
 	}
 
@@ -102,7 +105,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 
 		r.getFieldReflectionProvider(target, FieldFixture.class, field).setValue(100);
 
-		Assert.assertEquals(new Integer(100),
+		assertEquals(new Integer(100),
 							defaultProvider.getFieldReflectionProvider(target, FieldFixture.class, field).getValue());
 	}
 
@@ -114,7 +117,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 
 		r.getFieldReflectionProvider(target, FieldFixture.class, field).setValue(100);
 
-		Assert.assertEquals(new Integer(100),
+		assertEquals(new Integer(100),
 							defaultProvider.getFieldReflectionProvider(target, FieldFixture.class, field).getValue());
 	}
 
@@ -127,7 +130,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 
 		r.getFieldReflectionProvider(target, ChildFixture.class, field).setValue("100");
 
-		Assert.assertEquals("100", defaultProvider.getFieldReflectionProvider(target, ChildFixture.class, field)
+		assertEquals("100", defaultProvider.getFieldReflectionProvider(target, ChildFixture.class, field)
 				.getValue());
 	}
 
@@ -139,7 +142,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 
 		r.getFieldReflectionProvider(target, ChildFixture.class, field).setValue("100");
 
-		Assert.assertEquals("100", defaultProvider.getFieldReflectionProvider(target, ChildFixture.class, field)
+		assertEquals("100", defaultProvider.getFieldReflectionProvider(target, ChildFixture.class, field)
 				.getValue());
 	}
 
@@ -152,7 +155,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 
 		r.getFieldReflectionProvider(target, ChildFixture.class, field).setValue("100");
 
-		Assert.assertEquals("100", defaultProvider.getFieldReflectionProvider(target, ChildFixture.class, field)
+		assertEquals("100", defaultProvider.getFieldReflectionProvider(target, ChildFixture.class, field)
 				.getValue());
 	}
 
@@ -160,11 +163,11 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 	public void testSetAccessible(final ReflectionProvider r) {
 		Field field = defaultProvider.getClassReflectionProvider(FieldFixture.class).reflectField("field");
 
-		Assert.assertFalse(field.isAccessible());
+		assertFalse(field.isAccessible());
 
 		r.getFieldReflectionProvider(new FieldFixture(1), FieldFixture.class, field).setAccessible();
 
-		Assert.assertTrue(field.isAccessible());
+		assertTrue(field.isAccessible());
 
 	}
 
@@ -173,7 +176,7 @@ public class FieldReflectionProviderCompatibilityTest implements ReflectionProvi
 		final FieldFixture fixture = new FieldFixture(0);
 		Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("finalField");
 		r.getFieldReflectionProvider(fixture, FieldFixture.class, field).setValue(2);
-		Assert.assertEquals(2, new Mirror(provider).on(fixture).get().field("finalField"));
+		assertEquals(2, new Mirror(provider).on(fixture).get().field("finalField"));
 	}
 
 }

@@ -3,12 +3,12 @@
  */
 package net.vidageek.mirror.reflect;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import java.lang.reflect.Method;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.InterfaceFixture;
@@ -104,7 +104,7 @@ public class MethodReflectorTest {
 		assertNotNull(method);
 		Method method2 = new DefaultMethodReflector(provider, "methodWithOneArg", MethodFixture.class)
 				.withArgs(String.class);
-		Assert.assertEquals(method2, method);
+		assertEquals(method2, method);
 	}
 
 	@Test
@@ -144,9 +144,9 @@ public class MethodReflectorTest {
 		Class clazzMustBePrimitiveInt = methodReflector.getParameterClass(0);
 		Class clazzMustBeString = methodReflector.getParameterClass(1);
 		Class clazzMustBeStringArray = methodReflector.getParameterClass(2);
-		Assert.assertEquals(clazzMustBePrimitiveInt, int.class);
-		Assert.assertEquals(clazzMustBeString, String.class);
-		Assert.assertEquals(clazzMustBeStringArray, String[].class);
+		assertEquals(clazzMustBePrimitiveInt, int.class);
+		assertEquals(clazzMustBeString, String.class);
+		assertEquals(clazzMustBeStringArray, String[].class);
 	}
 	
 	@Test(expected = ArrayIndexOutOfBoundsException.class)

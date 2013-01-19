@@ -6,7 +6,6 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.AnnotationFixture;
@@ -117,7 +116,7 @@ public class MethodInvocationTest {
 		AnnotationFixture annotation = new Mirror().on(ClassFixture.class).reflect()
 				.annotation(AnnotationFixture.class).atClass();
 
-		Assert.assertEquals("foo", new Mirror().on(annotation).invoke().method("value").withoutArgs());
+		assertEquals("foo", new Mirror().on(annotation).invoke().method("value").withoutArgs());
 	}
 
 }

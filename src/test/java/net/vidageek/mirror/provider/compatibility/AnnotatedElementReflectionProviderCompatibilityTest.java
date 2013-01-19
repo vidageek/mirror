@@ -3,6 +3,9 @@
  */
 package net.vidageek.mirror.provider.compatibility;
 
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.util.List;
@@ -18,7 +21,6 @@ import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
-import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.experimental.theories.DataPoint;
 import org.junit.experimental.theories.Theories;
@@ -47,8 +49,8 @@ public class AnnotatedElementReflectionProviderCompatibilityTest implements Refl
 
 		List<Annotation> list = provider.getAnnotations();
 
-		Assert.assertTrue("List should contain AnnotationFixture", contains(list, AnnotationFixture.class));
-		Assert.assertTrue(	"List should contain AnotherAnnotationFixture",
+		assertTrue("List should contain AnnotationFixture", contains(list, AnnotationFixture.class));
+		assertTrue(	"List should contain AnotherAnnotationFixture",
 							contains(list, AnotherAnnotationFixture.class));
 	}
 
@@ -56,9 +58,9 @@ public class AnnotatedElementReflectionProviderCompatibilityTest implements Refl
 	public void testGetAnnotation(final AnnotatedElement element, final ReflectionProvider r) {
 		AnnotatedElementReflectionProvider provider = r.getAnnotatedElementReflectionProvider(element);
 
-		Assert.assertNotNull(provider.getAnnotation(AnnotationFixture.class));
+		assertNotNull(provider.getAnnotation(AnnotationFixture.class));
 
-		Assert.assertNotNull(provider.getAnnotation(AnotherAnnotationFixture.class));
+		assertNotNull(provider.getAnnotation(AnotherAnnotationFixture.class));
 	}
 
 	private boolean contains(final List<Annotation> list, final Class<? extends Annotation> ann) {

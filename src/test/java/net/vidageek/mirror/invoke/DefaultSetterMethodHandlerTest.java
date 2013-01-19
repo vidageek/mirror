@@ -1,6 +1,6 @@
 package net.vidageek.mirror.invoke;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertEquals;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
@@ -22,7 +22,6 @@ final public class DefaultSetterMethodHandlerTest {
 		BeanFixture target = new BeanFixture();
 		new DefaultSetterMethodHandler(provider, target, "field").withValue("bar");
 
-		Assert.assertEquals("bar", target.getField());
-
+		assertEquals("bar", target.getField());
 	}
 }

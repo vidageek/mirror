@@ -1,6 +1,7 @@
 package net.vidageek.mirror.invoke;
 
-import junit.framework.Assert;
+import static org.junit.Assert.fail;
+
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.MethodExceptionFixture;
@@ -56,7 +57,7 @@ public class MethodHandlerByNameTest {
 			new Mirror().on(MethodExceptionFixture.class).invoke().method("method").withoutArgs();
 		} catch (MirrorException e) {
 			if (!RuntimeException.class.equals(e.getCause().getClass())) {
-				Assert.fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
+				fail("Exception cause should be RuntimeException.class. Was " + e.getCause());
 			}
 		}
 	}

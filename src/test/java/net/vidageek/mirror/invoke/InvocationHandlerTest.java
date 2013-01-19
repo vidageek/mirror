@@ -1,8 +1,10 @@
 package net.vidageek.mirror.invoke;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Method;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -63,7 +65,7 @@ public class InvocationHandlerTest {
 		BeanFixture target = new BeanFixture();
 		target.setField("foo");
 		String string = (String) new DefaultInvocationHandler<Object>(provider, target).getterFor("field");
-		Assert.assertEquals("foo", string);
+		assertEquals("foo", string);
 	}
 
 	@Test
@@ -71,7 +73,7 @@ public class InvocationHandlerTest {
 		BeanFixture target = new BeanFixture();
 		target.setBooleanField(true);
 		Boolean b = (Boolean) new DefaultInvocationHandler<Object>(provider, target).getterFor("booleanField");
-		Assert.assertTrue(b);
+		assertTrue(b);
 	}
 
 	@Test
@@ -80,6 +82,6 @@ public class InvocationHandlerTest {
 		target.setField("foo");
 		String string = (String) new DefaultInvocationHandler<Object>(provider, target).getterFor(new Mirror(provider)
 				.on(BeanFixture.class).reflect().field("field"));
-		Assert.assertEquals("foo", string);
+		assertEquals("foo", string);
 	}
 }

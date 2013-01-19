@@ -1,6 +1,7 @@
 package net.vidageek.mirror.provider.compatibility;
 
-import junit.framework.Assert;
+import static org.junit.Assert.assertNotNull;
+
 import net.vidageek.mirror.fixtures.ConstructorThatThrowsException;
 import net.vidageek.mirror.provider.ReflectionProvider;
 
@@ -20,7 +21,7 @@ final public class ObjenesisConstructorBypassingReflectionProviderCompatibilityT
 	public void testThatInstantiatesWithoutInvokingAConstructor(final ReflectionProvider r) {
 		ConstructorThatThrowsException instance = r
 				.getConstructorBypassingReflectionProvider(ConstructorThatThrowsException.class).bypassConstructor();
-		Assert.assertNotNull(instance);
+		assertNotNull(instance);
 	}
 
 }
