@@ -8,7 +8,6 @@ import static org.junit.Assert.assertNotNull;
 
 import java.lang.reflect.Field;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.InterfaceFixture;
@@ -62,13 +61,13 @@ public class FieldReflectorTest {
 
 	@Test
 	public void testThatCanReflectInterfaceFields() {
-		Assert.assertNotNull(new DefaultFieldReflector(new DefaultMirrorReflectionProvider(), "interfaceField")
+		assertNotNull(new DefaultFieldReflector(new DefaultMirrorReflectionProvider(), "interfaceField")
 				.onClass(InterfaceFixture.class));
 	}
 
 	@Test
 	public void testThatFieldLookupIsDoneOnInterfaces() {
-		Assert.assertEquals("interfaceField", new Mirror(new DefaultMirrorReflectionProvider()).on(new ChildFixture())
+		assertEquals("interfaceField", new Mirror(new DefaultMirrorReflectionProvider()).on(new ChildFixture())
 				.get().field("interfaceField"));
 	}
 
@@ -77,6 +76,6 @@ public class FieldReflectorTest {
 		Mirror mirror = new Mirror(new DefaultMirrorReflectionProvider());
 		Field field = mirror.on(InterfaceFixture.class).reflect().field("interfaceField");
 
-		Assert.assertEquals("interfaceField", mirror.on(new ChildFixture()).get().field(field));
+		assertEquals("interfaceField", mirror.on(new ChildFixture()).get().field(field));
 	}
 }

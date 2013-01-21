@@ -1,10 +1,11 @@
 package net.vidageek.mirror.provider.experimental.performance;
 
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
@@ -53,7 +54,7 @@ final public class TestSunInternalReflectionProviderIsFasterThanTraditionalRefle
         long sunGap = System.currentTimeMillis() - begin;
         System.out.println("Sun method invocation: " + sunGap);
         System.out.println("Default method invocation: " + defaultGap);
-        Assert.assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
+        assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
                 + defaultGap + " millisseconds.", sunGap < defaultGap);
     }
 
@@ -78,7 +79,7 @@ final public class TestSunInternalReflectionProviderIsFasterThanTraditionalRefle
         long sunGap = System.currentTimeMillis() - begin;
         System.out.println("Sun field getting: " + sunGap);
         System.out.println("Default field getting: " + defaultGap);
-        Assert.assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
+        assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
                 + defaultGap + " millisseconds.", sunGap < defaultGap);
     }
 
@@ -103,7 +104,7 @@ final public class TestSunInternalReflectionProviderIsFasterThanTraditionalRefle
         long sunGap = System.currentTimeMillis() - begin;
         System.out.println("Sun field setting: " + sunGap);
         System.out.println("Default field setting: " + defaultGap);
-        Assert.assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
+        assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
                 + defaultGap + " millisseconds.", sunGap < defaultGap);
     }
 
@@ -131,7 +132,7 @@ final public class TestSunInternalReflectionProviderIsFasterThanTraditionalRefle
         long sunGap = System.currentTimeMillis() - begin;
         System.out.println("Sun contructor invoking: " + sunGap);
         System.out.println("Default constructor invoking: " + defaultGap);
-        Assert.assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
+        assertTrue("Sun implementation took " + sunGap + " millisseconds and default implemetation took "
                 + defaultGap + " millisseconds.", sunGap < defaultGap);
     }
 }

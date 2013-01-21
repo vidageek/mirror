@@ -3,10 +3,11 @@
  */
 package net.vidageek.mirror.config;
 
+import static org.junit.Assert.assertEquals;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.fake.FakeProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
@@ -23,7 +24,7 @@ public class MirrorProviderBuilderTest {
 	public void testThatInstantiatesPureJavaReflectionProviderIfPropertiesNotFound() {
 		ReflectionProvider provider = new MirrorProviderBuilder(null).createProvider();
 
-		Assert.assertEquals(DefaultMirrorReflectionProvider.class, provider.getClass());
+		assertEquals(DefaultMirrorReflectionProvider.class, provider.getClass());
 	}
 
 	@Test
@@ -31,7 +32,7 @@ public class MirrorProviderBuilderTest {
 		ReflectionProvider provider = new MirrorProviderBuilder(
 				asStream("provider.class = net.vidageek.mirror.fake.FakeProvider")).createProvider();
 
-		Assert.assertEquals(FakeProvider.class, provider.getClass());
+		assertEquals(FakeProvider.class, provider.getClass());
 	}
 
 	private InputStream asStream(final String string) {

@@ -3,9 +3,10 @@
  */
 package net.vidageek.mirror.invoke;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.lang.reflect.Constructor;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.ConstructorFixture;
 import net.vidageek.mirror.fixtures.ConstructorThatThrowsException;
@@ -54,6 +55,6 @@ public class ConstructorHandlerByConstructorTest {
 				.constructor(
 								new Mirror(provider).on(ConstructorThatThrowsException.class).reflect().constructor()
 										.withoutArgs()).bypasser();
-		Assert.assertNotNull(instance);
+		assertNotNull(instance);
 	}
 }

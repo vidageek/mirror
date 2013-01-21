@@ -3,9 +3,10 @@
  */
 package net.vidageek.mirror.set;
 
+import static org.junit.Assert.assertEquals;
+
 import java.lang.reflect.Field;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
@@ -57,7 +58,7 @@ public class FieldSetterByFieldTest {
 		final FieldFixture fixture = new FieldFixture(0);
 		new FieldSetterByField(provider, fixture, FieldFixture.class, new Mirror(provider).on(FieldFixture.class)
 				.reflect().field("finalField")).withValue(2);
-		Assert.assertEquals(2, new Mirror(new DefaultMirrorReflectionProvider()).on(fixture).get().field("finalField"));
+		assertEquals(2, new Mirror(new DefaultMirrorReflectionProvider()).on(fixture).get().field("finalField"));
 	}
 
 	@Test(expected = IllegalArgumentException.class)
@@ -88,7 +89,7 @@ public class FieldSetterByFieldTest {
 
 		new FieldSetterByField(provider, target, FieldFixture.class, field).withValue(null);
 
-		Assert.assertEquals(null, target.referenceField);
+		assertEquals(null, target.referenceField);
 
 	}
 

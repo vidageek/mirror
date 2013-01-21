@@ -1,5 +1,7 @@
 package net.vidageek.mirror.provider.compatibility;
 
+import static org.junit.Assert.assertTrue;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,7 +12,6 @@ import net.vidageek.mirror.fixtures.OtherInterfaceFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
 
-import org.junit.Assert;
 import org.junit.experimental.theories.Theories;
 import org.junit.experimental.theories.Theory;
 import org.junit.runner.RunWith;
@@ -37,7 +38,7 @@ final public class ProxyfyReflectionProviderCompatibilityTest implements Reflect
 														}
 													} }).createProxy();
 
-		Assert.assertTrue(Number.class.isAssignableFrom(proxy.getClass()));
+		assertTrue(Number.class.isAssignableFrom(proxy.getClass()));
 	}
 
 	@Theory
@@ -56,8 +57,8 @@ final public class ProxyfyReflectionProviderCompatibilityTest implements Reflect
 														}
 													} }).createProxy();
 
-		Assert.assertTrue(Object.class.isAssignableFrom(proxy.getClass()));
-		Assert.assertTrue(OtherInterfaceFixture.class.isAssignableFrom(proxy.getClass()));
+		assertTrue(Object.class.isAssignableFrom(proxy.getClass()));
+		assertTrue(OtherInterfaceFixture.class.isAssignableFrom(proxy.getClass()));
 	}
 
 	@Theory
@@ -78,8 +79,8 @@ final public class ProxyfyReflectionProviderCompatibilityTest implements Reflect
 														}
 													} }).createProxy();
 
-		Assert.assertTrue(Object.class.isAssignableFrom(proxy.getClass()));
-		Assert.assertTrue(OtherInterfaceFixture.class.isAssignableFrom(proxy.getClass()));
-		Assert.assertTrue(OneInterfaceFixture.class.isAssignableFrom(proxy.getClass()));
+		assertTrue(Object.class.isAssignableFrom(proxy.getClass()));
+		assertTrue(OtherInterfaceFixture.class.isAssignableFrom(proxy.getClass()));
+		assertTrue(OneInterfaceFixture.class.isAssignableFrom(proxy.getClass()));
 	}
 }

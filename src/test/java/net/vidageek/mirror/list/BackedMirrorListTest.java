@@ -1,8 +1,9 @@
 package net.vidageek.mirror.list;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.Arrays;
 
-import junit.framework.Assert;
 import net.vidageek.mirror.list.dsl.Mapper;
 import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
@@ -24,10 +25,11 @@ final public class BackedMirrorListTest {
 				return element > 1;
 			}
 		});
-		Assert.assertEquals(3, result.size());
-		Assert.assertEquals(new Integer(2), result.get(0));
-		Assert.assertEquals(new Integer(3), result.get(1));
-		Assert.assertEquals(new Integer(4), result.get(2));
+		
+		assertEquals(3, result.size());
+		assertEquals(new Integer(2), result.get(0));
+		assertEquals(new Integer(3), result.get(1));
+		assertEquals(new Integer(4), result.get(2));
 	}
 
 	@Test
@@ -40,11 +42,12 @@ final public class BackedMirrorListTest {
 			}
 
 		});
-		Assert.assertEquals(4, result.size());
-		Assert.assertEquals("1", result.get(0));
-		Assert.assertEquals("2", result.get(1));
-		Assert.assertEquals("3", result.get(2));
-		Assert.assertEquals("4", result.get(3));
+		
+		assertEquals(4, result.size());
+		assertEquals("1", result.get(0));
+		assertEquals("2", result.get(1));
+		assertEquals("3", result.get(2));
+		assertEquals("4", result.get(3));
 	}
 
 }
