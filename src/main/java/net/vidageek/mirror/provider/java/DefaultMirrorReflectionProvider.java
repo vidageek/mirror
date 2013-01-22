@@ -6,6 +6,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import net.vidageek.mirror.exception.ProxyProviderNotFoundException;
 import net.vidageek.mirror.provider.AnnotatedElementReflectionProvider;
 import net.vidageek.mirror.provider.ClassReflectionProvider;
 import net.vidageek.mirror.provider.ConstructorBypassingReflectionProvider;
@@ -75,9 +76,11 @@ public final class DefaultMirrorReflectionProvider implements ReflectionProvider
 			final MethodInterceptor... methodInterceptors) {
 		if (isClassPresent("net.sf.cglib.proxy.Factory")) {
 			return new CGLibProxyReflectionProvider(clazz, interfaces, methodInterceptors);
+		} else if(isClassPresent("javassist.util.proxy.ProxyFactory")) {
+			return new JavassistProxyReflectionProvider(clazz, interfaces, methodInterceptors);
 		}
-
-		return new JavassistProxyReflectionProvider(clazz, interfaces, methodInterceptors);
+		
+		throw new ProxyProviderNotFoundException("cglib or javassist not found on your classpath");
 	}
 
 	private static boolean isClassPresent(String className) {
