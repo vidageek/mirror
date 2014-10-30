@@ -8,6 +8,7 @@ import static org.junit.Assert.assertEquals;
 import java.lang.reflect.Field;
 
 import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.ChildFixture;
 import net.vidageek.mirror.fixtures.FieldFixture;
 import net.vidageek.mirror.fixtures.SuperClassFixture;
@@ -61,7 +62,7 @@ public class FieldSetterByFieldTest {
 		assertEquals(2, new Mirror(new DefaultMirrorReflectionProvider()).on(fixture).get().field("finalField"));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = MirrorException.class)
 	public void testThatThrowsIllegalArgumentExceptionIfValueTypeDoesntMatchFieldType() {
 
 		Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");
