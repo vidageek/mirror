@@ -5,6 +5,7 @@ package net.vidageek.mirror.invoke;
 
 import java.lang.reflect.Constructor;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.invoke.dsl.ConstructorHandler;
 import net.vidageek.mirror.provider.ConstructorBypassingReflectionProvider;
 import net.vidageek.mirror.provider.ConstructorReflectionProvider;
@@ -25,16 +26,11 @@ public final class ConstructorHandlerByConstructor<T> implements ConstructorHand
 
 	public ConstructorHandlerByConstructor(final ReflectionProvider provider, final Class<T> clazz,
 			final Constructor<T> con) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
-		if (con == null) {
-			throw new IllegalArgumentException("constructor cannot be null");
-		}
-		if (!clazz.equals(con.getDeclaringClass())) {
-			throw new IllegalArgumentException("constructor declaring type should be " + clazz.getName() + " but was "
-					+ con.getDeclaringClass().getName());
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
+		Preconditions.checkArgument(con!= null, "constructor cannot be null");
+		Preconditions.checkArgument(clazz.equals(con.getDeclaringClass()), "Constructor declaring type should be %s but was %s", 
+				clazz.getName(), con.getDeclaringClass().getName());
+		
 		this.provider = provider;
 		this.clazz = clazz;
 		this.constructor = con;

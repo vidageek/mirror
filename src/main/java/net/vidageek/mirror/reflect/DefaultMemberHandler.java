@@ -3,6 +3,7 @@ package net.vidageek.mirror.reflect;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.MemberHandler;
 
@@ -19,9 +20,7 @@ public final class DefaultMemberHandler implements MemberHandler {
 	private final ReflectionProvider provider;
 
 	public DefaultMemberHandler(final ReflectionProvider provider, final AnnotatedElement member) {
-		if (member == null) {
-			throw new IllegalArgumentException("Argument member cannot be null");
-		}
+		Preconditions.checkArgument(member != null, "member cannot be null");
 		this.provider = provider;
 		this.member = member;
 	}

@@ -3,6 +3,7 @@ package net.vidageek.mirror.invoke;
 import java.lang.reflect.Constructor;
 import java.util.Arrays;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.invoke.dsl.ConstructorHandler;
@@ -22,9 +23,7 @@ public final class ConstructorHandlerByArgs<T> implements ConstructorHandler<T> 
 	private final ReflectionProvider provider;
 
 	public ConstructorHandlerByArgs(final ReflectionProvider provider, final Class<T> clazz) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("Argument class cannot be null");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
 		this.provider = provider;
 		this.clazz = clazz;
 	}
@@ -48,10 +47,7 @@ public final class ConstructorHandlerByArgs<T> implements ConstructorHandler<T> 
 
 		Class<?>[] classes = new Class<?>[length];
 		for (int i = 0; i < length; i++) {
-			if (args[i] == null) {
-				throw new IllegalArgumentException(
-						"Cannot invoke a constructor by args if one of it's arguments is null. First reflect the constructor.");
-			}
+			Preconditions.checkArgument(args[i] != null, "Cannot invoke a constructor by args if one of it's arguments is null. First reflect the constructor.");
 			classes[i] = args[i].getClass();
 		}
 

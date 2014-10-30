@@ -79,7 +79,6 @@ public class AllReflectionHandlerTest {
 	@Test
 	public void testThatReflectHierarchyMethods() {
 		List<Method> methods = new DefaultAllReflectionHandler<ChildFixture>(provider, ChildFixture.class).methods();
-
 		assertEquals(22, methods.size());
 	}
 

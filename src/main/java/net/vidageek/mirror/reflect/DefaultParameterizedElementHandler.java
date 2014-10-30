@@ -1,5 +1,6 @@
 package net.vidageek.mirror.reflect;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.provider.GenericTypeAccessor;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.ParameterizedElementHandler;
@@ -15,9 +16,7 @@ public class DefaultParameterizedElementHandler implements ParameterizedElementH
 	private final GenericTypeAccessor accessor;
 
 	public DefaultParameterizedElementHandler(ReflectionProvider provider, GenericTypeAccessor accessor) {
-		if (accessor == null) {
-			throw new IllegalArgumentException("Argument accessor cannot be null");
-		}
+		Preconditions.checkArgument(accessor != null, "accessor cannot be null");
 		this.provider = provider;
 		this.accessor = accessor;
 	}

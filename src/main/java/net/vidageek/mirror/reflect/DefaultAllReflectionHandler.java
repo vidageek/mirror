@@ -9,6 +9,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.list.BackedMirrorList;
 import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
@@ -30,9 +31,7 @@ public final class DefaultAllReflectionHandler<T> implements AllReflectionHandle
 	private final ReflectionProvider provider;
 
 	public DefaultAllReflectionHandler(final ReflectionProvider provider, final Class<T> clazz) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
 		this.provider = provider;
 		this.clazz = clazz;
 	}

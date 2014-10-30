@@ -1,5 +1,6 @@
 package net.vidageek.mirror;
 
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.InterfaceFixture;
 import net.vidageek.mirror.fixtures.OtherInterfaceFixture;
 import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
@@ -27,12 +28,12 @@ final public class DefaultProxyHandlerTest {
 		new DefaultProxyHandler(null, new Class[] { Object.class, InterfaceFixture.class, OtherInterfaceFixture.class });
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = MirrorException.class)
 	public void testThatThrowsExceptionIfReceiveTwoClasses() {
 		new DefaultProxyHandler(null, new Class[] { Object.class, Number.class });
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = MirrorException.class)
 	public void testThatThrowsExceptionIfReceiveAFinalClass() {
 		new DefaultProxyHandler(null, new Class[] { String.class });
 	}

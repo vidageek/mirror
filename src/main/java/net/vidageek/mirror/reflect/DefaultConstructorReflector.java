@@ -6,6 +6,7 @@ package net.vidageek.mirror.reflect;
 import java.lang.reflect.Constructor;
 import java.util.List;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -23,17 +24,13 @@ public final class DefaultConstructorReflector<T> implements ConstructorReflecto
 	private final ReflectionProvider provider;
 
 	public DefaultConstructorReflector(final ReflectionProvider provider, final Class<T> clazz) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("argument class cannot be null.");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
 		this.provider = provider;
 		this.clazz = clazz;
 	}
 
 	public Constructor<T> withArgs(final Class<?>... classes) {
-		if (classes == null) {
-			throw new IllegalArgumentException("classes cannot be null");
-		}
+		Preconditions.checkArgument(classes != null, "classes cannot be null");
 
 		return provider.getClassReflectionProvider(clazz).reflectConstructor(classes);
 	}

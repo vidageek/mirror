@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.AnnotatedElement;
 import java.util.List;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.list.BackedMirrorList;
 import net.vidageek.mirror.list.dsl.Matcher;
 import net.vidageek.mirror.list.dsl.MirrorList;
@@ -23,9 +24,7 @@ public final class DefaultAllMemberHandler implements AllMemberHandler {
 	private final ReflectionProvider provider;
 
 	public DefaultAllMemberHandler(final ReflectionProvider provider, final AnnotatedElement member) {
-		if (member == null) {
-			throw new IllegalArgumentException("Argument member cannot be null");
-		}
+		Preconditions.checkArgument(member != null, "member cannot be null");
 		this.provider = provider;
 		this.member = member;
 	}

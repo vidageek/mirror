@@ -3,6 +3,7 @@ package net.vidageek.mirror.reflect;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.PureJavaFieldGenericTypeAccessor;
 import net.vidageek.mirror.reflect.dsl.FieldHandler;
@@ -21,9 +22,7 @@ public class DefaultFieldHandler implements FieldHandler {
 	private MemberHandler memberHandler;
 
 	public DefaultFieldHandler(ReflectionProvider provider, Field field) {
-		if (field == null) {
-			throw new IllegalArgumentException("Argument field cannot be null.");
-		}
+		Preconditions.checkArgument(field != null, "field cannot be null");
 
 		this.provider = provider;
 		this.field = field;

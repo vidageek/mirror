@@ -21,9 +21,7 @@ public final class DefaultMemberController implements MemberController {
 	private final ReflectionProvider provider;
 
 	public DefaultMemberController(final ReflectionProvider provider, final AnnotatedElement member) {
-		if (member == null) {
-			throw new IllegalArgumentException("Argument member cannot be null");
-		}
+		Preconditions.checkArgument(member != null, "member cannot be null");
 		this.provider = provider;
 		this.member = member;
 	}

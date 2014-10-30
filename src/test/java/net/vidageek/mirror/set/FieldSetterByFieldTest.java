@@ -94,7 +94,7 @@ public class FieldSetterByFieldTest {
 
 	}
 
-	@Test(expected = IllegalArgumentException.class)
+	@Test(expected = MirrorException.class)
 	public void testThatCantSetNullValueOnPrimitiveField() {
 
 		Field field = new Mirror(provider).on(FieldFixture.class).reflect().field("field");

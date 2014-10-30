@@ -9,6 +9,7 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.list.EqualMethodRemover;
@@ -31,12 +32,8 @@ public final class DefaultMethodReflector implements MethodReflector {
 	private final ReflectionProvider provider;
 
 	public DefaultMethodReflector(final ReflectionProvider provider, final String methodName, final Class<?> clazz) {
-		if ((methodName == null) || (methodName.trim().length() == 0)) {
-			throw new IllegalArgumentException("methodName cannot be null or empty");
-		}
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannnot be null");
-		}
+		Preconditions.checkArgument(methodName != null && methodName.trim().length() > 0, "methodName cannot be null or empty");
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
 		this.provider = provider;
 		this.methodName = methodName.trim();
 		this.clazz = clazz;
@@ -47,9 +44,7 @@ public final class DefaultMethodReflector implements MethodReflector {
 	}
 
 	public Method withArgs(final Class<?>... classes) {
-		if (classes == null) {
-			throw new IllegalArgumentException("classes cannot be null");
-		}
+		Preconditions.checkArgument(classes != null, "classes cannot be null");
 		return provider.getClassReflectionProvider(clazz).reflectMethod(methodName, classes);
 	}
 

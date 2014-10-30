@@ -6,6 +6,7 @@ import static org.junit.Assert.assertTrue;
 import java.lang.reflect.Method;
 
 import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.fixtures.BeanFixture;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
@@ -55,7 +56,7 @@ public class InvocationHandlerTest {
 		new DefaultInvocationHandler(provider, new Object()).constructor(null);
 	}
 
-	@Test(expected = IllegalStateException.class)
+	@Test(expected = MirrorException.class)
 	public void testThatThrowsExceptionIfTryToInvokeConstructorOnObject() {
 		new DefaultInvocationHandler(provider, new Object()).constructor();
 	}

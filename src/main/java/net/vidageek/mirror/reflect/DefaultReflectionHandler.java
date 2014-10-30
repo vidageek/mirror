@@ -5,6 +5,7 @@ package net.vidageek.mirror.reflect;
 
 import java.lang.reflect.Field;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.provider.java.PureJavaClassGenericTypeAccessor;
 import net.vidageek.mirror.reflect.dsl.AnnotationHandler;
@@ -26,24 +27,18 @@ public final class DefaultReflectionHandler<T> implements ReflectionHandler<T> {
 	private final ReflectionProvider provider;
 
 	public DefaultReflectionHandler(final ReflectionProvider provider, final Class<T> clazz) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
 		this.provider = provider;
 		this.clazz = clazz;
 	}
 
 	public Field field(final String fieldName) {
-		if ((fieldName == null) || (fieldName.trim().length() == 0)) {
-			throw new IllegalArgumentException("fieldName cannot be null or empty.");
-		}
+		Preconditions.checkArgument(fieldName != null && fieldName.trim().length() > 0, "fieldName cannot be null or empty");
 		return new DefaultFieldReflector(provider, fieldName).onClass(clazz);
 	}
 
 	public MethodReflector method(final String methodName) {
-		if ((methodName == null) || (methodName.trim().length() == 0)) {
-			throw new IllegalArgumentException("methodName cannot be null or empty.");
-		}
+		Preconditions.checkArgument(methodName != null && methodName.trim().length() > 0, "methodName cannot be null or empty");
 		return new DefaultMethodReflector(provider, methodName, clazz);
 	}
 

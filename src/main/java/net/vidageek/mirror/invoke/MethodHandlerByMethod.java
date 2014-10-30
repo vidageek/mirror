@@ -6,6 +6,7 @@ package net.vidageek.mirror.invoke;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.invoke.dsl.MethodHandler;
 import net.vidageek.mirror.provider.MethodReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -27,16 +28,10 @@ public final class MethodHandlerByMethod implements MethodHandler {
 
 	public MethodHandlerByMethod(final ReflectionProvider provider, final Object target, final Class<?> clazz,
 			final Method method) {
-
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
-		if (method == null) {
-			throw new IllegalArgumentException("method cannot be null");
-		}
-		if (!method.getDeclaringClass().isAssignableFrom(clazz)) {
-			throw new IllegalArgumentException("method " + method + " cannot be invoked on clazz " + clazz.getName());
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
+		Preconditions.checkArgument(method != null, "method cannot be null");
+		Preconditions.checkArgument(method.getDeclaringClass().isAssignableFrom(clazz), 
+				"Method %s cannot be invoked on clazz %s", method, clazz.getName());
 		this.provider = provider;
 		this.target = target;
 		this.clazz = clazz;

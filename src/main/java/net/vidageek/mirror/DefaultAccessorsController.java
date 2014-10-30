@@ -24,9 +24,7 @@ public final class DefaultAccessorsController implements AccessorsController {
 	private final ReflectionProvider provider;
 
 	public DefaultAccessorsController(final ReflectionProvider provider, final Object target) {
-		if (target == null) {
-			throw new IllegalArgumentException("target cannot be null");
-		}
+		Preconditions.checkArgument(target != null, "target cannot be null");
 		this.provider = provider;
 		this.target = target;
 	}

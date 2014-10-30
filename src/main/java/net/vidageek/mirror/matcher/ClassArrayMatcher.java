@@ -6,6 +6,8 @@ package net.vidageek.mirror.matcher;
 import java.util.HashMap;
 import java.util.Map;
 
+import net.vidageek.mirror.Preconditions;
+
 /**
  * This class is responsible for analyzing if two class arrays match. This is
  * used to chose which constructor or method to be invoked.
@@ -31,16 +33,12 @@ public final class ClassArrayMatcher {
 	}
 
 	public ClassArrayMatcher(final Class<?>... baseClasses) {
-		if (baseClasses == null) {
-			throw new IllegalArgumentException("argument baseClasses cannot be null.");
-		}
+		Preconditions.checkArgument(baseClasses != null, "baseClasses cannot be null");
 		this.baseClasses = baseClasses;
 	}
 
 	public MatchType match(final Class<?>... classes) {
-		if (classes == null) {
-			throw new IllegalArgumentException("argument classes cannot be null.");
-		}
+		Preconditions.checkArgument(classes != null, "classes cannot be null");
 
 		if (baseClasses.length != classes.length) {
 			return MatchType.DONT_MATCH;

@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.MethodAnnotationHandler;
@@ -25,15 +26,10 @@ public final class DefaultMethodAnnotationHandler<T extends Annotation> implemen
 
 	public DefaultMethodAnnotationHandler(final ReflectionProvider provider, final Class<?> clazz,
 			final String methodName, final Class<T> annotation) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("Argument clazz cannot be null.");
-		}
-		if ((methodName == null) || (methodName.trim().length() == 0)) {
-			throw new IllegalArgumentException("Argument fieldName cannot be null or empty.");
-		}
-		if (annotation == null) {
-			throw new IllegalArgumentException("Argument annotation cannot be null.");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
+		Preconditions.checkArgument(methodName != null && methodName.trim().length() > 0, "methodName cannot be null or empty");
+		Preconditions.checkArgument(annotation != null, "annotation cannot be null");
+
 		this.provider = provider;
 		this.clazz = clazz;
 		this.methodName = methodName.trim();
