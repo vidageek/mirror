@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.MethodAnnotationHandler;
 
@@ -42,7 +43,7 @@ public final class DefaultMethodAnnotationHandler<T extends Annotation> implemen
 	public T withArgs(final Class<?>... classes) {
 		Method method = new DefaultMethodReflector(provider, methodName, clazz).withArgs(classes);
 		if (method == null) {
-			throw new IllegalArgumentException("could not find method matching argument list " + Arrays.asList(classes));
+			throw new MirrorException("could not find method matching argument list " + Arrays.asList(classes));
 		}
 		return provider.getAnnotatedElementReflectionProvider(method).getAnnotation(annotation);
 	}
