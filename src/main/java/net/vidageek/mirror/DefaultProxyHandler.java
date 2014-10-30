@@ -5,6 +5,7 @@ import static java.lang.reflect.Modifier.isFinal;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ProxyReflectionProvider;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.proxy.dsl.MethodInterceptor;
@@ -34,13 +35,13 @@ public class DefaultProxyHandler<T> implements ProxyHandler<T> {
 				interfaces.add(clazz);
 			} else if (!baseClassAlreadyFound) {
 				if (isFinal(clazz.getModifiers())) {
-					throw new IllegalArgumentException("Cannot proxify final class " + clazz.getName());
+					throw new MirrorException("Cannot proxify final class " + clazz.getName());
 				}
 
 				baseClassAlreadyFound = true;
 				baseClass = clazz;
 			} else {
-				throw new IllegalArgumentException("Cannot proxify more than one concrete/abstract class");
+				throw new MirrorException("Cannot proxify more than one concrete/abstract class");
 			}
 		}
 	}

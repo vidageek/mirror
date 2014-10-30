@@ -49,7 +49,9 @@ public final class DefaultInvocationHandler<T> implements InvocationHandler<T> {
 
 	@SuppressWarnings("unchecked")
 	public ConstructorHandler<T> constructor() {
-		Preconditions.checkArgument(target == null, "You must use constructor InvocationHandler(Class<T>) instead of InvocationHandler(Object).");
+		if (target != null) {
+			throw new MirrorException("You must use constructor InvocationHandler(Class<T>) instead of InvocationHandler(Object).");
+		}
 		return new ConstructorHandlerByArgs<T>(provider, (Class<T>) clazz);
 	}
 

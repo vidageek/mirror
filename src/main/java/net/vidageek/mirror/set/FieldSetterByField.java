@@ -48,7 +48,7 @@ public final class FieldSetterByField implements FieldSetter {
 		}
 
 		if ((value == null) && field.getType().isPrimitive()) {
-			throw new IllegalArgumentException("cannot set null value on primitive field");
+			throw new MirrorException("cannot set null value on primitive field");
 		}
 
 		if (value != null) {
