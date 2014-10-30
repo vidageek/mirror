@@ -14,12 +14,14 @@ import net.vidageek.mirror.provider.experimental.sun15.Sun15ReflectionProvider;
 import net.vidageek.mirror.provider.java.DefaultMirrorReflectionProvider;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 /**
  * @author jonasabreu
  * 
  */
+@Ignore
 final public class TestSunInternalReflectionProviderIsFasterThanTraditionalReflection {
 
     private static final int BATCH_SIZE = 1000000;

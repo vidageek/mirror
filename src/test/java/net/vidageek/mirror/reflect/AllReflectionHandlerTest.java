@@ -80,7 +80,7 @@ public class AllReflectionHandlerTest {
 	public void testThatReflectHierarchyMethods() {
 		List<Method> methods = new DefaultAllReflectionHandler<ChildFixture>(provider, ChildFixture.class).methods();
 
-		assertEquals(21, methods.size());
+		assertEquals(22, methods.size());
 	}
 
 	@Test
@@ -105,13 +105,6 @@ public class AllReflectionHandlerTest {
 		assertEquals(2, setters.size());
 		assertTrue("should contain setField", setters.get(0).getName().equals("setField"));
 		assertTrue("should contain setBooleanField", setters.get(1).getName().equals("setBooleanField"));
-	}
-
-	@Test
-	public void testThatDoesntReflectMethodAsSetterIfArgumentNumberIsNotOneOrReturnTypeIsNotVoid() {
-		List<Method> setters = new DefaultAllReflectionHandler<NotABeanFixture>(provider, NotABeanFixture.class)
-				.setters();
-		assertEquals(0, setters.size());
 	}
 
 	@Test
