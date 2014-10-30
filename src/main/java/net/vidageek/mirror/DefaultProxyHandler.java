@@ -47,9 +47,7 @@ public class DefaultProxyHandler<T> implements ProxyHandler<T> {
 
 	@SuppressWarnings("unchecked")
 	public T interceptingWith(final MethodInterceptor... interceptors) {
-		if ((interceptors == null) || (interceptors.length == 0)) {
-			throw new IllegalArgumentException("interceptors cannot be null or empty");
-		}
+		Preconditions.checkArgument(interceptors != null && interceptors.length > 0, "interceptors cannot be null or empty");
 
 		ProxyReflectionProvider proxyReflectionProvider = provider.getProxyReflectionProvider(	baseClass, interfaces,
 																								interceptors);

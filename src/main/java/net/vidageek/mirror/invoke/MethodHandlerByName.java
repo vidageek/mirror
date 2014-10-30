@@ -2,6 +2,7 @@ package net.vidageek.mirror.invoke;
 
 import java.lang.reflect.Method;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.invoke.dsl.MethodHandler;
@@ -24,15 +25,10 @@ public final class MethodHandlerByName implements MethodHandler {
 
 	public MethodHandlerByName(final ReflectionProvider provider, final Object target, final Class<?> clazz,
 			final String methodName) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz can't be null");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
+		Preconditions.checkArgument(methodName != null && methodName.trim().length() > 0, "methodName cannot be null or empty");
 
-		if ((methodName == null) || (methodName.trim().length() == 0)) {
-			throw new IllegalArgumentException("methodName can't be null");
-		}
 		this.provider = provider;
-
 		this.target = target;
 		this.clazz = clazz;
 		this.methodName = methodName;
@@ -51,10 +47,7 @@ public final class MethodHandlerByName implements MethodHandler {
 
 		Class<?>[] classes = new Class<?>[length];
 		for (int i = 0; i < length; i++) {
-			if (args[i] == null) {
-				throw new IllegalArgumentException(
-						"Cannot invoke a method by name if one of it's arguments is null. First reflect the method.");
-			}
+			Preconditions.checkArgument(args[i] != null, "Cannot invoke a method by name if one of it's arguments is null. First reflect the method.");
 			classes[i] = args[i].getClass();
 		}
 

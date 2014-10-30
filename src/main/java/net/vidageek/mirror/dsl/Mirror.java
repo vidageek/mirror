@@ -11,6 +11,7 @@ import net.vidageek.mirror.DefaultClassController;
 import net.vidageek.mirror.DefaultFieldController;
 import net.vidageek.mirror.DefaultMemberController;
 import net.vidageek.mirror.DefaultProxyHandler;
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.config.MirrorProviderBuilder;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -59,10 +60,7 @@ public final class Mirror {
 	 *             if className is null or empty.
 	 */
 	public Class<?> reflectClass(final String className) {
-		if ((className == null) || (className.trim().length() == 0)) {
-			throw new IllegalArgumentException("className cannot be null or empty");
-		}
-
+		Preconditions.checkArgument(className != null && className.trim().length() > 0, "className cannot be null or empty");
 		return provider.getClassReflectionProvider(className).reflectClass();
 	}
 

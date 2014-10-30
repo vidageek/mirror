@@ -5,6 +5,7 @@ package net.vidageek.mirror.set;
 
 import java.lang.reflect.Field;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -28,13 +29,8 @@ public final class FieldSetterByName implements FieldSetter {
 
 	public FieldSetterByName(final ReflectionProvider provider, final String fieldName, final Object target,
 			final Class<?> clazz) {
-		if ((fieldName == null) || (fieldName.trim().length() == 0)) {
-			throw new IllegalArgumentException("fieldName cannot be null or blank");
-		}
-
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
+		Preconditions.checkArgument(fieldName != null && fieldName.trim().length() > 0, "fieldName cannot be null or empty");
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
 
 		this.provider = provider;
 		this.fieldName = fieldName;

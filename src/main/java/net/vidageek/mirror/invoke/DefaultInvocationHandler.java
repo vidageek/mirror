@@ -4,6 +4,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.bean.Bean;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
@@ -28,36 +29,27 @@ public final class DefaultInvocationHandler<T> implements InvocationHandler<T> {
 	private final ReflectionProvider provider;
 
 	public DefaultInvocationHandler(final ReflectionProvider provider, final Object target) {
-		if (target == null) {
-			throw new IllegalArgumentException("target can't be null");
-		}
+		Preconditions.checkArgument(target != null, "target cannot be null");
 		this.provider = provider;
 		this.target = target;
 		clazz = target.getClass();
 	}
 
 	public DefaultInvocationHandler(final ReflectionProvider provider, final Class<T> target) {
-		if (target == null) {
-			throw new IllegalArgumentException("target can't be null");
-		}
+		Preconditions.checkArgument(target != null, "target cannot be null");
 		this.provider = provider;
 		clazz = target;
 		this.target = null;
 	}
 
 	public MethodHandler method(final String methodName) {
-		if (methodName == null) {
-			throw new IllegalArgumentException("methodName can't be null");
-		}
+		Preconditions.checkArgument(methodName != null, "methodName cannot be null");
 		return new MethodHandlerByName(provider, target, clazz, methodName);
 	}
 
 	@SuppressWarnings("unchecked")
 	public ConstructorHandler<T> constructor() {
-		if (this.target != null) {
-			throw new IllegalStateException(
-					"must use constructor InvocationHandler(Class<T>) instead of InvocationHandler(Object).");
-		}
+		Preconditions.checkArgument(target == null, "You must use constructor InvocationHandler(Class<T>) instead of InvocationHandler(Object).");
 		return new ConstructorHandlerByArgs<T>(provider, (Class<T>) clazz);
 	}
 

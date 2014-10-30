@@ -20,9 +20,7 @@ public class DefaultFieldController implements FieldController {
 	private final Field field;
 
 	public DefaultFieldController(ReflectionProvider provider, Field field) {
-		if (field == null) {
-			throw new IllegalArgumentException("Argument field cannot be null.");
-		}
+		Preconditions.checkArgument(field != null, "field cannot be null");
 		this.provider = provider;
 		this.field = field;
 	}

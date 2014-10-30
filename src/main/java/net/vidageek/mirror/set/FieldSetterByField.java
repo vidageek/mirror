@@ -6,6 +6,7 @@ package net.vidageek.mirror.set;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.matcher.ClassArrayMatcher;
 import net.vidageek.mirror.matcher.MatchType;
@@ -29,16 +30,11 @@ public final class FieldSetterByField implements FieldSetter {
 
 	public FieldSetterByField(final ReflectionProvider provider, final Object target, final Class<?> clazz,
 			final Field field) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
-		if (field == null) {
-			throw new IllegalArgumentException("field cannot be null");
-		}
-		if (!field.getDeclaringClass().isAssignableFrom(clazz)) {
-			throw new IllegalArgumentException("field declaring class (" + field.getDeclaringClass().getName()
-					+ ") doesn't match clazz " + clazz.getName());
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
+		Preconditions.checkArgument(field != null, "field cannot be null");
+		Preconditions.checkArgument(field.getDeclaringClass().isAssignableFrom(clazz), 
+				"field declaring class (%s) doesn't match clazz %s", field.getDeclaringClass().getName(), clazz.getName());
+
 		this.provider = provider;
 		this.target = target;
 		this.clazz = clazz;

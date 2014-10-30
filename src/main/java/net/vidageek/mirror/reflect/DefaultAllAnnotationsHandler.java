@@ -4,6 +4,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.List;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -22,9 +23,7 @@ public final class DefaultAllAnnotationsHandler implements AllAnnotationsHandler
 	private final ReflectionProvider provider;
 
 	public DefaultAllAnnotationsHandler(final ReflectionProvider provider, final Class<?> clazz) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("Argument clazz cannot be null.");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
 		this.provider = provider;
 		this.clazz = clazz;
 	}

@@ -5,6 +5,7 @@ import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.dsl.Mirror;
 import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
@@ -25,12 +26,8 @@ public final class DefaultAllMethodAnnotationsHandler implements AllMethodAnnota
 
 	public DefaultAllMethodAnnotationsHandler(final ReflectionProvider provider, final Class<?> clazz,
 			final String methodName) {
-		if (clazz == null) {
-			throw new IllegalArgumentException("Argument clazz cannot be null.");
-		}
-		if ((methodName == null) || (methodName.trim().length() == 0)) {
-			throw new IllegalArgumentException("Argument methodName cannot be null or blank.");
-		}
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
+		Preconditions.checkArgument(methodName != null && methodName.trim().length() > 0, "methodName cannot be null or empty");
 
 		this.provider = provider;
 		this.clazz = clazz;

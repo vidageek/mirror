@@ -3,6 +3,7 @@ package net.vidageek.mirror.provider.java;
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
 
+import net.vidageek.mirror.Preconditions;
 import net.vidageek.mirror.provider.GenericTypeAccessor;
 
 /**
@@ -15,9 +16,7 @@ public class PureJavaFieldGenericTypeAccessor implements GenericTypeAccessor {
 	private final Field field;
 
 	public PureJavaFieldGenericTypeAccessor(Field field) {
-		if (field == null) {
-			throw new IllegalArgumentException("Argument field cannot be null.");
-		}
+		Preconditions.checkArgument(field != null, "field cannot be null");
 		this.field = field;
 	}
 

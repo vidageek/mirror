@@ -28,10 +28,9 @@ public final class DefaultClassController<T> implements ClassController<T> {
 	private final ReflectionProvider provider;
 
 	public DefaultClassController(final ReflectionProvider provider, final Class<T> clazz) {
+		Preconditions.checkArgument(clazz != null, "clazz cannot be null");
+		
 		this.provider = provider;
-		if (clazz == null) {
-			throw new IllegalArgumentException("clazz cannot be null");
-		}
 		this.clazz = clazz;
 	}
 
