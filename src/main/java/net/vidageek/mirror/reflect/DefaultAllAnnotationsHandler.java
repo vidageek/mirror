@@ -5,6 +5,7 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 import net.vidageek.mirror.dsl.Mirror;
+import net.vidageek.mirror.exception.MirrorException;
 import net.vidageek.mirror.provider.ReflectionProvider;
 import net.vidageek.mirror.reflect.dsl.AllAnnotationsHandler;
 import net.vidageek.mirror.reflect.dsl.AllMethodAnnotationsHandler;
@@ -35,7 +36,7 @@ public final class DefaultAllAnnotationsHandler implements AllAnnotationsHandler
 	public List<Annotation> atField(final String fieldName) {
 		Field field = new Mirror(provider).on(clazz).reflect().field(fieldName);
 		if (field == null) {
-			throw new IllegalArgumentException("could not find field " + fieldName + " at class " + clazz);
+			throw new MirrorException("could not find field " + fieldName + " at class " + clazz);
 		}
 		return provider.getAnnotatedElementReflectionProvider(field).getAnnotations();
 	}

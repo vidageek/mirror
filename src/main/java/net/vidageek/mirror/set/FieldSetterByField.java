@@ -58,7 +58,7 @@ public final class FieldSetterByField implements FieldSetter {
 		if (value != null) {
 			MatchType match = new ClassArrayMatcher(value.getClass()).match(field.getType());
 			if (MatchType.DONT_MATCH.equals(match)) {
-				throw new IllegalArgumentException("Value of type " + value.getClass() + " cannot be set on field "
+				throw new MirrorException("Value of type " + value.getClass() + " cannot be set on field "
 						+ field.getName() + " of type " + field.getType() + " from class " + clazz.getName()
 						+ ". Incompatible types");
 			}
