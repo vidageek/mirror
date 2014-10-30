@@ -2,7 +2,7 @@
 
 echo "installing Mirror so we can test things after the jar is built"
 
-mvn -Dmaven.test.skip -Ptests clean install
+mvn -Dmaven.test.skip clean install
 
 mvn test
 
