@@ -2,8 +2,8 @@ package net.vidageek.mirror;
 
 /**
  * Utility class to check preconditions.
- * 
- * @author Ot·vio Scherer Garcia
+ *  
+ * @author Ot√°vio Scherer Garcia
  */
 public final class Preconditions {
 
