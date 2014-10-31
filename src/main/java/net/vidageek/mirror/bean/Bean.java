@@ -1,6 +1,6 @@
 package net.vidageek.mirror.bean;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -16,10 +16,8 @@ final public class Bean {
 	}
 
 	public List<String> getter(final String fieldName) {
-		List<String> list = new ArrayList<String>();
-		list.add("get" + capitalize(fieldName));
-		list.add("is" + capitalize(fieldName));
-		return list;
+		String capitalized = capitalize(fieldName);
+		return Arrays.asList("get" + capitalized, "is" + capitalized);
 	}
 
 	public String setter(final String fieldName) {
