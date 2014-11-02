@@ -39,25 +39,32 @@ public final class PureJavaClassReflectionProvider<T> implements ClassReflection
 	}
 
 	public List<Field> reflectAllFields() {
-		Class<?> c = clazz;
 		final List<Field> list = new ArrayList<Field>();
-		while (c != null) {
-			list.addAll(Arrays.asList(c.getDeclaredFields()));
-			for (Class<?> interf : c.getInterfaces()) {
-				list.addAll(Arrays.asList(interf.getFields()));
+
+		for (Class<?> current = clazz; current != null; current = current.getSuperclass()) {
+			for (Field field : current.getDeclaredFields()) {
+				list.add(field);
 			}
-			c = c.getSuperclass();
+
+			for (Class<?> interf : current.getInterfaces()) {
+				for (Field field : interf.getDeclaredFields()) {
+					list.add(field);
+				}
+			}
 		}
+
 		return list;
 	}
 
 	public List<Method> reflectAllMethods() {
-		Class<?> c = clazz;
 		final List<Method> list = new ArrayList<Method>();
-		while (c != null) {
-			list.addAll(Arrays.asList(c.getDeclaredMethods()));
-			c = c.getSuperclass();
+
+		for (Class<?> current = clazz; current != null; current = current.getSuperclass()) {
+			for (Method method : current.getDeclaredMethods()) {
+				list.add(method);
+			}
 		}
+
 		return list;
 	}
 
