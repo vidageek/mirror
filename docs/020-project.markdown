@@ -1,4 +1,7 @@
-[chapter Project]
+---
+permalink: /project.html
+title: Project
+---
 
 Mirror is a simple DSL layer over Java Reflection API, designed to make the use
 of this powerful a lot tool easier. Forget about thousands of exceptions thrown
@@ -11,165 +14,110 @@ idea gave by a great programmer, Nico Steppat (http://www.caelum.com.br), when
 asked how to remove that ugly static-full ReflectionUtil from the code base of a
 project we were working at.
 
-[section Versioning]
+## Versioning
 
 Mirror uses a simple versioning system:
 
 mirror-A.B.C.jar
 
-[list]
-* C - Critical bug resolutions.
-* B - Feature added + bug resolutions.
-* A - Tons of features or API change.
-[/list]
+- C - Critical bug resolutions.
+- B - Feature added + bug resolutions.
+- A - Tons of features or API change.
 
 Since Mirror is a DSL, any changes to the DSL itself is assumed to be an API change. The underneath objects that formerly provided the changed feature will not be considered. 
 
-[section Release Notes]
+## Release Notes
 
-[list]
-* **Mirror 1.6.1 - 2011 March 19**
+- **Mirror 1.6.1 - 2011 March 19**
+    - Issue 54 - Proxyfy won't work (BUGFIX)
 
-- Issue 54 - Proxyfy won't work (BUGFIX)
+- **Mirror 1.6 - 2011 February 22**
+    - Issue 17 - Add documentation link to other languages (BUGFIX)
+    - Issue 28 - add constructor bypasser (FEATURE)
+    - Issue 33 - Proxyfier similar to the one in vraptor (FEATURE)
+    - Issue 35 - Must return MirrorList (FEATURE)
+    - Issue 36 - Deprecate fields/constructors/methods/annotationsMatching (FEATURE)
+    - Issue 38 - Implement mapping (FEATURE)
+    - Issue 39 - MirrorList must be thread safe (FEATURE)
+    - Issue 43 - Move Matcher to list.dsl (BUGFIX)
+    - Issue 44 - add method to reflect uniquely named methods (FEATURE)
+    - Issue 45 - Set final fields (FEATURE)
+    - Issue 46 - add method to reflect unique constructor (FEATURE)
+    - Issue 47 - Sun15ReflectionProvider (FEATURE)
+    - Issue 51 - Do not read config file using java.io.File (BUGFIX)
+    - Issue 52 - license clarity (BUGFIX)
 
-* **Mirror 1.6 - 2011 February 22**
+- **Mirror 1.5.1 - 2009 August 04**
+    - Cannot find getter for boolean field. (BUGFIX #40)
 
-- Issue 17 - Add documentation link to other languages (BUGFIX)
+- **Mirror 1.5 - 2009 July 24**
+    - Does not run static initializer (BUGFIX #19)
+    - Reads configuration file just once (BUGFIX #32)
+    - Created portuguese users list (FEATURE #29)
+    - Matchers for reflectAll() (FEATURE #30)
 
-- Issue 28 - add constructor bypasser (FEATURE)
+- **Mirror 1.4 - 2009 June 5**
+    - support for setter/getter invocation (FEATURE)
+    - support for setter/getter reflection (FEATURE)
+    - Mirror is completely interface based. (FEATURE)
+    - net.vidageek.mirror.Mirror was deprecated. Use net.vidageek.mirror.dsl.Mirror instead. (DEPRECATION)
+    - Changed Mirror.on(AccessibleObject) to Mirror.on(AnnotatedElement) (BUGFIX)
+    - Field lookup is done on interfaces (BUGFIX)
+    - Throws IllegalArgumentException instead of NUllPointerException (BUGFIX)
 
-- Issue 33 - Proxyfier similar to the one in vraptor (FEATURE)
+- **Mirror 1.3 - 2009 January 5**
+    - Added Reflection Providers
+    - pt-BR docs
+    - Javadocs at most of the public methods and classes
+    - Bugfixes 
 
-- Issue 35 - Must return MirrorList (FEATURE)
+- **Mirror 1.2 - 2008 November 16**
+    - First public release
 
-- Issue 36 - Deprecate fields/constructors/methods/annotationsMatching (FEATURE)
-
-- Issue 38 - Implement mapping (FEATURE)
-
-- Issue 39 - MirrorList must be thread safe (FEATURE)
-
-- Issue 43 - Move Matcher to list.dsl (BUGFIX)
-
-- Issue 44 - add method to reflect uniquely named methods (FEATURE)
-
-- Issue 45 - Set final fields (FEATURE)
-
-- Issue 46 - add method to reflect unique constructor (FEATURE)
-
-- Issue 47 - Sun15ReflectionProvider (FEATURE)
-
-- Issue 51 - Do not read config file using java.io.File (BUGFIX)
-
-- Issue 52 - license clarity (BUGFIX)
-
-
-* **Mirror 1.5.1 - 2009 August 04**
-
-- Cannot find getter for boolean field. (BUGFIX #40)
-
-* **Mirror 1.5 - 2009 July 24**
-
-- Does not run static initializer (BUGFIX #19)
-
-- Reads configuration file just once (BUGFIX #32)
-
-- Created portuguese users list (FEATURE #29)
-
-- Matchers for reflectAll() (FEATURE #30)
-  
-* **Mirror 1.4 - 2009 June 5**
-
-- support for setter/getter invocation (FEATURE)
-
-- support for setter/getter reflection (FEATURE)
-
-- Mirror is completely interface based. (FEATURE)
-
-- net.vidageek.mirror.Mirror was deprecated. Use net.vidageek.mirror.dsl.Mirror instead. (DEPRECATION)
-
-- Changed Mirror.on(AccessibleObject) to Mirror.on(AnnotatedElement) (BUGFIX)
-
-- Field lookup is done on interfaces (BUGFIX)
-
-- Throws IllegalArgumentException instead of NUllPointerException (BUGFIX)
-
-* **Mirror 1.3 - 2009 January 5**
-
-- Added Reflection Providers
-
-- pt-BR docs
-
-- Javadocs at most of the public methods and classes
-
-- Bugfixes 
-
-* **Mirror 1.2 - 2008 November 16**
-
-- First public release
-[/list]
-[section Download]
+## Download
 
 You can browse all Mirror releases and sources at http://maven.vidageek.net/net/vidageek/mirror 
 or http://github.com/vidageek/mirror/downloads .
 
 If you use maven to build your project, you can just add the following lines to your pom.xml:
-[xml]
-<dependencies>
-...
-	<dependency>
-	    <groupId>net.vidageek</groupId>
-	    <artifactId>mirror</artifactId>
-	    <version>1.6.1</version>
-	</dependency>
-...
-</dependencies>
 
-[/xml]
+    <dependencies>
+    ...
+    	<dependency>
+    	    <groupId>net.vidageek</groupId>
+    	    <artifactId>mirror</artifactId>
+    	    <version>1.6.1</version>
+    	</dependency>
+    ...
+    </dependencies>
 
 Or even browse and checkout our sources at http://github.com/vidageek/mirror/ .
 
-[section BugTracker And Email lists]
 
-[title Email Lists]
+## Email Lists
 
-[list]
-* Users Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-users-vidageek.net
+- Users Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-users-vidageek.net
 ** Doubts about how to use Mirror should come here.
-* Development Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-dev-vidageek.net
+- Development Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-dev-vidageek.net
 ** Discussions on new features or bugs.
-* Commit Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-commit-vidageek.net
+- Commit Mailing list: http://lista.vidageek.net/listinfo.cgi/mirror-commit-vidageek.net
 ** Commit warnings for developers (or anyone who wants to know how Mirror's source
 is changing).
-[/list]
 
-[title Bugtracker]
+## Bugtracker
 
 Just go to http://github.com/vidageek/mirror/issues and don't be ashamed of creating a new ticket!
 
-[section Project Members]
+## Project Members
 
 Currently active project members are:
 
-[list]
-* Jonas Abreu (jonas [at] vidageek [dot] net)
-* Adriano Almeida (adrianoalmeida7 [at] gmail [dot] com)
-* Diego Feitosa (diego [at] dnfeitosa [dot] com)
-* José Donizetti (jose.donizetti [at] caelum [dot] com [dot] br)
-[/list]
+- Jonas Abreu (jonas [at] vidageek [dot] net)
+- Adriano Almeida (adrianoalmeida7 [at] gmail [dot] com)
+- Diego Feitosa (diego [at] dnfeitosa [dot] com)
+- José Donizetti (jose.donizetti [at] caelum [dot] com [dot] br)
 
-[section Maven Reports]
-
-You can access maven reports here:
-
-http://projetos.vidageek.net/mirror/maven
-
-[section Javadocs]
-
-You can find javadoc for this project here:
-
-http://projetos.vidageek.net/mirror/javadoc
-
-[section Get Involved]
+## Get Involved
 
 You can get involved to Mirror in a lot of ways. If you are just using it, you are already really helping us. 
 Patches of any kind (source, documentation, etc) are always welcome. You can send your patches through our 
